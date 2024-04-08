@@ -1,4 +1,9 @@
 
+using SmartMarket.Data.DbContexts;
+using Newtonsoft.Json;
+using System;
+using Microsoft.EntityFrameworkCore;
+
 namespace SmartMarket.Api
 {
     public class Program
@@ -13,6 +18,17 @@ namespace SmartMarket.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            /// Fix the Cycle
+            builder.Services.AddControllers()
+                 .AddNewtonsoftJson(options =>
+                 {
+                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                 });
+
+            //Set Database Configuration
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
             var app = builder.Build();
 
