@@ -24,6 +24,5 @@ public record UserForResultDto
 
     public ICollection<CardForResultDto> Cards { get; set; }
     public ICollection<ProductForResultDto> Products { get; set; }
-    public ICollection<CancelOrderForResultDto> CancelOrders { get; set; }
     public ICollection<PartnerProductForResultDto> PartnerProducts { get; set; }
 }

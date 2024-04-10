@@ -13,5 +13,5 @@ public record PartnerForResultDto
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
-    public ICollection<PartnerProductForResultDto> PartnersProducts { get; set; }
+    public ICollection<PartnerProductForResultDto> PartnerProducts { get; set; }
 }

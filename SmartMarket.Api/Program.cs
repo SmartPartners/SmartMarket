@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using Microsoft.EntityFrameworkCore;
 using SmartMarket.Service.Mappers;
+using SmartMarket.Api.Extensions;
 
 namespace SmartMarket.Api
 {
@@ -19,6 +20,7 @@ namespace SmartMarket.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddCustomServices();
 
             /// Fix the Cycle
             builder.Services.AddControllers()

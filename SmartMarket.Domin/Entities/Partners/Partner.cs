@@ -10,5 +10,5 @@ public class Partner : Auditable
     public decimal Debt { get; set; }
     public decimal Paid { get; set; }
 
-    public IEnumerable<PartnerProduct> PartnersProducts { get; set; }
+    public IEnumerable<PartnerProduct> PartnerProducts { get; set; }
 }
