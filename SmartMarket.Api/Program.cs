@@ -3,6 +3,7 @@ using SmartMarket.Data.DbContexts;
 using Newtonsoft.Json;
 using System;
 using Microsoft.EntityFrameworkCore;
+using SmartMarket.Service.Mappers;
 
 namespace SmartMarket.Api
 {
@@ -29,6 +30,8 @@ namespace SmartMarket.Api
             //Set Database Configuration
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
+            builder.Services.AddAutoMapper(typeof(MapperProfile));
 
             var app = builder.Build();
 
