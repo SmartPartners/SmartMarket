@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SmartMarket.Data.DbContexts;
@@ -11,9 +12,11 @@ using SmartMarket.Data.DbContexts;
 namespace SmartMarket.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240410153106_FirstMigration")]
+    partial class FirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,9 +132,6 @@ namespace SmartMarket.Data.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("CencelerCasherId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -177,8 +177,6 @@ namespace SmartMarket.Data.Migrations
                     b.HasIndex("CasherId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CencelerCasherId");
 
                     b.ToTable("CancelOrders");
                 });
@@ -414,7 +412,7 @@ namespace SmartMarket.Data.Migrations
             modelBuilder.Entity("SmartMarket.Domin.Entities.CencelOrders.CencelOrder", b =>
                 {
                     b.HasOne("SmartMarket.Domin.Entities.Users.User", "Casher")
-                        .WithMany()
+                        .WithMany("CencelOrders")
                         .HasForeignKey("CasherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -425,17 +423,9 @@ namespace SmartMarket.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "CencelerCasher")
-                        .WithMany()
-                        .HasForeignKey("CencelerCasherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Casher");
 
                     b.Navigation("Category");
-
-                    b.Navigation("CencelerCasher");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.PartnerProduct", b =>
@@ -501,6 +491,8 @@ namespace SmartMarket.Data.Migrations
             modelBuilder.Entity("SmartMarket.Domin.Entities.Users.User", b =>
                 {
                     b.Navigation("Cards");
+
+                    b.Navigation("CencelOrders");
 
                     b.Navigation("PartnerProducts");
 

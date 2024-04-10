@@ -1,14 +1,11 @@
-﻿using SmartMarket.Domin.Commons;
+﻿namespace SmartMarket.Service.DTOs.Partners;
 
-namespace SmartMarket.Domin.Entities.Partners;
-
-public class Partner : Auditable
+public record PartnerForUpdateDto
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string PhoneNumber { get; set; }
     public decimal Debt { get; set; }
     public decimal Paid { get; set; }
-
-    public IEnumerable<PartnerProduct> PartnerProducts { get; set; }
 }
+
