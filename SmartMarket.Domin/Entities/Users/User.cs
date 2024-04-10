@@ -1,5 +1,6 @@
 ﻿using SmartMarket.Domin.Commons;
 using SmartMarket.Domin.Entities.Cards;
+using SmartMarket.Domin.Entities.CencelOrders;
 using SmartMarket.Domin.Entities.Partners;
 using SmartMarket.Domin.Entities.Products;
 using SmartMarket.Domin.Enums;
@@ -21,5 +22,6 @@ public class User : Auditable
 
     public IEnumerable<Card> Cards { get; set; }
     public IEnumerable<Product> Products { get; set; }
+    public IEnumerable<CencelOrder> CencelOrders { get; set; }
     public IEnumerable<PartnerProduct> PartnerProducts { get; set; }
 }

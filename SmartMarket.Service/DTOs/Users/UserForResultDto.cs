@@ -1,7 +1,8 @@
-﻿using SmartMarket.Domin.Entities.Cards;
-using SmartMarket.Domin.Entities.Partners;
-using SmartMarket.Domin.Entities.Products;
-using SmartMarket.Domin.Enums;
+﻿using SmartMarket.Domin.Enums;
+using SmartMarket.Service.DTOs.CancelOrders;
+using SmartMarket.Service.DTOs.Cards;
+using SmartMarket.Service.DTOs.PartnerProducts;
+using SmartMarket.Service.DTOs.Products;
 
 namespace SmartMarket.Service.DTOs.Users;
 
@@ -17,8 +18,12 @@ public record UserForResultDto
     public decimal? Oylik { get; set; }
     public decimal? OlganPuli { get; set; }
     public decimal? QolganPuli { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
-    public ICollection<Card> Cards { get; set; }
-    public ICollection<Product> Products { get; set; }
-    public ICollection<PartnerProduct> PartnerProducts { get; set; }
+
+    public ICollection<CardForResultDto> Cards { get; set; }
+    public ICollection<ProductForResultDto> Products { get; set; }
+    public ICollection<CancelOrderForResultDto> CancelOrders { get; set; }
+    public ICollection<PartnerProductForResultDto> PartnerProducts { get; set; }
 }
