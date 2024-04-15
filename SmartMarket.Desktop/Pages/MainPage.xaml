@@ -1,0 +1,171 @@
+﻿<Page x:Class="SmartMarket.Desktop.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+      xmlns:local="clr-namespace:SmartMarket.Desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="640" d:DesignWidth="1024"
+      Title="MainPage">
+    <Grid Background="#D9D9D9">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2.8*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Border Background="White" Margin="5" CornerRadius="8">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Border Height="40" Background="Red" CornerRadius="8 8 0 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="IO" VerticalAlignment="Center" FontSize="15" Padding="25 0 0 0" Foreground="White" DockPanel.Dock="Left"/>
+
+                            <Button Grid.Column="1" Width="50" Height="25" Style="{StaticResource MenuButton}" >
+                                <Button.Content>
+                                    <fa:IconImage Grid.Column="0" Icon="Plus" Width="20" Height="20" Foreground="Black"/>
+                                </Button.Content>
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <StackPanel x:Name="panel_goods">
+
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="5 5 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <DockPanel Grid.Row="0">
+                <Border DockPanel.Dock="Top" Height="30" Background="#A59C9C" CornerRadius="8 8 0 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Mahsulotlar" VerticalAlignment="Center" FontSize="18" Padding="25 0 0 0" Foreground="Black" DockPanel.Dock="Left"/>
+
+                        <Button Grid.Column="2" Width="90" Height="25" Style="{StaticResource MenuButton}" Background="#0AB1F9" BorderBrush="#0AB1F9">
+                            <Button.Content>
+                                <TextBlock Text="Qo'shish" FontSize="14" Foreground="Black"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <DataGrid
+                    Background="White">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" />
+                        <DataGridTextColumn Header="P-Code" />
+                        <DataGridTextColumn Header="Barcode" />
+                        <DataGridTextColumn Header="Maxsulot nomi" />
+                        <DataGridTextColumn Header="Kategoriya" />
+                        <DataGridTextColumn Header="Ishchi" />
+                        <DataGridTextColumn Header="Tan narxi" />
+                        <DataGridTextColumn Header="Soni" />
+                        <DataGridTextColumn Header="Jami summasi" />
+                        <DataGridTextColumn Header="O'lchov" />
+                        <DataGridTextColumn Header="Sotuv Narxi" />
+
+
+                        <DataGridTemplateColumn Width="65">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MenuButton}">
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="65">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MenuButton}">
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
+                
+            </DockPanel>
+
+            <DockPanel Grid.Row="1" Margin="0 5 0 0">
+                <Border DockPanel.Dock="Top" Height="30" Background="#A59C9C" CornerRadius="8 8 0 0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Kontr Agentlar" VerticalAlignment="Center" FontSize="18" Padding="25 0 0 0" Foreground="Black" DockPanel.Dock="Left"/>
+
+                        <Button Grid.Column="2" Width="90" Height="25" Style="{StaticResource MenuButton}" Background="#0AB1F9" BorderBrush="#0AB1F9">
+                            <Button.Content>
+                                <TextBlock Text="Qo'shish" FontSize="14" Foreground="Black"/>
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <DataGrid Background="White">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" />
+                        <DataGridTextColumn Header="Firma" />
+                        <DataGridTextColumn Header="Ism" Width="30"/>
+                        <DataGridTextColumn Header="Familiya" Width="60"/>
+                        <DataGridTextColumn Header="Telefon Nomer" />
+                        <DataGridTextColumn Header="Olingan yuk narxi" />
+                        <DataGridTextColumn Header="Qilingan to'lov" />
+                        <DataGridTextColumn Header="Oxirgi to'lov" />
+                        <DataGridTextColumn Header="Oxirgi to'lov sanasi" />
+                        <DataGridTextColumn Header="Qarz miqdori" />
+
+                        <DataGridTemplateColumn Width="25">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MenuButton}">
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Width="25">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource MenuButton}">
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </DockPanel>
+
+
+
+        </Grid>
+
+    </Grid>
+</Page>
