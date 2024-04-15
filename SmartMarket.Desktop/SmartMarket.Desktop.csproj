@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Pages\" />
     <Folder Include="Services\" />
     <Folder Include="Themes\" />
     <Folder Include="ViewModels\" />
