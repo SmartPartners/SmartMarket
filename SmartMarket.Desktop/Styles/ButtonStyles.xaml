@@ -14,7 +14,7 @@
         				CornerRadius="8" 
         				Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
                         <Grid>
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Name="content"/>
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="content"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>

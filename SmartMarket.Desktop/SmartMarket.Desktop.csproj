@@ -10,16 +10,14 @@
 
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Components\" />
-    <Folder Include="Pages\" />
     <Folder Include="Services\" />
     <Folder Include="Themes\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignColors" Version="3.0.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.6.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="4.5.0.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.1.1" />
   </ItemGroup>
 

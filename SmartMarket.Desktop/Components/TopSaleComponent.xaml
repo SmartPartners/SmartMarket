@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="SmartMarket.Desktop.Components.TopSaleComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartMarket.Desktop.Components" 
+             mc:Ignorable="d" FontSize="25" MinWidth="900">
+    <Border
+    Name="brand_Border"
+    Margin="10 3 10 3"
+    CornerRadius="10"
+    BorderBrush="Transparent"
+    BorderThickness="1"
+    Background="#A59C9C">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+
+                <TextBlock Text="Mahsulot Nomi: " Foreground="Black" Margin="5"/>
+                <TextBlock Text="Kasha Nestle 9" Foreground="White" Margin="5"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+
+                <TextBlock Text="Sotilgan Soni: " Foreground="Black" Margin="5"/>
+                <TextBlock Text="1,000 Dona" Foreground="White" Margin="5"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+
+                <TextBlock Text="Jami sotuv summasi: " Foreground="Black" Margin="5"/>
+                <TextBlock Text="25,000,000" Foreground="White" Margin="5"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+
+                <TextBlock Text="Foyda: " Foreground="Red" Margin="5"/>
+                <TextBlock Text="5,000,000" Foreground="White" Margin="5"/>
+
+            </StackPanel>
+
+        </Grid>
+
+    </Border>
+</UserControl>
