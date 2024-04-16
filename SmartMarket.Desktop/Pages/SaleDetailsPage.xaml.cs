@@ -25,7 +25,7 @@ namespace SmartMarket.Desktop.Pages
             InitializeComponent();
         }
 
-        private void butt_sale_history_Click(object sender, RoutedEventArgs e)
+        private void rbSaleHistory_Click(object sender, RoutedEventArgs e)
         {
             this.leftGrid.RowDefinitions[1].Height = GridLength.Auto;
             this.left_bottom_panel_sale_history.Visibility = Visibility.Visible;
@@ -35,13 +35,13 @@ namespace SmartMarket.Desktop.Pages
             this.content_menu.Content = new SaleHistory();
         }
 
-        private void butt_top_sale_Click(object sender, RoutedEventArgs e)
+        private void rbTopSale_Click(object sender, RoutedEventArgs e)
         {
             this.leftGrid.RowDefinitions[1].Height = new GridLength(0);
             this.content_menu.Content = new TopSale();
         }
 
-        private void butt_return_prods_Click(object sender, RoutedEventArgs e)
+        private void rbReturnProds_Click(object sender, RoutedEventArgs e)
         {
             this.leftGrid.RowDefinitions[1].Height = GridLength.Auto;
             this.left_bottom_panel_sale_history.Visibility = Visibility.Collapsed;
@@ -51,7 +51,7 @@ namespace SmartMarket.Desktop.Pages
             this.content_menu.Content = new ReturnProductsPage();
         }
 
-        private void butt_invalid_prods_Click(object sender, RoutedEventArgs e)
+        private void rbInvalidProds_Click(object sender, RoutedEventArgs e)
         {
             this.leftGrid.RowDefinitions[1].Height = GridLength.Auto;
             this.left_bottom_panel_sale_history.Visibility = Visibility.Collapsed;

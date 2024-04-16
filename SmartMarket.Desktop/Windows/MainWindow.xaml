@@ -7,18 +7,20 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:local="clr-namespace:SmartMarket.Desktop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="730" Width="1024" AllowsTransparency="True" WindowStyle="None">
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0"/>
-    </WindowChrome.WindowChrome>
-    <Grid Background="#D9D9D9">
+        Title="MainWindow" Height="730" Width="1024" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid Background="{DynamicResource FirstColor}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="700*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" MouseDown="Grid_MouseDown">
-            <Border Grid.Row="0" Background="White" Margin="5" CornerRadius="8">
+            
+        </Grid>
+        
+        <Grid Grid.Row="1" >
+            <Border Grid.Row="0" Background="{DynamicResource SecondColor}" Margin="5" CornerRadius="8">
                 <Viewbox>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -26,91 +28,56 @@
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <Button Style="{StaticResource MenuButton}" Width="120" Height="40" Margin="10 0 0 0" Padding="0">
-                                <Grid Width="120">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
 
-                                    <fa:IconImage Grid.Column="0" Icon="House" Width="30" Height="30" Foreground="Black"/>
-                                    <TextBlock Grid.Column="1" Text="Asosiy"  Foreground="Black" Margin="0 0 0 0" FontSize="20"/>
-                                </Grid>
-                            </Button>
+                            <RadioButton 
+                                x:Name="rbMain"
+                                Content="Asosiy"
+                                Click="rbMain_Click"
+                                Style="{DynamicResource MenuButton2}" 
+                                Tag="{DynamicResource main}"/>
 
-                            <Button Style="{StaticResource MenuButton}" Width="120" Height="40" Margin="10 0 0 0" Padding="0">
-                                <Grid Width="120">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                            <RadioButton 
+                                x:Name="rbKassa"
+                                Content="Sotuv oynasi"
+                                Click="rbKassa_Click"
+                                Style="{DynamicResource MenuButton2}" 
+                                Tag="{DynamicResource cart}"/>
+                            <RadioButton 
+                                x:Name="rbSalesDetails"
+                                Content="Sotuv tafsilotlari"
+                                Click="rbSalesDetails_Click"
+                                Style="{DynamicResource MenuButton2}" 
+                                Tag="{DynamicResource sales_details}"/>
 
-                                    <fa:IconImage Grid.Column="0" Icon="BasketShopping" Width="30" Height="30" Foreground="Black"/>
-                                    <TextBlock Grid.Column="1" Text="Sotuv oynasi"  Foreground="Black" Margin="0 0 0 0" FontSize="14" TextWrapping="Wrap"/>
-                                </Grid>
-                            </Button>
+                            <RadioButton 
+                                x:Name="rbWorkers"
+                                Content="Do'kon ishchilari"
+                                Click="rbWorkers_Click"
+                                Style="{DynamicResource MenuButton2}" 
+                                Tag="{DynamicResource worker}"/>
 
-                            <Button Style="{StaticResource MenuButton}" Width="120" Height="40" Margin="10 0 0 0" Padding="0">
-                                <Grid Width="120">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
+                            <RadioButton 
+                                x:Name="rbPartners"
+                                Content="Hamkorlarim"
+                                Click="rbPartners_Click"
+                                Style="{DynamicResource MenuButton2}" 
+                                Tag="{DynamicResource partner}"/>
 
-                                    <materialDesign:PackIcon Grid.Column="0" Kind="ListBox" Width="30" Height="30" Foreground="Black" Margin="10 3 0 0"/>
+                            <RadioButton 
+                                x:Name="rbAccount"
+                                Content="Akkount sozlamalar"
+                                Click="rbAccount_Click"
+                                Style="{DynamicResource MenuButton2}" 
+                                Tag="{DynamicResource account}"/>
 
-                                    <TextBlock Grid.Column="1" Text="Sotuv tafsilotlari"  Foreground="Black" Margin="0 0 0 0" FontSize="14" TextWrapping="Wrap"/>
-                                </Grid>
-                            </Button>
+                            <RadioButton 
+                                x:Name="rbStoredetails"
+                                Content="Do'kon tafsilotlari"
+                                Click="rbStoredetails_Click"
+                                Style="{DynamicResource MenuButton2}" 
+                                Tag="{DynamicResource store}"/>
 
-                            <Button Style="{StaticResource MenuButton}" Width="120" Height="40" Margin="10 0 0 0" Padding="0">
-                                <Grid Width="120">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <fa:IconImage Grid.Column="0" Icon="users" Width="30" Height="30" Foreground="Black"/>
-                                    <TextBlock Grid.Column="1" Text="Do'kon ishchilari"  Foreground="Black" Margin="0 0 0 0" FontSize="14" TextWrapping="Wrap"/>
-                                </Grid>
-                            </Button>
-
-                            <Button Style="{StaticResource MenuButton}" Width="120" Height="40" Margin="10 0 0 0" Padding="0">
-                                <Grid Width="120">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <fa:IconImage Grid.Column="0" Icon="Handshake" Width="30" Height="30" Foreground="Black" Margin="-9 0 0 0"/>
-                                    <TextBlock Grid.Column="1" Text="Hamkorlarim"  Foreground="Black" Margin="-13 5 0 0" FontSize="14" TextWrapping="Wrap"/>
-                                </Grid>
-                            </Button>
-
-                            <Button Style="{StaticResource MenuButton}" Width="120" Height="40" Margin="10 0 0 0" Padding="0">
-                                <Grid Width="120">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <fa:IconImage Grid.Column="0" Icon="UserEdit" Width="30" Height="30" Foreground="Black"/>
-                                    <TextBlock Grid.Column="1" Text="Akkount sozlamalar"  Foreground="Black" Margin="0 0 0 0" FontSize="14" TextWrapping="Wrap"/>
-                                </Grid>
-                            </Button>
-
-                            <Button Style="{StaticResource MenuButton}" Width="120" Height="40" Margin="10 0 0 0" Padding="0">
-                                <Grid Width="120">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <fa:IconImage Grid.Column="0" Icon="Shop" Width="30" Height="30" Foreground="Black"/>
-                                    <TextBlock Grid.Column="1" Text="Do'kon tafsilotlari"  Foreground="Black" Margin="0 0 0 0" FontSize="14" TextWrapping="Wrap"/>
-                                </Grid>
-                            </Button>
 
                         </StackPanel>
 
@@ -122,5 +89,12 @@
 
             </Border>
         </Grid>
+
+        <Grid Grid.Row="2">
+            <Frame
+            Name="PageNavigator"
+            NavigationUIVisibility="Hidden" Content=""/>
+        </Grid>
+        
     </Grid>
 </Window>

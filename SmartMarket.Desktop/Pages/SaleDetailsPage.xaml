@@ -23,124 +23,120 @@
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" Background="White" Margin="5" CornerRadius="8">
-                <StackPanel Grid.Column="0" Orientation="Vertical">
-                    <Button x:Name="butt_sale_history" Style="{StaticResource MenuButton}"  Height="40" Margin="10 10 10 0" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Click="butt_sale_history_Click">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
 
-                            <fa:IconImage Grid.Column="0" Icon="Receipt" Width="30" Height="30" Foreground="Black"/>
-                            <TextBlock Grid.Column="1" Text="Sotuv tarixi"  Foreground="Black" Margin="0 0 0 0" Padding="0 4 0 0" FontSize="16" TextWrapping="Wrap"/>
-                        </Grid>
-                    </Button>
+                <Viewbox Stretch="Uniform" VerticalAlignment="Top">
+                    <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top">
 
-                    <Button x:Name="butt_top_sale" Style="{StaticResource MenuButton}"  Height="40" Margin="10 10 10 0" Padding="0" Click="butt_top_sale_Click">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                        <RadioButton 
+                            x:Name="rbSaleHistory"
+                            Content="Sotuv tarixi"
+                            Click="rbSaleHistory_Click"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            Style="{DynamicResource SaleMenuButton}" 
+                            Tag="{DynamicResource receipt}" IsChecked="True"/>
 
-                            <fa:IconImage Grid.Column="0" Icon="ChartLine" Width="30" Height="30" Foreground="Black"/>
-                            <TextBlock Grid.Column="1" Text="Top Sotuv"  Foreground="Black" Margin="0 0 0 0" Padding="0 4 0 0" FontSize="16" TextWrapping="Wrap"/>
-                        </Grid>
-                    </Button>
+                        <RadioButton 
+                            x:Name="rbTopSale"
+                            Content="Top Sotuv"
+                            Click="rbTopSale_Click"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            Style="{DynamicResource SaleMenuButton}" 
+                            Tag="{DynamicResource chart}"/>
 
-                    <Button x:Name="butt_return_prods" Style="{StaticResource MenuButton}"  Height="40" Margin="10 10 10 0" Padding="0" Click="butt_return_prods_Click">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                        <RadioButton 
+                            x:Name="rbReturnProds"
+                            Content="Qaytarilgan yuklar"
+                            Click="rbReturnProds_Click"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            Style="{DynamicResource SaleMenuButton}" 
+                            Tag="{DynamicResource return}"/>
 
-                            <materialDesign:PackIcon Grid.Column="0" Kind="AssignmentReturned" Width="30" Height="30" Foreground="Black" Margin="10 3 0 0"/>
+                        <RadioButton 
+                            x:Name="rbInvalidProds"
+                            Content="Yaroqsiz yuklar "
+                            Click="rbInvalidProds_Click"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            Style="{DynamicResource SaleMenuButton}" 
+                            Tag="{DynamicResource trash}" Margin="10"/>
 
-                            <TextBlock Grid.Column="1" Text="Qaytarilgan yuklar"  Foreground="Black" Margin="0 0 0 0" Padding="0 4 0 0" FontSize="16" TextWrapping="Wrap"/>
-                        </Grid>
-                    </Button>
-
-                    <Button x:Name="butt_invalid_prods" Style="{StaticResource MenuButton}"  Height="40" Margin="10 10 10 0" Padding="0" Click="butt_invalid_prods_Click">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-
-                            <fa:IconImage Grid.Column="0" Icon="DeleteLeft" Width="30" Height="30" Foreground="Black"/>
-                            <TextBlock Grid.Column="1" Text="Brak yuklar"  Foreground="Black" Margin="0 0 0 0" Padding="0 4 0 0" FontSize="16" TextWrapping="Wrap"/>
-                        </Grid>
-                    </Button>
-
-                </StackPanel>
+                    </StackPanel>
+                </Viewbox>
+                
             </Border>
 
             <Border Grid.Row="1" Background="White" Margin="5 0 5 5" CornerRadius="8">
 
-                <Grid>
-                    <StackPanel Orientation="Vertical" x:Name="left_bottom_panel_sale_history" Visibility="Collapsed">
-                        <Border Background="#0FBC5F" Margin="5 5 5 0" CornerRadius="8" Height="80">
-                            <StackPanel>
-                                <TextBlock x:Name="lbl_sale_sum_header" Text="Sotuv Summasi: " Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="lbl_sale_sum" Text="100,000,000 so`m" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                        </Border>
+                <Viewbox Stretch="Uniform" VerticalAlignment="Top">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" x:Name="left_bottom_panel_sale_history" Visibility="Collapsed">
+                            <Border Background="#0FBC5F" Margin="5 5 5 0" CornerRadius="8" Height="80">
+                                <StackPanel>
+                                    <TextBlock x:Name="lbl_sale_sum_header" Text="Sotuv Summasi: " Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="lbl_sale_sum" Text="100,000,000 so`m" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </Border>
 
-                        <Border Background="#D41509" Margin="5 5 5 0" CornerRadius="8" Height="80">
-                            <StackPanel>
-                                <TextBlock x:Name="lbl_expenses_header" Text="Harajatlar: " Foreground="White" Margin="0 5 0 0"  Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="lbl_expenses" Text="100,000,000 so`m" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                        </Border>
+                            <Border Background="#D41509" Margin="5 5 5 0" CornerRadius="8" Height="80">
+                                <StackPanel>
+                                    <TextBlock x:Name="lbl_expenses_header" Text="Harajatlar: " Foreground="White" Margin="0 5 0 0"  Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="lbl_expenses" Text="100,000,000 so`m" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </Border>
 
-                        <Border Background="#25D409" Margin="5 5 5 0" CornerRadius="8" Height="80">
-                            <StackPanel>
-                                <TextBlock x:Name="lbl_profit_header" Text="Sof Foyda: " Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="lbl_profit" Text="100,000,000 so`m" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>
+                            <Border Background="#25D409" Margin="5 5 5 0" CornerRadius="8" Height="80">
+                                <StackPanel>
+                                    <TextBlock x:Name="lbl_profit_header" Text="Sof Foyda: " Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="lbl_profit" Text="100,000,000 so`m" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" x:Name="left_bottom_panel_return" Visibility="Collapsed">
-                        <Border Background="#0FBC5F" Margin="5 5 5 0" CornerRadius="8" Height="120">
-                            <StackPanel>
-                                <TextBlock x:Name="lbl_sale_return_count_header" Text="Qaytarilgan&#x0a;yuklar soni: " TextWrapping="Wrap" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="lbl_sale_return_count" Text="100 Dona" Foreground="White" Margin="0 15 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                        </Border>
+                        <StackPanel Orientation="Vertical" x:Name="left_bottom_panel_return" Visibility="Collapsed">
+                            <Border Background="#0FBC5F" Margin="5 5 5 0" CornerRadius="8" Height="120">
+                                <StackPanel>
+                                    <TextBlock x:Name="lbl_sale_return_count_header" Text="Qaytarilgan&#x0a;yuklar soni: " TextWrapping="Wrap" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="lbl_sale_return_count" Text="100 Dona" Foreground="White" Margin="0 15 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </Border>
 
-                        <Border Background="#D41509" Margin="5 5 5 0" CornerRadius="8" Height="120">
-                            <StackPanel>
-                                <TextBlock x:Name="lbl_sale_return_sum_header" Text="Qaytarilgan&#x0a;yuklar summasi: " Foreground="White" Margin="0 5 0 0"  Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="lbl_sale_return_sum" Text="5,000,000 so`m" Foreground="White" Margin="0 15 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                        </Border>
+                            <Border Background="#D41509" Margin="5 5 5 0" CornerRadius="8" Height="120">
+                                <StackPanel>
+                                    <TextBlock x:Name="lbl_sale_return_sum_header" Text="Qaytarilgan&#x0a;yuklar summasi: " Foreground="White" Margin="0 5 0 0"  Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="lbl_sale_return_sum" Text="5,000,000 so`m" Foreground="White" Margin="0 15 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </Border>
 
-                    </StackPanel>
+                        </StackPanel>
 
-                    <StackPanel Orientation="Vertical" x:Name="left_bottom_panel_invalid" Visibility="Collapsed">
-                        <Border Background="#0FBC5F" Margin="5 5 5 0" CornerRadius="8" Height="120">
-                            <StackPanel>
-                                <TextBlock x:Name="lbl_sale_invalid_count_header" Text="Yaroqsiz&#x0a;yuklar soni: " TextWrapping="Wrap" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="lbl_sale_invalid_count" Text="100 Dona" Foreground="White" Margin="0 15 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                        </Border>
+                        <StackPanel Orientation="Vertical" x:Name="left_bottom_panel_invalid" Visibility="Collapsed">
+                            <Border Background="#0FBC5F" Margin="5 5 5 0" CornerRadius="8" Height="120">
+                                <StackPanel>
+                                    <TextBlock x:Name="lbl_sale_invalid_count_header" Text="Yaroqsiz&#x0a;yuklar soni: " TextWrapping="Wrap" Foreground="White" Margin="0 5 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="lbl_sale_invalid_count" Text="100 Dona" Foreground="White" Margin="0 15 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </Border>
 
-                        <Border Background="#D41509" Margin="5 5 5 0" CornerRadius="8" Height="120">
-                            <StackPanel>
-                                <TextBlock x:Name="lbl_sale_invalid_sum_header" Text="Yaroqsiz&#x0a;yuklar summasi: " Foreground="White" Margin="0 5 0 0"  Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                <TextBlock x:Name="lbl_sale_invalid_sum" Text="5,000,000 so`m" Foreground="White" Margin="0 15 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                            </StackPanel>
-                        </Border>
+                            <Border Background="#D41509" Margin="5 5 5 0" CornerRadius="8" Height="120">
+                                <StackPanel>
+                                    <TextBlock x:Name="lbl_sale_invalid_sum_header" Text="Yaroqsiz&#x0a;yuklar summasi: " Foreground="White" Margin="0 5 0 0"  Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                    <TextBlock x:Name="lbl_sale_invalid_sum" Text="5,000,000 so`m" Foreground="White" Margin="0 15 0 0" Padding="20 0 0 0"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </Border>
 
-                    </StackPanel>
-                </Grid>
+                        </StackPanel>
+                    </Grid>
+                </Viewbox>
 
             </Border>
         </Grid>
 
-        <ContentControl Grid.Column="1" x:Name="content_menu" Margin="0,0,0,0"/>
+        <Frame
+            Grid.Column="1" x:Name="content_menu" 
+            NavigationUIVisibility="Hidden" Content=""/>
 
     </Grid>
 </Page>
