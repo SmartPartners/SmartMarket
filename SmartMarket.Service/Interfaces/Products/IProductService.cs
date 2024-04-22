@@ -5,6 +5,7 @@ namespace SmartMarket.Service.Interfaces.Products;
 
 public interface IProductService
 {
+    string GeneratePCode();
     Task<bool> DeleteAsync(long id);
     Task<ProductForResultDto> GetByIdAsync(long id);
     Task<IEnumerable<ProductForResultDto>> GetAllAsync(PaginationParams @params);
