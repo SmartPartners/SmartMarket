@@ -4,7 +4,6 @@ namespace SmartMarket.Service.DTOs.Products;
 
 public record ProductForUpdateDto
 {
-    public string PCode { get; set; }
     public string BarCode { get; set; }
     public string Name { get; set; }
     public long CategoryId { get; set; }
