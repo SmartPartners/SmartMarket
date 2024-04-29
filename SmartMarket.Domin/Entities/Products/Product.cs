@@ -20,4 +20,6 @@ public class Product : Auditable
     public OlchovBirligi OlchovTuri { get; set; }
     public decimal? SalePrice { get; set; }
     public decimal? PercentageOfPrice { get; set; }
+    public bool Action {  get; set; }
+    public string ImagePath { get; set; }
 }

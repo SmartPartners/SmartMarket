@@ -12,8 +12,8 @@ using SmartMarket.Data.DbContexts;
 namespace SmartMarket.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240410153106_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20240426095251_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,9 @@ namespace SmartMarket.Data.Migrations
                     b.Property<short>("DiscountPrice")
                         .HasColumnType("smallint");
 
+                    b.Property<decimal?>("PercentageOfPrice")
+                        .HasColumnType("numeric");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
@@ -57,6 +60,9 @@ namespace SmartMarket.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("SalePrice")
                         .HasColumnType("numeric");
 
                     b.Property<string>("Status")
@@ -132,6 +138,9 @@ namespace SmartMarket.Data.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("CencelerCasherId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -177,6 +186,8 @@ namespace SmartMarket.Data.Migrations
                     b.HasIndex("CasherId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("CencelerCasherId");
 
                     b.ToTable("CancelOrders");
                 });
@@ -285,6 +296,9 @@ namespace SmartMarket.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<bool>("Action")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("BarCode")
                         .IsRequired()
                         .HasColumnType("text");
@@ -297,6 +311,10 @@ namespace SmartMarket.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -412,7 +430,7 @@ namespace SmartMarket.Data.Migrations
             modelBuilder.Entity("SmartMarket.Domin.Entities.CencelOrders.CencelOrder", b =>
                 {
                     b.HasOne("SmartMarket.Domin.Entities.Users.User", "Casher")
-                        .WithMany("CencelOrders")
+                        .WithMany()
                         .HasForeignKey("CasherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -423,9 +441,17 @@ namespace SmartMarket.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "CencelerCasher")
+                        .WithMany()
+                        .HasForeignKey("CencelerCasherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Casher");
 
                     b.Navigation("Category");
+
+                    b.Navigation("CencelerCasher");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.PartnerProduct", b =>
@@ -491,8 +517,6 @@ namespace SmartMarket.Data.Migrations
             modelBuilder.Entity("SmartMarket.Domin.Entities.Users.User", b =>
                 {
                     b.Navigation("Cards");
-
-                    b.Navigation("CencelOrders");
 
                     b.Navigation("PartnerProducts");
 

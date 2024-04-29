@@ -1,7 +1,8 @@
-﻿#nullable disable
-
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+
+#nullable disable
 
 namespace SmartMarket.Data.Migrations
 {
@@ -81,6 +82,7 @@ namespace SmartMarket.Data.Migrations
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     DiscountPrice = table.Column<short>(type: "smallint", nullable: false),
+                    OlchovTuri = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     CasherId = table.Column<long>(type: "bigint", nullable: false),
@@ -127,6 +129,8 @@ namespace SmartMarket.Data.Migrations
                     BarCode = table.Column<string>(type: "text", nullable: false),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    SalePrice = table.Column<decimal>(type: "numeric", nullable: true),
+                    PercentageOfPrice = table.Column<decimal>(type: "numeric", nullable: true),
                     DiscountPrice = table.Column<short>(type: "smallint", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "numeric", nullable: false),
@@ -212,6 +216,8 @@ namespace SmartMarket.Data.Migrations
                     OlchovTuri = table.Column<int>(type: "integer", nullable: false),
                     SalePrice = table.Column<decimal>(type: "numeric", nullable: true),
                     PercentageOfPrice = table.Column<decimal>(type: "numeric", nullable: true),
+                    Action = table.Column<bool>(type: "boolean", nullable: false),
+                    ImagePath = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },

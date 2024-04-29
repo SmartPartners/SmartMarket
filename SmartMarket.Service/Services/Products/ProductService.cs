@@ -5,6 +5,7 @@ using SmartMarket.Domin.Configurations;
 using SmartMarket.Domin.Entities.Products;
 using SmartMarket.Service.Commons.Exceptions;
 using SmartMarket.Service.Commons.Extensions;
+using SmartMarket.Service.Commons.Helpers;
 using SmartMarket.Service.DTOs.Products;
 using SmartMarket.Service.Interfaces.Categories;
 using SmartMarket.Service.Interfaces.Products;
@@ -33,43 +34,131 @@ public class ProductService : IProductService
 
     public async Task<ProductForResultDto> CreateAsync(ProductForCreationDto productForCreationDto)
     {
-        var category = await _categoryService.RetrieveByIdAsync(productForCreationDto.CategoryId);
-
-        var user = await _userService.RetrieveByIdAsync(productForCreationDto.UserId);
-
         var product = await _productRepository.SelectAll()
             .Where(p => p.BarCode == productForCreationDto.BarCode)
-            .AsNoTracking()
             .FirstOrDefaultAsync();
+
+        var categoryTask = _categoryService.RetrieveByIdAsync(productForCreationDto.CategoryId);
+        var userTask = _userService.RetrieveByIdAsync(productForCreationDto.UserId);
 
         if (product is not null)
         {
-            product.Quantity += productForCreationDto.Quantity;
-            product.UpdatedAt = DateTime.UtcNow;
-            await _productRepository.UpdateAsync(product);
-            throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
+            if (productForCreationDto.Action)
+            {
+                if (product.CamePrice != productForCreationDto.CamePrice)
+                {
+                    product.CamePrice = (product.CamePrice + productForCreationDto.CamePrice) / 2;
+                    product.Quantity += productForCreationDto.Quantity;
+                    UpdatePriceAndPercentage(product, productForCreationDto);
+                    product.UpdatedAt = DateTime.UtcNow;
+                    await _productRepository.UpdateAsync(product);
+
+                    product.TotalPrice = (product.SalePrice ?? 0) * product.Quantity;
+                    await _productRepository.UpdateAsync(product);
+                    throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
+                }
+                else
+                {
+                    if (product.CamePrice == productForCreationDto.CamePrice)
+                    {
+                        product.Quantity += productForCreationDto.Quantity;
+                        UpdatePriceAndPercentage(product, productForCreationDto);
+                        product.UpdatedAt = DateTime.UtcNow;
+                        await _productRepository.UpdateAsync(product);
+
+                        product.TotalPrice = (product.SalePrice ?? 0) * product.Quantity;
+                        await _productRepository.UpdateAsync(product);
+                        throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
+                    }
+                }
+            }
+            else
+            {
+                if (product.CamePrice != productForCreationDto.CamePrice)
+                {
+                    product.CamePrice = productForCreationDto.CamePrice;
+                    product.Quantity += productForCreationDto.Quantity;
+                    UpdatePriceAndPercentage(product, productForCreationDto);
+                    product.UpdatedAt = DateTime.UtcNow;
+                    await _productRepository.UpdateAsync(product);
+
+                    product.TotalPrice = (product.SalePrice ?? 0) * product.Quantity;
+                    await _productRepository.UpdateAsync(product);
+                    throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
+                }
+                else
+                {
+                    if (product.CamePrice == productForCreationDto.CamePrice)
+                    {
+                        product.Quantity += productForCreationDto.Quantity;
+                        UpdatePriceAndPercentage(product, productForCreationDto);
+                        product.UpdatedAt = DateTime.UtcNow;
+                        await _productRepository.UpdateAsync(product);
+
+                        product.TotalPrice = (product.SalePrice ?? 0) * product.Quantity;
+                        await _productRepository.UpdateAsync(product);
+                        throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
+                    }
+                }
+            }
+
+            return _mapper.Map<ProductForResultDto>(product);
         }
+
+        var wwwRootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Products");
+        var assetsFolderPath = Path.Combine(wwwRootPath, "Media");
+        var videosFolderPath = Path.Combine(assetsFolderPath, "Products");
+
+        if (!Directory.Exists(assetsFolderPath))
+        {
+            Directory.CreateDirectory(assetsFolderPath);
+        }
+
+        if (!Directory.Exists(videosFolderPath))
+        {
+            Directory.CreateDirectory(videosFolderPath);
+        }
+        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(productForCreationDto.ImagePath.FileName);
+
+        var fullPath = Path.Combine(wwwRootPath, fileName);
+
+        using (var stream = File.OpenWrite(fullPath))
+        {
+            await productForCreationDto.ImagePath.CopyToAsync(stream);
+            await stream.FlushAsync();
+            stream.Close();
+        }
+
+        string resultPath = Path.Combine("Media", "Products", fileName);
 
         var mappedProduct = _mapper.Map<Product>(productForCreationDto);
         mappedProduct.PCode = GeneratePCode();
+        mappedProduct.TotalPrice = (productForCreationDto.SalePrice ?? 0) * productForCreationDto.Quantity;
+        mappedProduct.ImagePath = resultPath;
+        UpdatePriceAndPercentage(mappedProduct, productForCreationDto);
         mappedProduct.CreatedAt = DateTime.UtcNow;
-
-        if (mappedProduct.SalePrice is null && mappedProduct.PercentageOfPrice is not null)
-        {
-            decimal? newPrice = (mappedProduct.CamePrice / 100) * mappedProduct.PercentageOfPrice;
-            decimal? salePrice = mappedProduct.CamePrice + newPrice;
-            mappedProduct.SalePrice = salePrice;
-        }
-        else if (mappedProduct.SalePrice is not null && mappedProduct.PercentageOfPrice is null)
-        {
-            decimal? percentPrice = ((mappedProduct.SalePrice - mappedProduct.CamePrice) / mappedProduct.CamePrice) * 100;
-            mappedProduct.PercentageOfPrice = (short)percentPrice;
-        }
 
         var result = await _productRepository.InsertAsync(mappedProduct);
 
-        return _mapper.Map<ProductForResultDto>(mappedProduct);
+        return _mapper.Map<ProductForResultDto>(result);
     }
+
+    public void UpdatePriceAndPercentage(Product product, ProductForCreationDto dto)
+    {
+        if (dto.SalePrice == null && dto.PercentageOfPrice != null)
+        {
+            decimal newPrice = (product.CamePrice / 100) * dto.PercentageOfPrice.Value;
+            product.SalePrice = product.CamePrice + newPrice;
+            product.PercentageOfPrice = dto.PercentageOfPrice.Value;
+        }
+        else if (dto.SalePrice != null && dto.PercentageOfPrice == null)
+        {
+            decimal percentPrice = ((dto.SalePrice.Value - product.CamePrice) / product.CamePrice) * 100;
+            product.PercentageOfPrice = percentPrice;
+            product.SalePrice = dto.SalePrice;
+        }
+    }
+
 
     public async Task<bool> DeleteAsync(long id)
     {
@@ -80,6 +169,13 @@ public class ProductService : IProductService
 
         if (product is null)
             throw new CustomException(404, "Mahsulot topilmadi.");
+
+        var fullPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, product.ImagePath);
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
 
         return await _productRepository.DeleteAsync(id);
     }
@@ -112,8 +208,12 @@ public class ProductService : IProductService
         var product = await _productRepository.SelectAll()
             .Where(p => p.Id == id)
             .FirstOrDefaultAsync();
+
         if (product is null)
             throw new CustomException(404, "Mahsulot topilmadi.");
+
+        var category = await _categoryService.RetrieveByIdAsync(productForUpdateDto.CategoryId);
+        var user = await _userService.RetrieveByIdAsync(productForUpdateDto.UserId);
 
         if (product.SalePrice is null && product.PercentageOfPrice is not null)
         {
@@ -125,42 +225,48 @@ public class ProductService : IProductService
         {
             decimal? percentPrice = ((product.CamePrice - product.SalePrice) / product.CamePrice) * 100;
             decimal? percentSale = 100 - percentPrice;
-            product.PercentageOfPrice = (short?)percentSale;
+            product.PercentageOfPrice = percentSale;
         }
-        var category = await _categoryService.RetrieveByIdAsync(productForUpdateDto.CategoryId);
 
-        var user = await _userService.RetrieveByIdAsync(productForUpdateDto.UserId);
+
+        var fullPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, product.ImagePath);
+
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
+
+        var fileName = Guid.NewGuid().ToString("N") + Path.GetExtension(productForUpdateDto.ImagePath.FileName);
+        var rootPath = Path.Combine(WebHostEnviromentHelper.WebRootPath, "Media", "Products", fileName);
+        using (var stream = new FileStream(rootPath, FileMode.Create))
+        {
+            await productForUpdateDto.ImagePath.CopyToAsync(stream);
+            await stream.FlushAsync();
+            stream.Close();
+        }
+        string resultImage = Path.Combine("Media", "Products", fileName);
 
         var mapped = _mapper.Map(productForUpdateDto, product);
         mapped.UpdatedAt = DateTime.UtcNow;
+        mapped.ImagePath = resultImage;
 
         await _productRepository.UpdateAsync(mapped);
 
         return _mapper.Map<ProductForResultDto>(mapped);
     }
 
-
-
-    private static int lastPCodeSuffix = 10;
-    private static DateTime lastPCodeDate = DateTime.UtcNow.Date;
-
     public string GeneratePCode()
     {
-        DateTime currentDate = DateTime.UtcNow.Date;
-
-        if (currentDate > lastPCodeDate)
-        {
-            lastPCodeSuffix = 11;
-            lastPCodeDate = currentDate;
-        }
+        var random = new Random();
 
         string pCode;
         do
         {
-            pCode = currentDate.ToString("P"+"yyyyMMdd") + lastPCodeSuffix.ToString();
-            lastPCodeSuffix++;
+            int randomSuffix = random.Next(1000, 9999);
+            pCode = "P" + randomSuffix.ToString();
         } while (_productRepository.SelectAll().Any(t => t.PCode == pCode));
 
         return pCode;
     }
+
 }

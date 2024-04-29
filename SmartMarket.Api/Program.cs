@@ -5,6 +5,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using SmartMarket.Service.Mappers;
 using SmartMarket.Api.Extensions;
+using SmartMarket.Service.Commons.Helpers;
 
 namespace SmartMarket.Api
 {
@@ -36,6 +37,7 @@ namespace SmartMarket.Api
             builder.Services.AddAutoMapper(typeof(MapperProfile));
 
             var app = builder.Build();
+            WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
