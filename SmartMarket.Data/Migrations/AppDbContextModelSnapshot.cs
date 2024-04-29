@@ -46,6 +46,9 @@ namespace SmartMarket.Data.Migrations
                     b.Property<short>("DiscountPrice")
                         .HasColumnType("smallint");
 
+                    b.Property<decimal?>("PercentageOfPrice")
+                        .HasColumnType("numeric");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
@@ -54,6 +57,9 @@ namespace SmartMarket.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("SalePrice")
                         .HasColumnType("numeric");
 
                     b.Property<string>("Status")
@@ -287,6 +293,9 @@ namespace SmartMarket.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<bool>("Action")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("BarCode")
                         .IsRequired()
                         .HasColumnType("text");
@@ -299,6 +308,10 @@ namespace SmartMarket.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()

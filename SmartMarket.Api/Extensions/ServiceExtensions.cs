@@ -2,9 +2,11 @@
 using SmartMarket.Data.Repositories;
 using SmartMarket.Service.Interfaces.Categories;
 using SmartMarket.Service.Interfaces.Partners;
+using SmartMarket.Service.Interfaces.Products;
 using SmartMarket.Service.Interfaces.Users;
 using SmartMarket.Service.Services.Categories;
 using SmartMarket.Service.Services.Partners;
+using SmartMarket.Service.Services.Products;
 using SmartMarket.Service.Services.Users;
 
 namespace SmartMarket.Api.Extensions;
@@ -17,7 +19,7 @@ public static class ServiceExtensions
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPartnerService, PartnerService>();
         services.AddScoped<ICategoryService, CategoryService>();
-
+        services.AddScoped<IProductService, ProductService>();
         // Repository
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
     }

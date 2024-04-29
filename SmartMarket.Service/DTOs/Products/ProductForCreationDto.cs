@@ -1,4 +1,5 @@
-﻿using SmartMarket.Domin.Entities.Categories;
+﻿using Microsoft.AspNetCore.Http;
+using SmartMarket.Domin.Entities.Categories;
 using SmartMarket.Domin.Entities.Users;
 using SmartMarket.Domin.Enums;
 
@@ -12,8 +13,9 @@ public record ProductForCreationDto
     public long UserId { get; set; }
     public decimal CamePrice { get; set; }
     public decimal Quantity { get; set; }
-    public decimal TotalPrice { get; set; }
     public OlchovBirligi OlchovTuri { get; set; }
     public decimal? SalePrice { get; set; }
     public decimal? PercentageOfPrice { get; set; }
+    public bool Action {  get; set; }
+    public IFormFile ImagePath { get; set; }
 }

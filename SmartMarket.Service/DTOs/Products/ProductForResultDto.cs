@@ -16,6 +16,8 @@ public record ProductForResultDto
     public OlchovBirligi OlchovTuri { get; set; }
     public decimal? SalePrice { get; set; }
     public decimal? PercentageOfPrice { get; set; }
+    public bool Action { get; set; }
+    public string ImagePath { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }
