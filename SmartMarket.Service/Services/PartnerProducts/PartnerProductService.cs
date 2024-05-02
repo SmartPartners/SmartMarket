@@ -66,6 +66,7 @@ public class PartnerProductService : IPartnerProductService
             BarCode = product.BarCode,
             Price = product.SalePrice ?? 0,
             Quantity = quantityToMove,
+            OlchovBirligi = product.OlchovTuri,
             CreatedAt = DateTime.UtcNow,
         };
         partnerProduct.TotalPrice = partnerProduct.Price * partnerProduct.Quantity;

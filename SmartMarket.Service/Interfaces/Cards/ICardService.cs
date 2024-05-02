@@ -8,8 +8,8 @@ public interface ICardService
     Task<bool> ReamoveAsync(long id);
     string GenerateTransactionNumber();
     Task<CardForResultDto> RetrieveByIdAsync(long id);
+    Task<CardForResultDto> GetByBarCodeAsync(string barCode);
     Task<IEnumerable<CardForResultDto>> SvetUchgandaAsync(string status);
-    Task<IEnumerable<CardForResultDto>> GetByBarCodeAsync(string barCode);
     Task<IEnumerable<CardForResultDto>> RetrieveAllWithMaxSaledAsync(int takeMax);
     Task<IEnumerable<CardForResultDto>> RetrieveAllAsync(PaginationParams @params);
     Task<CardForResultDto> UpdateWithTransactionNumberAsync(string transactionNumber);

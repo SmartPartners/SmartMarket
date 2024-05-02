@@ -1,6 +1,7 @@
 ﻿using SmartMarket.Domin.Commons;
 using SmartMarket.Domin.Entities.Categories;
 using SmartMarket.Domin.Entities.Users;
+using SmartMarket.Domin.Enums;
 
 namespace SmartMarket.Domin.Entities.Cards;
 
@@ -20,4 +21,5 @@ public class Card : Auditable
     public long CasherId { get; set; }
     public User User { get; set; }
     public string Status { get; set; }
+    public OlchovBirligi OlchovBirligi { get; set; }
 }
