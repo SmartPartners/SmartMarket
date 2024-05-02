@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartMarket.Service.Mappers;
 using SmartMarket.Api.Extensions;
 using SmartMarket.Service.Commons.Helpers;
+using Serilog;
 
 namespace SmartMarket.Api
 {
@@ -23,6 +24,9 @@ namespace SmartMarket.Api
             builder.Services.AddSwaggerGen();
             builder.Services.AddCustomServices();
 
+            // CORS
+            builder.Services.ConfigureCors();
+
             /// Fix the Cycle
             builder.Services.AddControllers()
                  .AddNewtonsoftJson(options =>
@@ -36,6 +40,14 @@ namespace SmartMarket.Api
 
             builder.Services.AddAutoMapper(typeof(MapperProfile));
 
+            // Logger
+            var logger = new LoggerConfiguration()
+              .ReadFrom.Configuration(builder.Configuration)
+              .Enrich.FromLogContext()
+              .CreateLogger();
+            builder.Logging.ClearProviders();
+            builder.Logging.AddSerilog(logger);
+
             var app = builder.Build();
             WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
 
@@ -47,6 +59,8 @@ namespace SmartMarket.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 

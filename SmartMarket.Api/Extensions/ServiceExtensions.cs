@@ -2,12 +2,14 @@
 using SmartMarket.Data.Repositories;
 using SmartMarket.Service.Interfaces.Cards;
 using SmartMarket.Service.Interfaces.Categories;
+using SmartMarket.Service.Interfaces.CencelOrders;
 using SmartMarket.Service.Interfaces.PartnerProducts;
 using SmartMarket.Service.Interfaces.Partners;
 using SmartMarket.Service.Interfaces.Products;
 using SmartMarket.Service.Interfaces.Users;
 using SmartMarket.Service.Services.Cards;
 using SmartMarket.Service.Services.Categories;
+using SmartMarket.Service.Services.CencelOrders;
 using SmartMarket.Service.Services.PartnerProducts;
 using SmartMarket.Service.Services.Partners;
 using SmartMarket.Service.Services.Products;
@@ -21,12 +23,24 @@ public static class ServiceExtensions
     {
         // Services
         services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IPartnerService, PartnerService>();
-        services.AddScoped<ICategoryService, CategoryService>();
-        services.AddScoped<IProductService, ProductService>();
         services.AddScoped<ICardService, CardService>();
+        services.AddScoped<IPartnerService, PartnerService>();
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<ICancelOrderService, CancelOrderService>();
         services.AddScoped<IPartnerProductService, PartnerProductService>();
         // Repository
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+    }
+
+    public static void ConfigureCors(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            });
+        });
     }
 }
