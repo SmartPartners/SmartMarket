@@ -56,6 +56,7 @@ public class CardService : ICardService
             SalePrice = product.SalePrice,
             PercentageOfPrice = product.PercentageOfPrice,
             Quantity = quantityToMove,
+            OlchovBirligi = product.OlchovTuri,
             CasherId = userId,
             Status = "Kutilmoqda",
             CreatedAt = DateTime.UtcNow
@@ -120,6 +121,7 @@ public class CardService : ICardService
             SalePrice = product.SalePrice,
             PercentageOfPrice = product.PercentageOfPrice,
             Quantity = quantityToMove,
+            OlchovBirligi = product.OlchovTuri,
             CasherId = userId,
             Status = "Kutilmoqda",
             CreatedAt = DateTime.UtcNow
@@ -194,16 +196,15 @@ public class CardService : ICardService
         return _mapper.Map<CardForResultDto>(cards);
     }
 
-    public async Task<IEnumerable<CardForResultDto>> GetByBarCodeAsync(string barCode)
+    public async Task<CardForResultDto> GetByBarCodeAsync(string barCode)
     {
-        var codes = await _cardRepository.SelectAll()
+        var code = await _cardRepository.SelectAll()
             .Where(c => c.BarCode == barCode)
             .ToListAsync();
-        if (codes is null)
+        if (code is null)
             throw new CustomException(404, "Mahsulot topilmadi.");
 
-
-        return _mapper.Map<IEnumerable<CardForResultDto>>(codes);
+        return _mapper.Map<CardForResultDto>(code);
     }
 
 

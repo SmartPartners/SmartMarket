@@ -1,4 +1,6 @@
-﻿namespace SmartMarket.Service.DTOs.Cards;
+﻿using SmartMarket.Domin.Enums;
+
+namespace SmartMarket.Service.DTOs.Cards;
 
 public record CardForResultDto
 {
@@ -15,6 +17,7 @@ public record CardForResultDto
     public decimal TotalPrice { get; set; }
     public long CasherId { get; set; }
     public string Status { get; set; }
+    public OlchovBirligi OlchovBirligi { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }

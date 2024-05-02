@@ -1,4 +1,6 @@
-﻿namespace SmartMarket.Service.DTOs.PartnerProducts;
+﻿using SmartMarket.Domin.Enums;
+
+namespace SmartMarket.Service.DTOs.PartnerProducts;
 
 public record PartnerProductForResultDto
 {
@@ -14,6 +16,7 @@ public record PartnerProductForResultDto
     public decimal Price { get; set; }
     public decimal TotalPrice { get; set; }
     public decimal DiscountPrice { get; set; }
+    public OlchovBirligi OlchovBirligi { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }

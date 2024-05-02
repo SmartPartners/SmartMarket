@@ -13,13 +13,13 @@ public class CencelOrder : Auditable
     public long CategoryId { get; set; }
     public Category Category { get; set; }
     public decimal Price { get; set; }
-    public short DiscountPrice { get; set; }
+    public decimal DiscountPrice { get; set; }
     public OlchovBirligi OlchovTuri { get; set; }
     public decimal Quantity { get; set; }
     public decimal TotalPrice { get; set; }
     public long CasherId { get; set; }
     public User Casher { get; set; }
-    public string Rason { get; set; }
+    public string Reason { get; set; }
     public long CancelerCasherId { get; set; }
     public User CencelerCasher { get; set; }
     public DateTime ReturnDate { get; set; }

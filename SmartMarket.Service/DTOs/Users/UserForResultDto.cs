@@ -1,5 +1,4 @@
 ﻿using SmartMarket.Domin.Enums;
-using SmartMarket.Service.DTOs.CancelOrders;
 using SmartMarket.Service.DTOs.Cards;
 using SmartMarket.Service.DTOs.PartnerProducts;
 using SmartMarket.Service.DTOs.Products;

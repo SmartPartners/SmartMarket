@@ -1,6 +1,7 @@
 ﻿using SmartMarket.Domin.Commons;
 using SmartMarket.Domin.Entities.Categories;
 using SmartMarket.Domin.Entities.Users;
+using SmartMarket.Domin.Enums;
 
 namespace SmartMarket.Domin.Entities.Partners;
 
@@ -20,4 +21,5 @@ public class PartnerProduct : Auditable
     public decimal Price { get; set; }
     public decimal TotalPrice { get; set; }
     public decimal DiscountPrice { get; set; }
+    public OlchovBirligi OlchovBirligi { get; set; }
 }
