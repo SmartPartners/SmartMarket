@@ -12,10 +12,11 @@ public interface ICardService
     Task<IEnumerable<CardForResultDto>> GetByBarCodeAsync(string barCode);
     Task<IEnumerable<CardForResultDto>> RetrieveAllWithMaxSaledAsync(int takeMax);
     Task<IEnumerable<CardForResultDto>> RetrieveAllAsync(PaginationParams @params);
-    Task<CardForResultDto> InsertWithBarCodeAsync(string barCode, decimal quantity);
     Task<CardForResultDto> UpdateWithTransactionNumberAsync(string transactionNumber);
     Task<CardForResultDto> CalculeteDiscountPercentageAsync(long id, short discountPercentage);
-    Task<CardForResultDto> MoveProductToCardAsync(long id, long userId, decimal quantityToMove, string trnasNo);
+    Task<bool> CancelProductAtListByPlanshetAsync(string transNo, string barCode, decimal quantity);
+    Task<CardForResultDto> MoveProductToCardAsync(long id, long userId, decimal quantityToMove, string transNo);
+    //Task<bool> CancelProductsAtListByPlanshetAsync(List<(string transNo, string barCode, decimal quantity)> productList);
+    Task<CardForResultDto> SaleProductWithBarCodeAsync(string barCode, long userId, decimal quantityToMove, string transNo);
     Task<IEnumerable<CardForResultDto>> RetrieveAllWithDateTimeAsync(long userId, DateTime startDate, DateTime endDate);
-    Task<CardForResultDto> SaleProductWithBarCodeAsync(string barCode, long userId, decimal quantityToMove, string trnasNo);
 }
