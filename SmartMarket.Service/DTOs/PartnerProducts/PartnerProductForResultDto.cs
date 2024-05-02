@@ -13,6 +13,7 @@ public record PartnerProductForResultDto
     public decimal Quantity { get; set; }
     public decimal Price { get; set; }
     public decimal TotalPrice { get; set; }
+    public decimal DiscountPrice { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }
