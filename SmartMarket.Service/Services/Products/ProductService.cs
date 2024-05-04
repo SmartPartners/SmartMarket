@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SmartMarket.Data.IRepositories;
 using SmartMarket.Domin.Configurations;
+using SmartMarket.Domin.Entities.ContrAgents;
 using SmartMarket.Domin.Entities.Products;
 using SmartMarket.Service.Commons.Exceptions;
 using SmartMarket.Service.Commons.Extensions;
@@ -19,17 +20,20 @@ public class ProductService : IProductService
     private readonly IUserService _userService;
     private readonly ICategoryService _categoryService;
     private readonly IRepository<Product> _productRepository;
+    private readonly IRepository<ContrAgent> _contrAgentRepository;
 
     public ProductService(
         IMapper mapper,
         ICategoryService categoryService,
         IRepository<Product> productsRepository,
-        IUserService userService)
+        IUserService userService,
+        IRepository<ContrAgent> contrAgentRepository)
     {
         _productRepository = productsRepository;
         _mapper = mapper;
         _categoryService = categoryService;
         _userService = userService;
+        _contrAgentRepository = contrAgentRepository;
     }
 
     public async Task<ProductForResultDto> CreateAsync(ProductForCreationDto productForCreationDto)
@@ -55,6 +59,13 @@ public class ProductService : IProductService
 
                     product.TotalPrice = (product.SalePrice ?? 0) * product.Quantity;
                     await _productRepository.UpdateAsync(product);
+
+                    var agentDept4 = await _contrAgentRepository.SelectAll()
+                                    .Where(a => a.Id == product.ContrAgentId)
+                                    .FirstOrDefaultAsync();
+                    agentDept4.Dept += product.TotalPrice;
+                    agentDept4.UpdatedAt = DateTime.UtcNow;
+                    await _contrAgentRepository.UpdateAsync(agentDept4);
                     throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
                 }
                 else
@@ -68,6 +79,13 @@ public class ProductService : IProductService
 
                         product.TotalPrice = (product.SalePrice ?? 0) * product.Quantity;
                         await _productRepository.UpdateAsync(product);
+
+                        var agentDept1 = await _contrAgentRepository.SelectAll()
+                                        .Where(a => a.Id == product.ContrAgentId)
+                                        .FirstOrDefaultAsync();
+                        agentDept1.Dept += product.TotalPrice;
+                        agentDept1.UpdatedAt = DateTime.UtcNow;
+                        await _contrAgentRepository.UpdateAsync(agentDept1);
                         throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
                     }
                 }
@@ -84,6 +102,13 @@ public class ProductService : IProductService
 
                     product.TotalPrice = (product.SalePrice ?? 0) * product.Quantity;
                     await _productRepository.UpdateAsync(product);
+
+                    var agentDept2 = await _contrAgentRepository.SelectAll()
+                        .Where(a => a.Id == product.ContrAgentId)
+                        .FirstOrDefaultAsync();
+                    agentDept2.Dept += product.TotalPrice;
+                    agentDept2.UpdatedAt = DateTime.UtcNow;
+                    await _contrAgentRepository.UpdateAsync(agentDept2);
                     throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
                 }
                 else
@@ -97,6 +122,13 @@ public class ProductService : IProductService
 
                         product.TotalPrice = (product.SalePrice ?? 0) * product.Quantity;
                         await _productRepository.UpdateAsync(product);
+
+                        var agentDept3 = await _contrAgentRepository.SelectAll()
+                                .Where(a => a.Id == product.ContrAgentId)
+                                .FirstOrDefaultAsync();
+                        agentDept3.Dept += product.TotalPrice;
+                        agentDept3.UpdatedAt = DateTime.UtcNow;
+                        await _contrAgentRepository.UpdateAsync(agentDept3);
                         throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
                     }
                 }
@@ -137,6 +169,13 @@ public class ProductService : IProductService
         mappedProduct.ImagePath = resultPath;
         UpdatePriceAndPercentage(mappedProduct, productForCreationDto);
         mappedProduct.CreatedAt = DateTime.UtcNow;
+
+        var agentDept = await _contrAgentRepository.SelectAll()
+                        .Where(a => a.Id == mappedProduct.ContrAgentId)
+                        .FirstOrDefaultAsync();
+        agentDept.Dept += mappedProduct.TotalPrice;
+        agentDept.UpdatedAt = DateTime.UtcNow;
+        await _contrAgentRepository.UpdateAsync(agentDept);
 
         var result = await _productRepository.InsertAsync(mappedProduct);
 

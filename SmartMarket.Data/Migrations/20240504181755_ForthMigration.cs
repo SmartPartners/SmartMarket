@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmartMarket.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class ForthMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,11 +20,32 @@ namespace SmartMarket.Data.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContrAgent",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Firma = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
+                    Dept = table.Column<decimal>(type: "numeric", nullable: false),
+                    PayForDept = table.Column<decimal>(type: "numeric", nullable: false),
+                    LastPaid = table.Column<decimal>(type: "numeric", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContrAgent", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,7 +60,7 @@ namespace SmartMarket.Data.Migrations
                     Debt = table.Column<decimal>(type: "numeric", nullable: false),
                     Paid = table.Column<decimal>(type: "numeric", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,11 +84,33 @@ namespace SmartMarket.Data.Migrations
                     OlganPuli = table.Column<decimal>(type: "numeric", nullable: true),
                     QolganPuli = table.Column<decimal>(type: "numeric", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tolov",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ContrAgentId = table.Column<long>(type: "bigint", nullable: false),
+                    LastPaid = table.Column<decimal>(type: "numeric", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tolov", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tolov_ContrAgent_ContrAgentId",
+                        column: x => x.ContrAgentId,
+                        principalTable: "ContrAgent",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,19 +124,19 @@ namespace SmartMarket.Data.Migrations
                     BarCode = table.Column<string>(type: "text", nullable: false),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    DiscountPrice = table.Column<short>(type: "smallint", nullable: false),
+                    DiscountPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     OlchovTuri = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     CasherId = table.Column<long>(type: "bigint", nullable: false),
-                    Rason = table.Column<string>(type: "text", nullable: false),
+                    Reason = table.Column<string>(type: "text", nullable: false),
                     CancelerCasherId = table.Column<long>(type: "bigint", nullable: false),
                     CencelerCasherId = table.Column<long>(type: "bigint", nullable: false),
                     ReturnDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Action = table.Column<bool>(type: "boolean", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -128,17 +171,18 @@ namespace SmartMarket.Data.Migrations
                     ProductName = table.Column<string>(type: "text", nullable: false),
                     BarCode = table.Column<string>(type: "text", nullable: false),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    CamePrice = table.Column<decimal>(type: "numeric", nullable: false),
                     SalePrice = table.Column<decimal>(type: "numeric", nullable: true),
                     PercentageOfPrice = table.Column<decimal>(type: "numeric", nullable: true),
-                    DiscountPrice = table.Column<short>(type: "smallint", nullable: false),
+                    DiscountPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     CasherId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
+                    OlchovBirligi = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -173,8 +217,10 @@ namespace SmartMarket.Data.Migrations
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    DiscountPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    OlchovBirligi = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -218,8 +264,9 @@ namespace SmartMarket.Data.Migrations
                     PercentageOfPrice = table.Column<decimal>(type: "numeric", nullable: true),
                     Action = table.Column<bool>(type: "boolean", nullable: false),
                     ImagePath = table.Column<string>(type: "text", nullable: false),
+                    ContrAgentId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -228,6 +275,12 @@ namespace SmartMarket.Data.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_ContrAgent_ContrAgentId",
+                        column: x => x.ContrAgentId,
+                        principalTable: "ContrAgent",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -284,9 +337,19 @@ namespace SmartMarket.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_ContrAgentId",
+                table: "Products",
+                column: "ContrAgentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_UserId",
                 table: "Products",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tolov_ContrAgentId",
+                table: "Tolov",
+                column: "ContrAgentId");
         }
 
         /// <inheritdoc />
@@ -305,6 +368,9 @@ namespace SmartMarket.Data.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
+                name: "Tolov");
+
+            migrationBuilder.DropTable(
                 name: "Partners");
 
             migrationBuilder.DropTable(
@@ -312,6 +378,9 @@ namespace SmartMarket.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "ContrAgent");
         }
     }
 }

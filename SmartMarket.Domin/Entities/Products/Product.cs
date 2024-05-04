@@ -1,5 +1,6 @@
 ﻿using SmartMarket.Domin.Commons;
 using SmartMarket.Domin.Entities.Categories;
+using SmartMarket.Domin.Entities.ContrAgents;
 using SmartMarket.Domin.Entities.Users;
 using SmartMarket.Domin.Enums;
 
@@ -22,4 +23,6 @@ public class Product : Auditable
     public decimal? PercentageOfPrice { get; set; }
     public bool Action {  get; set; }
     public string ImagePath { get; set; }
+    public long ContrAgentId { get; set; }
+    public ContrAgent ContrAgent { get; set; }
 }
