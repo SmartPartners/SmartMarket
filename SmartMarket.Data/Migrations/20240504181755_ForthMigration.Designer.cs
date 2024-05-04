@@ -12,8 +12,8 @@ using SmartMarket.Data.DbContexts;
 namespace SmartMarket.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240426095251_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240504181755_ForthMigration")]
+    partial class ForthMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,9 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<decimal>("CamePrice")
+                        .HasColumnType("numeric");
+
                     b.Property<long>("CasherId")
                         .HasColumnType("bigint");
 
@@ -46,13 +49,13 @@ namespace SmartMarket.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<short>("DiscountPrice")
-                        .HasColumnType("smallint");
-
-                    b.Property<decimal?>("PercentageOfPrice")
+                    b.Property<decimal>("DiscountPrice")
                         .HasColumnType("numeric");
 
-                    b.Property<decimal>("Price")
+                    b.Property<int>("OlchovBirligi")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal?>("PercentageOfPrice")
                         .HasColumnType("numeric");
 
                     b.Property<string>("ProductName")
@@ -76,7 +79,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("UserId")
@@ -106,7 +109,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -144,8 +147,8 @@ namespace SmartMarket.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<short>("DiscountPrice")
-                        .HasColumnType("smallint");
+                    b.Property<decimal>("DiscountPrice")
+                        .HasColumnType("numeric");
 
                     b.Property<int>("OlchovTuri")
                         .HasColumnType("integer");
@@ -160,7 +163,7 @@ namespace SmartMarket.Data.Migrations
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("Rason")
+                    b.Property<string>("Reason")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -178,7 +181,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -190,6 +193,77 @@ namespace SmartMarket.Data.Migrations
                     b.HasIndex("CencelerCasherId");
 
                     b.ToTable("CancelOrders");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.ContrAgents.ContrAgent", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("Dept")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Firma")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("LastPaid")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("PayForDept")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContrAgent");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.ContrAgents.Tolov", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("ContrAgentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("LastPaid")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContrAgentId");
+
+                    b.ToTable("Tolov");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.Partner", b =>
@@ -221,7 +295,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -247,6 +321,12 @@ namespace SmartMarket.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<decimal>("DiscountPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("OlchovBirligi")
+                        .HasColumnType("integer");
+
                     b.Property<string>("PCode")
                         .IsRequired()
                         .HasColumnType("text");
@@ -271,7 +351,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("UserId")
@@ -309,6 +389,9 @@ namespace SmartMarket.Data.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("ContrAgentId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -339,7 +422,7 @@ namespace SmartMarket.Data.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("UserId")
@@ -348,6 +431,8 @@ namespace SmartMarket.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ContrAgentId");
 
                     b.HasIndex("UserId");
 
@@ -400,7 +485,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -454,6 +539,17 @@ namespace SmartMarket.Data.Migrations
                     b.Navigation("CencelerCasher");
                 });
 
+            modelBuilder.Entity("SmartMarket.Domin.Entities.ContrAgents.Tolov", b =>
+                {
+                    b.HasOne("SmartMarket.Domin.Entities.ContrAgents.ContrAgent", "ContrAgent")
+                        .WithMany("Tolovs")
+                        .HasForeignKey("ContrAgentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ContrAgent");
+                });
+
             modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.PartnerProduct", b =>
                 {
                     b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
@@ -489,6 +585,12 @@ namespace SmartMarket.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SmartMarket.Domin.Entities.ContrAgents.ContrAgent", "ContrAgent")
+                        .WithMany("Products")
+                        .HasForeignKey("ContrAgentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("SmartMarket.Domin.Entities.Users.User", "User")
                         .WithMany("Products")
                         .HasForeignKey("UserId")
@@ -496,6 +598,8 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("ContrAgent");
 
                     b.Navigation("User");
                 });
@@ -507,6 +611,13 @@ namespace SmartMarket.Data.Migrations
                     b.Navigation("PartnersProducts");
 
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.ContrAgents.ContrAgent", b =>
+                {
+                    b.Navigation("Products");
+
+                    b.Navigation("Tolovs");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.Partner", b =>

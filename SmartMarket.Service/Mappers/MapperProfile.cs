@@ -2,15 +2,18 @@
 using SmartMarket.Domin.Entities.Cards;
 using SmartMarket.Domin.Entities.Categories;
 using SmartMarket.Domin.Entities.CencelOrders;
+using SmartMarket.Domin.Entities.ContrAgents;
 using SmartMarket.Domin.Entities.Partners;
 using SmartMarket.Domin.Entities.Products;
 using SmartMarket.Domin.Entities.Users;
 using SmartMarket.Service.DTOs.CancelOrders;
 using SmartMarket.Service.DTOs.Cards;
 using SmartMarket.Service.DTOs.Categories;
+using SmartMarket.Service.DTOs.ContrAgents;
 using SmartMarket.Service.DTOs.PartnerProducts;
 using SmartMarket.Service.DTOs.Partners;
 using SmartMarket.Service.DTOs.Products;
+using SmartMarket.Service.DTOs.Tolov;
 using SmartMarket.Service.DTOs.Users;
 
 namespace SmartMarket.Service.Mappers;
@@ -54,5 +57,13 @@ public class MapperProfile : Profile
         CreateMap<PartnerProduct, PartnerProductForCreationDto>().ReverseMap();
         CreateMap<PartnerProduct, PartnerProductForResultDto>().ReverseMap();
         CreateMap<PartnerProduct, PartnerProductForUpdateDto>().ReverseMap();
+
+        // ContrAgent
+        CreateMap<ContrAgent, ContrAgentForResultDto>().ReverseMap();
+        CreateMap<ContrAgent, ContrAgentForUpdateDto>().ReverseMap();
+        CreateMap<ContrAgent, ContrAgentForCreationDto>().ReverseMap();
+
+        // Tolov
+        CreateMap<Tolov, TolovForResultDto>().ReverseMap();
     }
 }
