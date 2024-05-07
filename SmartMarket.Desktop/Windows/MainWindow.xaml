@@ -11,8 +11,8 @@
     <Grid Background="{DynamicResource FirstColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="700*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" MouseDown="Grid_MouseDown">
@@ -91,9 +91,8 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <Frame
-            Name="PageNavigator"
-            NavigationUIVisibility="Hidden" Content=""/>
+            <Frame Name="PageNavigator"
+                   NavigationUIVisibility="Hidden" Content=""/>
         </Grid>
         
     </Grid>

@@ -33,7 +33,7 @@
 
     <Style x:Key="MenuButton2" TargetType="{x:Type RadioButton}">
         <Setter Property="Height" Value="40"/>
-        <Setter Property="Width" Value="125"/>
+        <Setter Property="Width" Value="135"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="16"/>
