@@ -70,8 +70,8 @@ public class CategoryService : ICategoryService
     {
         var categories = await _categoryRepository.SelectAll()
                 .Include(c => c.Products)
-                .Include(c => c.PartnersProducts)
                 .Include(c => c.Cards)
+                .Include(c => c.PartnersProducts)
                 .AsNoTracking()
                 .ToPagedList(@params)
                 .ToListAsync();
