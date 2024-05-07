@@ -31,10 +31,13 @@ public class UserService : IUserService
 
         var hasherResult = PasswordHelper.Hash(dto.Password);
         var mapped = _mapper.Map<User>(dto);
-
         mapped.CreatedAt = DateTime.UtcNow;
         mapped.Salt = hasherResult.Salt;
         mapped.Password = hasherResult.Hash;
+        if (mapped.OlganPuli is not null)
+        {
+            mapped.QolganPuli = mapped.Oylik - mapped.OlganPuli;
+        }
 
         var result = await _userRepository.InsertAsync(mapped);
         return _mapper.Map<UserForResultDto>(result);
@@ -52,6 +55,11 @@ public class UserService : IUserService
 
         var mapped = _mapper.Map(dto, user);
         mapped.UpdatedAt = DateTime.UtcNow;
+
+        if (mapped.OlganPuli is not null)
+        {
+            mapped.QolganPuli = mapped.Oylik - mapped.OlganPuli;
+        }
 
         await _userRepository.UpdateAsync(mapped);
 

@@ -14,5 +14,5 @@ public record CategoryForResultDto
 
     public ICollection<CardForResultDto> Cards { get; set; }
     public ICollection<ProductForResultDto> Products { get; set; }
-    public ICollection<PartnerProductForResultDto> PartnerProducts { get; set; }
+    public ICollection<PartnerProductForResultDto> PartnersProducts { get; set; }
 }
