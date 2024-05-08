@@ -36,25 +36,14 @@
                         Background="White"
                         BorderThickness="1"
                         BorderBrush="Black"
-                        CornerRadius="5"
+                        CornerRadius="8"
                         Margin="5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="8*"/>
-                        </Grid.ColumnDefinitions>
-                        <Path Grid.Column="0" 
-                              Data="{DynamicResource qidirish}"
-                              Fill="Black" 
-                              Stretch="Uniform"
-                              Margin="5"/>
-                        <Border Grid.Column="1" Margin="0 0 0 -1">
-                            <TextBox FontSize="14"
-                                     Text="qidiruv..."
-                                     Margin="0">
-                            </TextBox>
-                        </Border>
-                    </Grid>
+                    <Border Grid.Column="1" Margin="0 0 0 0">
+                        <TextBox FontSize="14"
+                                 Text="qidiruv..."
+                                 Style="{StaticResource SearchTextBox}">
+                        </TextBox>
+                    </Border>
                 </Border>
                 <Border Grid.Column="2"
                         Width="50"
@@ -75,7 +64,6 @@
             <ScrollViewer>
                 <WrapPanel x:Name="stPanel"
                            Margin="10 0 0 0">
-                
                 </WrapPanel>
             </ScrollViewer>
         </Border>

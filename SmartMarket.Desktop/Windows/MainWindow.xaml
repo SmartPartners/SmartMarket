@@ -7,7 +7,11 @@
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         xmlns:local="clr-namespace:SmartMarket.Desktop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="730" Width="1024" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" 
+        Height="730" Width="1024"
+        AllowsTransparency="True" 
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource FirstColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>

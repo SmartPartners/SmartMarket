@@ -70,7 +70,7 @@ namespace SmartMarket.Desktop
 
         private void rbStoredetails_Click(object sender, RoutedEventArgs e)
         {
-
+            this.PageNavigator.Content = new ShopDetailPage();
         }
     }
 }
