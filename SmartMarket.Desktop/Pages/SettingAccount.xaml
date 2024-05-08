@@ -72,9 +72,12 @@
         <Border Grid.Row="1"
                 CornerRadius=" 0 0 5 5"
                 Background="White">
-            <StackPanel x:Name="stPanel">
-            
-            </StackPanel>
+            <ScrollViewer>
+                <WrapPanel x:Name="stPanel"
+                           Margin="10 0 0 0">
+                
+                </WrapPanel>
+            </ScrollViewer>
         </Border>
     </Grid>
     

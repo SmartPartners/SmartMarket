@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartMarket.Desktop.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,14 +26,19 @@ namespace SmartMarket.Desktop.Pages
             InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            await RefreshAsync();
         }
 
         public async Task RefreshAsync()
         {
-
+            stPanel.Children.Clear();
+            for (int i = 0; i < 10; i++)
+            {
+                AccountCompanent accountCompanent = new AccountCompanent();
+                stPanel.Children.Add(accountCompanent);
+            }
         }
     }
 }

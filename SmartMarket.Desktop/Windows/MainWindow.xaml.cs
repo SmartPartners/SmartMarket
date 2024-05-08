@@ -65,7 +65,7 @@ namespace SmartMarket.Desktop
 
         private void rbAccount_Click(object sender, RoutedEventArgs e)
         {
-
+            this.PageNavigator.Content = new SettingAccount();
         }
 
         private void rbStoredetails_Click(object sender, RoutedEventArgs e)
