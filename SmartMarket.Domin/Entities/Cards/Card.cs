@@ -22,4 +22,5 @@ public class Card : Auditable
     public User User { get; set; }
     public string Status { get; set; }
     public OlchovBirligi OlchovBirligi { get; set; }
+    public TolovUsuli TolovUsuli { get; set; }
 }

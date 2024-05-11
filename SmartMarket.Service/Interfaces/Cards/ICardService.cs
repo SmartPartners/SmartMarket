@@ -1,4 +1,5 @@
 ﻿using SmartMarket.Domin.Configurations;
+using SmartMarket.Domin.Enums;
 using SmartMarket.Service.DTOs.Cards;
 
 namespace SmartMarket.Service.Interfaces.Cards;
@@ -12,7 +13,7 @@ public interface ICardService
     Task<IEnumerable<CardForResultDto>> SvetUchgandaAsync(string status);
     Task<IEnumerable<CardForResultDto>> RetrieveAllWithMaxSaledAsync(int takeMax);
     Task<IEnumerable<CardForResultDto>> RetrieveAllAsync(PaginationParams @params);
-    Task<CardForResultDto> UpdateWithTransactionNumberAsync(string transactionNumber);
+    Task<CardForResultDto> UpdateWithTransactionNumberAsync(string transactionNumber, TolovUsuli tolovUsuli);
     Task<CardForResultDto> CalculeteDiscountPercentageAsync(long id, short discountPercentage);
     Task<bool> CancelProductAtListByPlanshetAsync(string transNo, string barCode, decimal quantity);
     Task<CardForResultDto> MoveProductToCardAsync(long id, long userId, decimal quantityToMove, string transNo);

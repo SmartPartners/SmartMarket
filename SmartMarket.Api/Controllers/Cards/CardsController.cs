@@ -2,6 +2,7 @@
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
+using SmartMarket.Domin.Enums;
 using SmartMarket.Service.Interfaces.Cards;
 
 namespace SmartMarket.Api.Controllers.Cards
@@ -52,12 +53,12 @@ namespace SmartMarket.Api.Controllers.Cards
            });
 
         [HttpPost("{transNo}")]
-        public async Task<IActionResult> Updateasync([FromRoute(Name = "transNo")] string transNo)
+        public async Task<IActionResult> Updateasync([FromRoute(Name = "transNo")] string transNo, TolovUsuli tolovUsuli)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _cardService.UpdateWithTransactionNumberAsync(transNo)
+                Data = await _cardService.UpdateWithTransactionNumberAsync(transNo, tolovUsuli)
             });
 
         [HttpGet]
