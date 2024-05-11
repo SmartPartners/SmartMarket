@@ -2,6 +2,7 @@
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
+using SmartMarket.Domin.Enums;
 using SmartMarket.Service.DTOs.PartnerProducts;
 using SmartMarket.Service.Interfaces.PartnerProducts;
 
@@ -44,12 +45,12 @@ namespace SmartMarket.Api.Controllers.PartnerProduct
            });
 
         [HttpPut("pay-for-product")]
-        public async Task<IActionResult> UpdatePaidAsync(long partnerId, decimal paid)
+        public async Task<IActionResult> UpdatePaidAsync(long partnerId, decimal paid, TolovUsuli tolovUsuli)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _partnerProductService.PayForProductsAsync(partnerId, paid)
+                Data = await _partnerProductService.PayForProductsAsync(partnerId, paid, tolovUsuli)
             });
 
         [HttpGet("{id}")]

@@ -4,6 +4,7 @@ using SmartMarket.Data.IRepositories;
 using SmartMarket.Domin.Configurations;
 using SmartMarket.Domin.Entities.Partners;
 using SmartMarket.Domin.Entities.Products;
+using SmartMarket.Domin.Enums;
 using SmartMarket.Service.Commons.Exceptions;
 using SmartMarket.Service.Commons.Extensions;
 using SmartMarket.Service.DTOs.Cards;
@@ -103,7 +104,7 @@ public class PartnerProductService : IPartnerProductService
         return _mapper.Map<PartnerProductForResultDto>(partnerProduct);
     }
 
-    public async Task<PartnerForResultDto> PayForProductsAsync(long partnerId, decimal paid)
+    public async Task<PartnerForResultDto> PayForProductsAsync(long partnerId, decimal paid, TolovUsuli tolovUsuli)
     {
         var partnerProduct = await _partnerProductRepository.SelectAll()
             .Where(p => p.PartnerId == partnerId)
@@ -118,7 +119,8 @@ public class PartnerProductService : IPartnerProductService
                 var nat = partnerDebt.Debt -= paid;
                 partnerDebt.Debt = nat;
                 partnerDebt.Paid = paid;
-                partnerProduct.UpdatedAt = DateTime.UtcNow;
+                partnerDebt.TolovUsuli = tolovUsuli;
+                partnerDebt.UpdatedAt = DateTime.UtcNow;
                 await _partnerRepository.UpdateAsync(partnerDebt);
 
                 if (partnerDebt.Debt == 0)
