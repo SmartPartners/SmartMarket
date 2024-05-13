@@ -1,4 +1,5 @@
-﻿using SmartMarket.Service.DTOs.PartnerProducts;
+﻿using SmartMarket.Domin.Enums;
+using SmartMarket.Service.DTOs.PartnerProducts;
 
 namespace SmartMarket.Service.DTOs.Partners;
 
@@ -10,6 +11,7 @@ public record PartnerForResultDto
     public string PhoneNumber { get; set; }
     public decimal Debt { get; set; }
     public decimal Paid { get; set; }
+    public TolovUsuli TolovUsuli { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 

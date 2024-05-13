@@ -34,9 +34,9 @@ public class UserService : IUserService
         mapped.CreatedAt = DateTime.UtcNow;
         mapped.Salt = hasherResult.Salt;
         mapped.Password = hasherResult.Hash;
-        if (mapped.OlganPuli is not null)
+        if (dto.OlganPuli is not null)
         {
-            mapped.QolganPuli = mapped.Oylik - mapped.OlganPuli;
+            mapped.QolganPuli = dto.Oylik - dto.OlganPuli;
         }
 
         var result = await _userRepository.InsertAsync(mapped);
@@ -56,9 +56,9 @@ public class UserService : IUserService
         var mapped = _mapper.Map(dto, user);
         mapped.UpdatedAt = DateTime.UtcNow;
 
-        if (mapped.OlganPuli is not null)
+        if (dto.OlganPuli is not null)
         {
-            mapped.QolganPuli = mapped.Oylik - mapped.OlganPuli;
+            mapped.QolganPuli = dto.Oylik - dto.OlganPuli;
         }
 
         await _userRepository.UpdateAsync(mapped);

@@ -18,6 +18,7 @@ public record CardForResultDto
     public long CasherId { get; set; }
     public string Status { get; set; }
     public OlchovBirligi OlchovBirligi { get; set; }
+    public TolovUsuli TolovUsuli { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }

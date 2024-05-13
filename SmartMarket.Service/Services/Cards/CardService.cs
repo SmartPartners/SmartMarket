@@ -4,6 +4,7 @@ using SmartMarket.Data.IRepositories;
 using SmartMarket.Domin.Configurations;
 using SmartMarket.Domin.Entities.Cards;
 using SmartMarket.Domin.Entities.Products;
+using SmartMarket.Domin.Enums;
 using SmartMarket.Service.Commons.Exceptions;
 using SmartMarket.Service.Commons.Extensions;
 using SmartMarket.Service.DTOs.Cards;
@@ -177,7 +178,7 @@ public class CardService : ICardService
         return _mapper.Map<CardForResultDto>(card);
     }
 
-    public async Task<CardForResultDto> UpdateWithTransactionNumberAsync(string transactionNumber)
+    public async Task<CardForResultDto> UpdateWithTransactionNumberAsync(string transactionNumber, TolovUsuli tolovUsuli)
     {
         var cards = await _cardRepository.SelectAll()
             .Where(t => t.TransNo == transactionNumber)
@@ -188,6 +189,7 @@ public class CardService : ICardService
             if (card != null)
             {
                 card.Status = "Sotildi";
+                card.TolovUsuli = tolovUsuli;
                 card.UpdatedAt = DateTime.UtcNow;
                 await _cardRepository.UpdateAsync(card);
             }
