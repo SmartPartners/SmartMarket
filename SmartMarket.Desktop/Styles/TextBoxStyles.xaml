@@ -28,8 +28,8 @@
                                 <ColumnDefinition Width="30"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-
-                            <fa:IconImage Grid.Column="0" Icon="Search" Width="20" Height="20" Foreground="Black"/>
+                            <fa:IconImage Grid.Column="0" Icon="Search" Margin="5" Foreground="Black"/>
+                                
                             <TextBox Grid.Column="1" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}" VerticalAlignment="Center" materialDesign:HintAssist.Hint="qidiruv" Margin="5 0 0 0" Background="Transparent" BorderBrush="Transparent" Foreground="Black"/>
                         </Grid>
 

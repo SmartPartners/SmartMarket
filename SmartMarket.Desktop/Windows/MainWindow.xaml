@@ -11,16 +11,24 @@
         Height="730" Width="1024"
         AllowsTransparency="True" 
         WindowStyle="None"
+        WindowState="Normal"
         WindowStartupLocation="CenterScreen">
     <Grid Background="{DynamicResource FirstColor}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="45"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" MouseDown="Grid_MouseDown">
-            
+            <Border>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+                    <Button x:Name="btnMinimized" Style="{DynamicResource MinimizedButton}" Click="btnMinimized_Click" ></Button>
+                    <Button x:Name="btnMaximized" Style="{DynamicResource MaximizedButton}" Click="btnMaximized_Click"></Button>
+                    <Button x:Name="btnExit" Style="{DynamicResource CloseButtun}" Click="btnExit_Click" ></Button>
+                </StackPanel>
+            </Border>
+            <Border Grid.Column="1" ></Border>
         </Grid>
         
         <Grid Grid.Row="1" >

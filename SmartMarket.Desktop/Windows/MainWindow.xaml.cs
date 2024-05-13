@@ -72,5 +72,25 @@ namespace SmartMarket.Desktop
         {
             this.PageNavigator.Content = new ShopDetailPage();
         }
+
+        private void btnMaximized_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            else WindowState = WindowState.Maximized;
+        }
+
+        private void btnMinimized_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
