@@ -46,10 +46,10 @@
                                        Foreground="White"/>
                             <Border Grid.Column="1"
                                     Background="White" 
-                                    Margin="10" 
+                                    Margin="0 0 10 0" 
                                     CornerRadius="8"
                                     Height="25">
-                                <DatePicker Margin="8 0 3 0"
+                                <DatePicker Margin="2 0 2 0"
                                     materialDesign:HintAssist.Hint="Pick Date" DisplayDate="02/10/2024" SelectedDate="02/10/2024" FontSize="14"
                                     Style="{StaticResource MaterialDesignDatePicker}" />
                             </Border>
@@ -67,11 +67,14 @@
                                        Foreground="White"/>
                             <Border Grid.Column="1"
                                     Background="White" 
-                                    Margin="10" 
+                                    Margin="0 0 10 0" 
                                     CornerRadius="8"
+                                    VerticalAlignment="Center"
                                     Height="25">
-                                <DatePicker Margin="8 0 3 0"
-                                    materialDesign:HintAssist.Hint="Pick Date" DisplayDate="02/10/2024" SelectedDate="02/10/2024" FontSize="14"
+                                <DatePicker Margin="2 0 2 0"
+                                            HorizontalAlignment="Center"
+                                            materialDesign:HintAssist.Hint="Pick Date"
+                                            DisplayDate="02/10/2024" SelectedDate="02/10/2024" FontSize="14"
                                     Style="{StaticResource MaterialDesignDatePicker}" />
                             </Border>
                         </Grid>
