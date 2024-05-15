@@ -1,0 +1,200 @@
+﻿<Page x:Class="SmartMarket.Desktop.Pages.ShopDetailPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SmartMarket.Desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ShopDetailPage">
+
+    <Grid Background="#D9D9D9">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" 
+              x:Name="leftGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Background="White" Margin="5" CornerRadius="8">
+                <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top">
+                    <RadioButton 
+                                    x:Name="rbExpence"
+                                    Content="Harajatlar"
+                                    Click="rbExpence_Click"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    Style="{DynamicResource SaleMenuButton}" 
+                                    Tag="{DynamicResource receipt}" IsChecked="True"/>
+
+                    <RadioButton 
+                                    x:Name="rbReturnProds"
+                                    Content="Barcha mahsulotlar"
+                                    Click="rbReturnProds_Click"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    Style="{DynamicResource SaleMenuButton}" 
+                                    Tag="{DynamicResource return}"/>
+
+                    <RadioButton 
+                                    x:Name="rbInvalidProds"
+                                    Content="Tugayotgan mahsulotlar"
+                                    Click="rbInvalidProds_Click"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    Style="{DynamicResource SaleMenuButton}" 
+                                    Tag="{DynamicResource trash}" Margin="10"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <Border Grid.Row="1" Background="White" Margin="5 0 5 5" CornerRadius="8">
+                <Viewbox Stretch="Uniform" VerticalAlignment="Top">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" x:Name="left_bottom_panel_sale_history">
+                            <Border Background="#D41509" Margin="5 5 5 0" CornerRadius="8">
+                                <StackPanel>
+                                    <TextBlock x:Name="lbl_allExpenses" 
+                                               Text="Jami harajatlar: " 
+                                               Foreground="White"
+                                               Margin="0 5 0 0"
+                                               FontSize="20" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0 0 5 0">
+                                        <TextBlock Text="Naqt:" 
+                                                   Foreground="White"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="lblCash" 
+                                                   Text="100,000,000" 
+                                                   Foreground="White" 
+                                                   Margin="3 0 0 0" 
+                                                   FontSize="18"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"/>
+                                        
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0 0 5 0">
+                                        <TextBlock Text="Karta:" 
+                                                   Foreground="White"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="lblCard" 
+                                                   Text="100,000,000" 
+                                                   Foreground="White" 
+                                                   Margin="3 0 0 0" 
+                                                   FontSize="18"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0 0 5 0">
+                                        <TextBlock Text="Umumiy:" 
+                                                   Foreground="White"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="lblTotalSum" 
+                                                   Text="200,000,000" 
+                                                   Foreground="White" 
+                                                   Margin="3 0 0 0" 
+                                                   FontSize="18"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#24D009" 
+                                    Margin="5 5 5 0"
+                                    CornerRadius="8"
+                                    Height="135">
+                                <StackPanel>
+                                    <TextBlock Text="Sotuv summasi" 
+                                               Foreground="White"
+                                               Margin="0 5 0 0"
+                                               FontSize="20" 
+                                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0 0 5 0">
+                                        <TextBlock Text="Naqt:" 
+                                                   Foreground="White"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="lblSaleCash" 
+                                                   Text="100,000,000" 
+                                                   Foreground="White" 
+                                                   Margin="3 0 0 0" 
+                                                   FontSize="18"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"/>
+
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0 0 5 0">
+                                        <TextBlock Text="Karta:" 
+                                                   Foreground="White"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="lblSaleCard" 
+                                                   Text="100,000,000" 
+                                                   Foreground="White" 
+                                                   Margin="3 0 0 0" 
+                                                   FontSize="18"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0 0 5 0">
+                                        <TextBlock Text="Umumiy:" 
+                                                   Foreground="White"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="lblSaleTotalSum" 
+                                                   Text="200,000,000" 
+                                                   Foreground="White" 
+                                                   Margin="3 0 0 0" 
+                                                   FontSize="18"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="0 0 5 0">
+                                        <TextBlock Text="Sof foyda:" 
+                                                   Foreground="White"
+                                                   Margin="10 0 0 0"
+                                                   FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                        <TextBlock x:Name="lblProfit" 
+                                                   Text="200,000,000" 
+                                                   Foreground="White" 
+                                                   Margin="3 0 0 0" 
+                                                   FontSize="18"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Right"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                </Viewbox>
+
+            </Border>
+        </Grid>
+        <Viewbox Grid.Column="1"
+                 Stretch="Uniform" 
+                 VerticalAlignment="Top">
+            <Frame x:Name="content_menu" 
+                   NavigationUIVisibility="Hidden" 
+                   Content=""/>
+        </Viewbox>
+
+    </Grid>
+
+</Page>
