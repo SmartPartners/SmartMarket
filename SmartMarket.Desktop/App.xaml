@@ -13,7 +13,7 @@
                 <ResourceDictionary Source="\Styles\ButtonStyles.xaml"/>
                 <ResourceDictionary Source="\Styles\TextboxStyles.xaml"/>
                 <ResourceDictionary Source="\Themes\LightTheme.xaml"/>
-                <ResourceDictionary Source="/Assets/Icons/Icon.xaml"/>
+                <ResourceDictionary Source="/Assets/Icons/Icon.xaml"/>  
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
