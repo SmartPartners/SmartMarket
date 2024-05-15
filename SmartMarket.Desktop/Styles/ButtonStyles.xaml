@@ -106,9 +106,8 @@
                     <Border x:Name="B" CornerRadius="8" BorderThickness="1" BorderBrush="Black">
                         <Grid>
 
-                            <Border
-                        CornerRadius="8"
-                        x:Name="IconPath" >
+                            <Border CornerRadius="8"
+                                    x:Name="IconPath" >
                                 <Grid >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="40"/>

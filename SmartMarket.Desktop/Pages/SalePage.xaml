@@ -36,6 +36,21 @@
                                    VerticalAlignment="Center"
                                    Padding="10 0 0 0"/>
                     </Border>
+                    <ScrollViewer Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Style="{StaticResource SearchTextBox}"
+                                     Margin="2"/>
+                            <StackPanel Grid.Row="1"
+                                        x:Name="spOrder"
+                                        Margin="2 4 2 2">
+                                
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
             </Border>
         </Border>
