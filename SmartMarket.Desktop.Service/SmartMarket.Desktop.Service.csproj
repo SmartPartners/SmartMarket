@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmartMarket.Domin\SmartMarket.Domin.csproj" />
+    <ProjectReference Include="..\SmartMarket.Service\SmartMarket.Service.csproj" />
   </ItemGroup>
 
 </Project>
