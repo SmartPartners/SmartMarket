@@ -27,12 +27,12 @@ namespace SmartMarket.Desktop.Pages
 
         private void rbInvalidProds_Click(object sender, RoutedEventArgs e)
         {
-
+            this.content_menu.Content = new FinishingProductsPage();
         }
 
         private void rbReturnProds_Click(object sender, RoutedEventArgs e)
         {
-
+            this.content_menu.Content = new AllProductPage();
         }
 
         private void rbExpence_Click(object sender, RoutedEventArgs e)

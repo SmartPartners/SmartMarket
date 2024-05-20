@@ -7,7 +7,8 @@
       xmlns:local="clr-namespace:SmartMarket.Desktop.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="640" d:DesignWidth="1024"
-      Title="SalePage">
+      Title="SalePage"
+      Loaded="Page_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -37,6 +38,22 @@
                                    VerticalAlignment="Center"
                                    Padding="10 0 0 0"/>
                     </Border>
+                    <ScrollViewer Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBox Style="{DynamicResource SearchTextBox}"
+                                     Margin="5 2">
+                                
+                            </TextBox>
+                            <StackPanel Grid.Row="1"
+                                        x:Name="stackPanelOrders">
+                            
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
             </Border>
         </Border>
@@ -135,26 +152,105 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="50"/>
                             </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0"
+                                    Margin="5 5 3 5">
+                                <DataGrid HorizontalScrollBarVisibility="Auto" 
+                                          Width="Auto"
+                                          HorizontalGridLinesBrush="Black"
+                                          VerticalGridLinesBrush="Black"
+                                          AutoGenerateColumns="False"
+                                          GridLinesVisibility="All"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          IsReadOnly="False"
+                                          CanUserReorderColumns="False"
+                                          CanUserResizeColumns="False"
+                                          CanUserResizeRows="False"
+                                          Background="#FFFFFF"
+                                          BorderBrush="Black"
+                                          HeadersVisibility="Column"
+                                          BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
+                                          AlternationCount="2">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="DataGrid"  >
+                                            <Setter Property="GridLinesVisibility" Value="All"/>
+                                        </Style>
+                                        <Style TargetType="DataGridCell"  >
+                                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                            <!--<Setter Property="Background" Value="#FF17223B"/>-->
+                                            <Setter Property="Foreground" Value="#7A7979"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
+                                            <!--<Setter Property="BorderBrush" Value="#263859"/>-->
+                                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Background" Value="#B6E0FF"/>
+                                                </Trigger>
+
+                                            </Style.Triggers>
+                                        </Style>
+
+
+                                        <Style TargetType="DataGridRow">
+                                            <Style.Triggers>
+                                                <Trigger Property="AlternationIndex" Value="0">
+                                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                                </Trigger>
+                                                <Trigger Property="AlternationIndex" Value="1">
+                                                    <Setter Property="Background" Value="#E3E2E2"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+
+
+                                        <Style TargetType="DataGridColumnHeader" >
+                                            <Setter Property="Background" Value="White"/>
+                                            <Setter Property="Foreground" Value="Black"/>
+                                            <Setter Property="Height" Value="20"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                            <Setter Property="Padding" Value="0 0 0 0"/>
+                                        </Style>
+                                        <!--Scrolbar uchun style-->
+                                        <Style TargetType="ScrollBar">
+                                            <Setter Property="Background" Value="#263859"/>
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="№" Width="20"/>
+                                        <DataGridTextColumn Header="Kod" Width="*"/>
+                                        <DataGridTextColumn Header="Mahsulot nomi" Width="2*"/>
+                                        <DataGridTextColumn Header="Soni" Width="0.8*"/>
+                                        <DataGridTextColumn Header="Narxi" Width="*"/>
+                                        <DataGridTextColumn Header="Chegirma" Width="*"/>
+                                        <DataGridTextColumn Header="Jami" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                            </Border>
                             <Border Grid.Column="1" 
-                                    BorderThickness="1 0 0 0"
-                                    BorderBrush="{DynamicResource BorderColor}">
+                                    Margin="0 3 3 0">
                                 <StackPanel>
                                     <Border Margin="2"
                                             BorderThickness="1"
+                                            Cursor="Hand"
                                             BorderBrush="{DynamicResource BorderColor}">
                                         <fa:IconImage Icon="Plus" Margin="3"/>
                                     </Border>
                                     <Border Margin="2"
+                                            Cursor="Hand"
                                             BorderThickness="1"
                                             BorderBrush="{DynamicResource BorderColor}">
                                         <fa:IconImage Icon="Plus" Margin="3"/>
                                     </Border>
                                     <Border Margin="2"
+                                            Cursor="Hand"
                                             BorderThickness="1"
                                             BorderBrush="{DynamicResource BorderColor}">
                                         <fa:IconImage Icon="Plus" Margin="3"/>
                                     </Border>
                                     <Border Margin="2"
+                                            Cursor="Hand"
                                             BorderThickness="1"
                                             BorderBrush="{DynamicResource BorderColor}">
                                         <fa:IconImage Icon="Percentage" Margin="5"/>
@@ -223,6 +319,46 @@
                                            Margin="5 -10 0 0"/>
                                 </StackPanel>
                             </Grid>
+                        </Border>
+                        
+                    </Grid>
+                </Border>
+                <Border Grid.Column="1"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource BorderColor}"
+                        Background="White"
+                        CornerRadius="5"
+                        Margin="2 5 4 2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="33"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="140"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0"
+                                BorderThickness="0 0 0 1"
+                                BorderBrush="{DynamicResource BorderColor}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Text="18.05.2024"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontSize="18"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="15:18:45"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontSize="18"
+                                           FontWeight="SemiBold"/>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="2">
+                                                        
                         </Border>
                         
                     </Grid>

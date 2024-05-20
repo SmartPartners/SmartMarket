@@ -45,7 +45,7 @@ namespace SmartMarket.Desktop
 
         private void rbKassa_Click(object sender, RoutedEventArgs e)
         {
-
+            this.PageNavigator.Content = new SalePage();
         }
 
         private void rbSalesDetails_Click(object sender, RoutedEventArgs e)

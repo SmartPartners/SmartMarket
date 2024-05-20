@@ -18,22 +18,22 @@ using System.Windows.Shapes;
 namespace SmartMarket.Desktop.Pages
 {
     /// <summary>
-    /// Interaction logic for SalePage.xaml
+    /// Interaction logic for FinishingProductsPage.xaml
     /// </summary>
-    public partial class SalePage : Page
+    public partial class FinishingProductsPage : Page
     {
-        public SalePage()
+        public FinishingProductsPage()
         {
             InitializeComponent();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            stackPanelOrders.Children.Clear();
+            wrapPanelFinishingProducts.Children.Clear();
             for (int i = 0; i < 10; i++)
             {
-                OrderComponent accountCompanent = new OrderComponent();
-                stackPanelOrders.Children.Add(accountCompanent);
+                FinishingProductComponent accountCompanent = new FinishingProductComponent();
+                wrapPanelFinishingProducts.Children.Add(accountCompanent);
             }
         }
     }
