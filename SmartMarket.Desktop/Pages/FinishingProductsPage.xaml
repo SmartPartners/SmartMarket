@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SmartMarket.Desktop.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" Width="800"
+      d:DesignHeight="630" Width="800"
       Title="FinishingProductsPage"
       Loaded="Page_Loaded">
 
@@ -43,8 +43,9 @@
                 </Border>
 
                 <ScrollViewer Grid.Row="1">
-                    <WrapPanel Margin="5" x:Name="wrapPanelFinishingProducts">
-                        
+                    <WrapPanel Margin="5" 
+                               x:Name="wrapPanelFinishingProducts">
+                                                        
                     </WrapPanel>
                 </ScrollViewer>
             </Grid>

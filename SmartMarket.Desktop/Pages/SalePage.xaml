@@ -48,6 +48,7 @@
                                      Margin="5 2">
                                 
                             </TextBox>
+                            
                             <StackPanel Grid.Row="1"
                                         x:Name="stackPanelOrders">
                             
