@@ -52,7 +52,8 @@
                         VerticalAlignment="Center"
                         Background="Red"
                         Margin="8"
-                        CornerRadius="5">
+                        CornerRadius="5"
+                        MouseUp="Border_MouseUp">
                     <Path Data="{DynamicResource pilus}"
                           Fill="White"
                           Margin="5"
