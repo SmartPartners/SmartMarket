@@ -25,8 +25,8 @@ public class CardService : ICardService
         _productRepository = productRepository;
     }
 
-
-    public async Task<CardForResultDto> MoveProductToCardAsync(long id, long userId, decimal quantityToMove, string transNo)
+    // Kassa uchun
+    public async Task<CardForResultDto> MoveProductToCardAsync(long id, long? yukYiguvchId, long userId, decimal quantityToMove, string transNo)
     {
         var insufficientProduct = await _productRepository.SelectAll()
             .Where(q => q.Id == id && q.Quantity < quantityToMove)
@@ -58,6 +58,7 @@ public class CardService : ICardService
             PercentageOfPrice = product.PercentageOfPrice,
             Quantity = quantityToMove,
             OlchovBirligi = product.OlchovTuri,
+            YukYiguvchId = yukYiguvchId,
             CasherId = userId,
             Status = "Kutilmoqda",
             CreatedAt = DateTime.UtcNow
@@ -91,7 +92,8 @@ public class CardService : ICardService
         return _mapper.Map<CardForResultDto>(card);
     }
 
-    public async Task<CardForResultDto> SaleProductWithBarCodeAsync(string barCode, long userId, decimal quantityToMove, string transNo)
+    // Kassa uchun
+    public async Task<CardForResultDto> SaleProductWithBarCodeAsync(string barCode, long? yukYiguvchId, long userId, decimal quantityToMove, string transNo)
     {
         var insufficientProduct = await _productRepository.SelectAll()
             .Where(q => q.BarCode == barCode && q.Quantity < quantityToMove)
@@ -123,6 +125,7 @@ public class CardService : ICardService
             PercentageOfPrice = product.PercentageOfPrice,
             Quantity = quantityToMove,
             OlchovBirligi = product.OlchovTuri,
+            YukYiguvchId = yukYiguvchId,
             CasherId = userId,
             Status = "Kutilmoqda",
             CreatedAt = DateTime.UtcNow
@@ -263,10 +266,10 @@ public class CardService : ICardService
         return _mapper.Map<IEnumerable<CardForResultDto>>(products);
     }
 
-    public async Task<IEnumerable<CardForResultDto>> RetrieveAllWithMaxSaledAsync(int takeMax)
+    public async Task<IEnumerable<CardForResultDto>> RetrieveAllWithMaxSaledAsync(DateTime startDate, DateTime endDate, int takeMax)
     {
         var result = await _cardRepository.SelectAll()
-            .Where(c => c.Status == "Sotildi")
+            .Where(c => c.Status == "Sotildi" && c.CreatedAt >= startDate && c.CreatedAt <= endDate)
             .OrderByDescending(c => c.Quantity)
             .Take(takeMax)
             .AsNoTracking()
@@ -346,7 +349,7 @@ public class CardService : ICardService
         return true;
     }
 
-
+    #region
     /// <summary>
     /// Planshetdan bir vaqtda hamma mahsulotlarni cancel qilish uchun
     /// </summary>
@@ -379,4 +382,5 @@ public class CardService : ICardService
         }
         return true;
     }*/
+    #endregion
 }

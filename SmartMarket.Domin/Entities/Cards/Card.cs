@@ -18,6 +18,8 @@ public class Card : Auditable
     public decimal DiscountPrice { get; set; }
     public decimal Quantity { get; set; }
     public decimal TotalPrice { get; set; }
+    public long? YukYiguvchId { get; set; }
+    public User Yiguvchi { get; set; }
     public long CasherId { get; set; }
     public User User { get; set; }
     public string Status { get; set; }
