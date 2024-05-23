@@ -15,6 +15,7 @@ public record CardForResultDto
     public decimal DiscountPrice { get; set; }
     public decimal Quantity { get; set; }
     public decimal TotalPrice { get; set; }
+    public long? YukYiguvchId { get; set; }
     public long CasherId { get; set; }
     public string Status { get; set; }
     public OlchovBirligi OlchovBirligi { get; set; }

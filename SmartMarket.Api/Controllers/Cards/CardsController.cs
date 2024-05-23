@@ -25,21 +25,21 @@ namespace SmartMarket.Api.Controllers.Cards
             });
 
         [HttpPost("id-bilan-sotish")]
-        public async Task<IActionResult> PostAsync(long id, long userId, decimal quantityToMove, string trnasNo)
+        public async Task<IActionResult> PostAsync(long id, long yukYiguvchId, long userId, decimal quantityToMove, string trnasNo)
            => Ok(new Response
            {
                Code = 200,
                Message = "Success",
-               Data = await _cardService.MoveProductToCardAsync(id, userId, quantityToMove, trnasNo)
+               Data = await _cardService.MoveProductToCardAsync(id, userId, yukYiguvchId, quantityToMove, trnasNo)
            });
 
         [HttpPost("barcode-bilan-sotish")]
-        public async Task<IActionResult> SaleAsync(string barCode, long userId, decimal quantityToMove, string trnasNo)
+        public async Task<IActionResult> SaleAsync(string barCode, long yukYiguvchId, long userId, decimal quantityToMove, string trnasNo)
            => Ok(new Response
            {
                Code = 200,
                Message = "Success",
-               Data = await _cardService.SaleProductWithBarCodeAsync(barCode, userId, quantityToMove, trnasNo)
+               Data = await _cardService.SaleProductWithBarCodeAsync(barCode, yukYiguvchId, userId, quantityToMove, trnasNo)
            });
 
 
@@ -106,13 +106,13 @@ namespace SmartMarket.Api.Controllers.Cards
                 Data = await _cardService.RetrieveAllWithDateTimeAsync(userId, startDate, endDate)
             });
 
-        [HttpGet("kop-sotilgan-yuk/{max}")]
-        public async Task<IActionResult> GetByMaxAsync([FromRoute(Name = "max")] int max)
+        [HttpGet("kop-sotilgan-yuk/{max}/{startDate}/{endDate}")]
+        public async Task<IActionResult> GetByMaxAsync(DateTime startDate, DateTime endDate, int max)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _cardService.RetrieveAllWithMaxSaledAsync(max)
+                Data = await _cardService.RetrieveAllWithMaxSaledAsync(startDate, endDate, max)
             });
 
         [HttpDelete("{id}")]
