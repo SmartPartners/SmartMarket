@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SmartMarket.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class ForthMigration : Migration
+    public partial class SecondMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,6 +59,7 @@ namespace SmartMarket.Data.Migrations
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     Debt = table.Column<decimal>(type: "numeric", nullable: false),
                     Paid = table.Column<decimal>(type: "numeric", nullable: false),
+                    TolovUsuli = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -177,10 +178,12 @@ namespace SmartMarket.Data.Migrations
                     DiscountPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     Quantity = table.Column<decimal>(type: "numeric", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "numeric", nullable: false),
+                    YukYiguvchId = table.Column<long>(type: "bigint", nullable: true),
                     CasherId = table.Column<long>(type: "bigint", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
                     OlchovBirligi = table.Column<int>(type: "integer", nullable: false),
+                    TolovUsuli = table.Column<int>(type: "integer", nullable: false),
+                    CategoryId1 = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -192,13 +195,24 @@ namespace SmartMarket.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Cards_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Cards_Categories_CategoryId1",
+                        column: x => x.CategoryId1,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Cards_Users_CasherId",
+                        column: x => x.CasherId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Cards_Users_YukYiguvchId",
+                        column: x => x.YukYiguvchId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -307,14 +321,24 @@ namespace SmartMarket.Data.Migrations
                 column: "CencelerCasherId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cards_CasherId",
+                table: "Cards",
+                column: "CasherId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cards_CategoryId",
                 table: "Cards",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cards_UserId",
+                name: "IX_Cards_CategoryId1",
                 table: "Cards",
-                column: "UserId");
+                column: "CategoryId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cards_YukYiguvchId",
+                table: "Cards",
+                column: "YukYiguvchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PartnerProducts_CategoryId",

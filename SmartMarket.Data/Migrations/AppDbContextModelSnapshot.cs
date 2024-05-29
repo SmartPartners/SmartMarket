@@ -43,6 +43,9 @@ namespace SmartMarket.Data.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("CategoryId1")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -82,14 +85,18 @@ namespace SmartMarket.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("UserId")
+                    b.Property<long?>("YukYiguvchId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CasherId");
+
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CategoryId1");
+
+                    b.HasIndex("YukYiguvchId");
 
                     b.ToTable("Cards");
                 });
@@ -498,21 +505,32 @@ namespace SmartMarket.Data.Migrations
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Cards.Card", b =>
                 {
-                    b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
-                        .WithMany("Cards")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "Casher")
+                        .WithMany("CasherCards")
+                        .HasForeignKey("CasherId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "User")
-                        .WithMany("Cards")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Categories.Category", null)
+                        .WithMany("Cards")
+                        .HasForeignKey("CategoryId1");
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "Yiguvchi")
+                        .WithMany("YiguvchiCards")
+                        .HasForeignKey("YukYiguvchId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Casher");
 
                     b.Navigation("Category");
 
-                    b.Navigation("User");
+                    b.Navigation("Yiguvchi");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.CencelOrders.CencelOrder", b =>
@@ -630,11 +648,13 @@ namespace SmartMarket.Data.Migrations
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Users.User", b =>
                 {
-                    b.Navigation("Cards");
+                    b.Navigation("CasherCards");
 
                     b.Navigation("PartnerProducts");
 
                     b.Navigation("Products");
+
+                    b.Navigation("YiguvchiCards");
                 });
 #pragma warning restore 612, 618
         }

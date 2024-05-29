@@ -21,7 +21,7 @@ public class Card : Auditable
     public long? YukYiguvchId { get; set; }
     public User Yiguvchi { get; set; }
     public long CasherId { get; set; }
-    public User User { get; set; }
+    public User Casher { get; set; }
     public string Status { get; set; }
     public OlchovBirligi OlchovBirligi { get; set; }
     public TolovUsuli TolovUsuli { get; set; }

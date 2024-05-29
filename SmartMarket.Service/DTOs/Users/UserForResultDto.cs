@@ -1,4 +1,5 @@
-﻿using SmartMarket.Domin.Enums;
+﻿using SmartMarket.Domin.Entities.Cards;
+using SmartMarket.Domin.Enums;
 using SmartMarket.Service.DTOs.Cards;
 using SmartMarket.Service.DTOs.PartnerProducts;
 using SmartMarket.Service.DTOs.Products;
@@ -20,8 +21,8 @@ public record UserForResultDto
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
-
-    public ICollection<CardForResultDto> Cards { get; set; }
+    public IEnumerable<CardForResultDto> YiguvchiCards { get; set; }
+    public ICollection<CardForResultDto> CasherCards { get; set; }
     public ICollection<ProductForResultDto> Products { get; set; }
     public ICollection<PartnerProductForResultDto> PartnerProducts { get; set; }
 }

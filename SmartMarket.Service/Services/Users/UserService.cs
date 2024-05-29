@@ -84,7 +84,8 @@ public class UserService : IUserService
     {
         var users = await _userRepository.SelectAll()
              .Include(p => p.Products)
-             .Include(uc => uc.Cards)
+             .Include(uc => uc.CasherCards)
+             .Include(y => y.YiguvchiCards)
              .Include(c => c.PartnerProducts)
              .AsNoTracking()
              .ToPagedList(@params)
@@ -98,7 +99,8 @@ public class UserService : IUserService
         var user = await _userRepository.SelectAll()
              .Where(u => u.Id == id)
              .Include(p => p.Products)
-             .Include(uc => uc.Cards)
+             .Include(uc => uc.CasherCards)
+             .Include(y => y.YiguvchiCards)
              .Include(c => c.PartnerProducts)
              .AsNoTracking()
              .FirstOrDefaultAsync();
