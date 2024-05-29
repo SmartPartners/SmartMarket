@@ -19,7 +19,8 @@ public class User : Auditable
     public decimal? OlganPuli { get; set; }
     public decimal? QolganPuli { get; set; }
 
-    public IEnumerable<Card> Cards { get; set; }
+    public IEnumerable<Card> YiguvchiCards {  get; set; }
+    public IEnumerable<Card> CasherCards { get; set; }
     public IEnumerable<Product> Products { get; set; }
     public IEnumerable<PartnerProduct> PartnerProducts { get; set; }
 }

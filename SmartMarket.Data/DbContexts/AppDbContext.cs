@@ -26,41 +26,36 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Configure relationship between User and Product
-        modelBuilder.Entity<Product>()
-            .HasOne(p => p.User)
-            .WithMany(u => u.Products)
-            .HasForeignKey(p => p.UserId);
+        modelBuilder.Entity<Card>(entity =>
+        {
+            entity.HasOne(c => c.Category)
+                .WithMany()
+                .HasForeignKey(c => c.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-        // Configure relationship between PartnerProduct and Partner
-        modelBuilder.Entity<PartnerProduct>()
-            .HasOne(pp => pp.Partner)
-            .WithMany(p => p.PartnerProducts)
-            .HasForeignKey(pp => pp.PartnerId);
+            entity.HasOne(c => c.Yiguvchi)
+                .WithMany(u => u.YiguvchiCards)
+                .HasForeignKey(c => c.YukYiguvchId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-        // Configure relationship between PartnerProduct and User
-        modelBuilder.Entity<PartnerProduct>()
-            .HasOne(pp => pp.User)
-            .WithMany(u => u.PartnerProducts)
-            .HasForeignKey(pp => pp.UserId);
+            entity.HasOne(c => c.Casher)
+                .WithMany(u => u.CasherCards)
+                .HasForeignKey(c => c.CasherId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
 
-        // Configure relationship between Product and Category
-        modelBuilder.Entity<Product>()
-            .HasOne(p => p.Category)
-            .WithMany(c => c.Products)
-            .HasForeignKey(p => p.CategoryId);
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasMany(u => u.YiguvchiCards)
+                .WithOne(c => c.Yiguvchi)
+                .HasForeignKey(c => c.YukYiguvchId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-        // Configure relationship between PartnerProduct and Category
-        modelBuilder.Entity<PartnerProduct>()
-            .HasOne(pp => pp.Category)
-            .WithMany(c => c.PartnersProducts)
-            .HasForeignKey(pp => pp.CategoryId);
+            entity.HasMany(u => u.CasherCards)
+                .WithOne(c => c.Casher)
+                .HasForeignKey(c => c.CasherId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
 
-        // Configure relationship between Card and Category
-        modelBuilder.Entity<Card>()
-            .HasOne(c => c.Category)
-            .WithMany(c => c.Cards)
-            .HasForeignKey(c => c.CategoryId);
     }
-
 }
