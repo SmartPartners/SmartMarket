@@ -9,7 +9,4 @@ public record UserForUpdateDto
     public string PhoneNumber { get; set; }
     public bool IsActive { get; set; }
     public UserRole Role { get; set; }
-    public decimal? Oylik { get; set; }
-    public decimal? OlganPuli { get; set; }
-    public decimal? QolganPuli { get; set; }
 }

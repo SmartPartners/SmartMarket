@@ -3,108 +3,38 @@ using Microsoft.EntityFrameworkCore;
 using SmartMarket.Data.IRepositories;
 using SmartMarket.Domin.Configurations;
 using SmartMarket.Domin.Entities.Partners;
-using SmartMarket.Domin.Entities.Products;
-using SmartMarket.Domin.Enums;
+using SmartMarket.Domin.Entities.Tolovs;
 using SmartMarket.Service.Commons.Exceptions;
 using SmartMarket.Service.Commons.Extensions;
-using SmartMarket.Service.DTOs.Cards;
 using SmartMarket.Service.DTOs.PartnerProducts;
 using SmartMarket.Service.DTOs.Partners;
-using SmartMarket.Service.Interfaces.Categories;
 using SmartMarket.Service.Interfaces.PartnerProducts;
-using SmartMarket.Service.Interfaces.Partners;
-using SmartMarket.Service.Interfaces.Users;
 
 namespace SmartMarket.Service.Services.PartnerProducts;
 
 public class PartnerProductService : IPartnerProductService
 {
-    private readonly IRepository<Product> _productRepository;
+    private readonly IRepository<TolovUsuli> _tolovRepository;
     private readonly IRepository<Partner> _partnerRepository;
     private readonly IRepository<PartnerProduct> _partnerProductRepository;
+    private readonly IRepository<PartnerTolov> _partnerTolovRepository;
     private readonly IMapper _mapper;
-    private readonly ICategoryService _categoryService;
-    private readonly IUserService _userService;
-    private readonly IPartnerService _partnerService;
 
-    public PartnerProductService(IRepository<Product> productRepository, IRepository<Partner> partnerRepository, IRepository<PartnerProduct> partnerProductRepository, IMapper mapper, ICategoryService categoryService, IUserService userService, IPartnerService partnerService)
+    public PartnerProductService(
+        IRepository<PartnerProduct> partnerProductRepository,
+        IMapper mapper,
+        IRepository<PartnerTolov> partnerTolovRepository,
+        IRepository<Partner> partnerRepository,
+        IRepository<TolovUsuli> tolovRepository)
     {
-        _productRepository = productRepository;
-        _partnerRepository = partnerRepository;
         _partnerProductRepository = partnerProductRepository;
         _mapper = mapper;
-        _categoryService = categoryService;
-        _userService = userService;
-        _partnerService = partnerService;
+        _partnerTolovRepository = partnerTolovRepository;
+        _partnerRepository = partnerRepository;
+        _tolovRepository = tolovRepository;
     }
 
-    public async Task<PartnerProductForResultDto> MoveProductToPartnerProductAsync(long id, long partnerId, long userId, decimal quantityToMove, string transNo)
-    {
-        var insufficientProduct = await _productRepository.SelectAll()
-            .Where(p => p.Id == id && p.Quantity < quantityToMove)
-            .FirstOrDefaultAsync();
-        if (insufficientProduct is not null)
-            throw new CustomException(400, $"Omborda buncha mahsulot mavjud emas.\nOmborda {insufficientProduct.Quantity} ta mahsulot bor.");
-
-        if (quantityToMove == 0)
-            throw new CustomException(404, "Mahsulotni hajmini kiriting.");
-
-        var product = await _productRepository.SelectAll()
-            .Where(p => p.Id == id)
-            .FirstOrDefaultAsync();
-
-        if (product == null || product.Quantity == 0)
-            throw new CustomException(404, "Bu turdagi mahsulot omborda mavjud emas.");
-
-        var partnerProduct = new PartnerProduct
-        {
-            PartnerId = partnerId,  
-            CategoryId = product.CategoryId,
-            UserId = userId,
-            ProductName = product.Name,
-            TransNo = transNo,
-            PCode = product.PCode,
-            BarCode = product.BarCode,
-            Price = product.SalePrice ?? 0,
-            Quantity = quantityToMove,
-            OlchovBirligi = product.OlchovTuri,
-            CreatedAt = DateTime.UtcNow,
-        };
-        partnerProduct.TotalPrice = partnerProduct.Price * partnerProduct.Quantity;
-
-        var partnerDebt = await _partnerRepository.SelectAll()
-            .Where(p => p.Id == partnerProduct.PartnerId)
-            .FirstOrDefaultAsync();
-        partnerDebt.Debt += partnerProduct.TotalPrice;
-        partnerDebt.UpdatedAt = DateTime.UtcNow;
-        await _partnerRepository.UpdateAsync(partnerDebt);
-
-        var partnerProducts = await _partnerProductRepository.SelectAll()
-            .Where(p => p.PCode == product.PCode && p.BarCode == product.BarCode)
-            .FirstOrDefaultAsync();
-        if (partnerProducts is not null)
-        {
-            partnerProducts.Quantity += quantityToMove;
-            partnerProducts.UpdatedAt = DateTime.UtcNow;
-            await _partnerProductRepository.UpdateAsync(partnerProducts);
-
-            product.Quantity -= quantityToMove;
-            product.UpdatedAt = DateTime.UtcNow;
-            await _productRepository.UpdateAsync(product);
-        }
-        else
-        {
-        await _partnerProductRepository.InsertAsync(partnerProduct);
-        }
-
-        product.Quantity -= quantityToMove;
-        product.UpdatedAt = DateTime.UtcNow;
-        await _productRepository.UpdateAsync(product);
-
-        return _mapper.Map<PartnerProductForResultDto>(partnerProduct);
-    }
-
-    public async Task<PartnerForResultDto> PayForProductsAsync(long partnerId, decimal paid, TolovUsuli tolovUsuli)
+    public async Task<PartnerForResultDto> PayForProductsAsync(long partnerId, decimal paid, long tolovUsuli)
     {
         var partnerProduct = await _partnerProductRepository.SelectAll()
             .Where(p => p.PartnerId == partnerId)
@@ -119,15 +49,32 @@ public class PartnerProductService : IPartnerProductService
                 var nat = partnerDebt.Debt -= paid;
                 partnerDebt.Debt = nat;
                 partnerDebt.Paid = paid;
-                partnerDebt.TolovUsuli = tolovUsuli;
+                partnerDebt.TolovUsuliId = tolovUsuli;
                 partnerDebt.UpdatedAt = DateTime.UtcNow;
+
+                var tolov = new PartnerTolov
+                {
+                    PartnerId = partnerDebt.Id,
+                    LastPaid = partnerDebt.Paid,
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                await _partnerTolovRepository.InsertAsync(tolov);
+
                 await _partnerRepository.UpdateAsync(partnerDebt);
+
 
                 if (partnerDebt.Debt == 0)
                 {
                     partnerDebt.Paid = 0;
-                    partnerDebt.UpdatedAt = new DateTime(0001, 1, 1);
+                    partnerDebt.UpdatedAt = new DateTime(0000, 0, 0);
                 }
+
+                var tolovs = await _tolovRepository.SelectAll()
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync();
+                tolovs.Nasiya -= partnerDebt.Paid;
+                await _tolovRepository.UpdateAsync(tolovs);
             }
             else
             {
@@ -137,50 +84,6 @@ public class PartnerProductService : IPartnerProductService
         return _mapper.Map<PartnerForResultDto>(partnerProduct);
     }
 
-    public async Task<PartnerProductForResultDto> CalculeteDiscountPercentageAsync(long id, short discountPercentage)
-    {
-        var card = await _partnerProductRepository.SelectAll()
-            .Where(c => c.Id == id)
-            .FirstOrDefaultAsync();
-
-        if (card is null)
-            throw new CustomException(404, "Mahsulot topilmadi.");
-
-        decimal discountAmount = (card.TotalPrice / 100) * discountPercentage;
-
-        decimal discountedTotalPrice = card.TotalPrice - discountAmount;
-
-        card.TotalPrice = discountedTotalPrice;
-        card.DiscountPrice = discountAmount;
-
-        await _partnerProductRepository.UpdateAsync(card);
-
-        return _mapper.Map<PartnerProductForResultDto>(card);
-    }
-
-    public async Task<PartnerProductForResultDto> ModifyAsync(long id, PartnerProductForUpdateDto dto)
-    {
-        var category = await _categoryService.RetrieveByIdAsync(dto.CategoryId);
-
-        var user = await _userService.RetrieveByIdAsync(dto.UserId);
-
-        var partner = await _partnerService.RetrieveByIdAsync(dto.PartnerId);
-
-        var partnerProduct = await _partnerProductRepository.SelectAll()
-            .Where(s => s.Id == id)
-            .AsNoTracking()
-            .FirstOrDefaultAsync();
-
-        if (partner is null)
-            throw new CustomException(404, "Bu mahsulot topilmadi.");
-
-        var mappedStockProduct = _mapper.Map(dto, partnerProduct);
-        mappedStockProduct.UpdatedAt = DateTime.UtcNow;
-
-        var result = await _partnerProductRepository.UpdateAsync(mappedStockProduct);
-
-        return _mapper.Map<PartnerProductForResultDto>(result);
-    }
 
     public async Task<bool> RemoveAsync(long id)
     {
@@ -234,32 +137,6 @@ public class PartnerProductService : IPartnerProductService
             throw new CustomException(404, "Bu mahsulot topilmadi.");
 
         return _mapper.Map<PartnerProductForResultDto>(StockProduct);
-    }
-
-    private static int lastTransactionNumberSuffix = 2001;
-    private static DateTime lastTransactionDate = DateTime.UtcNow.Date;
-
-    public string GenerateTransactionNumber()
-    {
-        // Use current date in "yyyyMMdd" format
-        DateTime currentDate = DateTime.UtcNow.Date;
-
-        // Check if it's a new day
-        if (currentDate > lastTransactionDate)
-        {
-            // Reset the suffix to 2001 for the new day
-            lastTransactionNumberSuffix = 2001;
-            lastTransactionDate = currentDate;
-        }
-
-        string transactionNumber;
-        do
-        {
-            transactionNumber = currentDate.ToString("yyyyMMdd") + lastTransactionNumberSuffix.ToString();
-            lastTransactionNumberSuffix++;
-        } while (_partnerProductRepository.SelectAll().Any(t => t.TransNo == transactionNumber));
-
-        return transactionNumber;
     }
 
     public async Task<PartnerProductForResultDto> RetrieveByTransNoAsync(string transNo)

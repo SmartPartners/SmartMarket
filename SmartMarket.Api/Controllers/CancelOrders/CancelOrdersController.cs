@@ -30,7 +30,7 @@ namespace SmartMarket.Api.Controllers.CancelOrders
            {
                Code = 200,
                Message = "Success",
-               Data = await _cancelOrderService.CanceledProductsFromPArterAsync(id, partnerId, quantity, canceledBy, reason, action)
+               Data = await _cancelOrderService.CanceledProductsFromParterAsync(id, partnerId, quantity, canceledBy, reason, action)
            });
 
         [HttpGet("ikkita-vaqt-orasida-magazindagi-mahsulotlarni-kurish/{userId}/{startDate}/{endDate}")]

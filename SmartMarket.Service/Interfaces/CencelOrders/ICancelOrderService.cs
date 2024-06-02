@@ -11,5 +11,5 @@ public interface ICancelOrderService
     Task<IEnumerable<CancelOrderForResultDto>> YaroqsizMahsulotlarAsync(DateTime startDate, DateTime endDate);
     Task<CancelOrderForResultDto> CanceledProductsAsync(long id, decimal quantity, long canceledBy, string reason, bool action);
     Task<IEnumerable<CancelOrderForResultDto>> RetrieveAllWithDateTimeAsync(long userId, DateTime startDate, DateTime endDate);
-    Task<CancelOrderForResultDto> CanceledProductsFromPArterAsync(long id, long partnerId, decimal quantity, long canceledBy, string reason, bool action);
+    Task<CancelOrderForResultDto> CanceledProductsFromParterAsync(long id, long partnerId, decimal quantity, long canceledBy, string reason, bool action);
 }

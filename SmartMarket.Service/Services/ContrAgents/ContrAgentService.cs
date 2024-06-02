@@ -5,6 +5,7 @@ using SmartMarket.Domin.Configurations;
 using SmartMarket.Domin.Entities.ContrAgents;
 using SmartMarket.Domin.Entities.Partners;
 using SmartMarket.Domin.Entities.Products;
+using SmartMarket.Domin.Entities.Tolovs;
 using SmartMarket.Service.Commons.Exceptions;
 using SmartMarket.Service.Commons.Extensions;
 using SmartMarket.Service.DTOs.ContrAgents;
@@ -17,20 +18,23 @@ namespace SmartMarket.Service.Services.ContrAgents;
 public class ContrAgentService : IContrAgentService
 {
     private readonly IMapper _mapper;
+    private readonly IRepository<TolovUsuli> _tolovUsuliRepository;
     private readonly IRepository<ContrAgent> _agentRepository;
     private readonly IRepository<Product> _productRepository;
     private readonly IRepository<Tolov> _tolovRepository;
 
     public ContrAgentService(
-        IMapper mapper, 
+        IMapper mapper,
         IRepository<ContrAgent> agentRepository,
         IRepository<Product> productRepository,
-        IRepository<Tolov> tolovRepository)
+        IRepository<Tolov> tolovRepository,
+        IRepository<TolovUsuli> tolovUsuliRepository)
     {
         _mapper = mapper;
         _agentRepository = agentRepository;
         _productRepository = productRepository;
         _tolovRepository = tolovRepository;
+        _tolovUsuliRepository = tolovUsuliRepository;
     }
 
     public async Task<ContrAgentForResultDto> CreateAsync(ContrAgentForCreationDto dto)
@@ -141,8 +145,14 @@ public class ContrAgentService : IContrAgentService
                 {
                     partnerDebt.PayForDept = 0;
                     partnerDebt.LastPaid = 0;
-                    partnerDebt.UpdatedAt = new DateTime(0001, 1, 1);
+                    partnerDebt.UpdatedAt = new DateTime(0000, 0, 0);
                 }
+
+                /*var tolovUsuli = await _tolovUsuliRepository.SelectAll()
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync();
+                tolovUsuli.Nasiya -= partnerDebt.LastPaid;
+                await _tolovUsuliRepository.UpdateAsync(tolovUsuli);*/
             }
             else
             {

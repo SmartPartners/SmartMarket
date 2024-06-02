@@ -7,10 +7,10 @@ namespace SmartMarket.Service.Interfaces.Products;
 public interface IProductService
 {
     string GeneratePCode();
-    Task<bool> DeleteAsync(long id);
-    Task<ProductForResultDto> GetByIdAsync(long id);
+    Task<bool> DeleteAsync(long id);//
+    Task<ProductForResultDto> GetByIdAsync(long id);//
     void UpdatePriceAndPercentage(Product product, ProductForCreationDto dto);
-    Task<IEnumerable<ProductForResultDto>> GetAllAsync(PaginationParams @params);
-    Task<ProductForResultDto> CreateAsync(ProductForCreationDto productForCreationDto);
-    Task<ProductForResultDto> UpdateAsync(long id, ProductForUpdateDto productForUpdateDto);
+    Task<IEnumerable<ProductForResultDto>> GetAllAsync(PaginationParams @params);//
+    Task<ProductForResultDto> CreateAsync(ProductForCreationDto productForCreationDto);//
+    Task<ProductForResultDto> UpdateAsync(long id, ProductForUpdateDto productForUpdateDto);//
 }

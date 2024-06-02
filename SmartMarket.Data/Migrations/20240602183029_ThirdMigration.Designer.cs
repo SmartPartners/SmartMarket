@@ -12,8 +12,8 @@ using SmartMarket.Data.DbContexts;
 namespace SmartMarket.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240528055133_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20240602183029_ThirdMigration")]
+    partial class ThirdMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,16 +37,10 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("CamePrice")
-                        .HasColumnType("numeric");
-
                     b.Property<long>("CasherId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("CategoryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CategoryId1")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedAt")
@@ -55,10 +49,20 @@ namespace SmartMarket.Data.Migrations
                     b.Property<decimal>("DiscountPrice")
                         .HasColumnType("numeric");
 
+                    b.Property<long>("KassaId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("OlchovBirligi")
                         .HasColumnType("integer");
 
-                    b.Property<decimal?>("PercentageOfPrice")
+                    b.Property<string>("PCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long?>("PartnerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
                     b.Property<string>("ProductName")
@@ -68,15 +72,12 @@ namespace SmartMarket.Data.Migrations
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
 
-                    b.Property<decimal?>("SalePrice")
-                        .HasColumnType("numeric");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("TolovUsuli")
-                        .HasColumnType("integer");
+                    b.Property<long>("TolovUsulId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");
@@ -88,6 +89,9 @@ namespace SmartMarket.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<long?>("YukTaxlovchId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("YukYiguvchId")
                         .HasColumnType("bigint");
 
@@ -97,11 +101,96 @@ namespace SmartMarket.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("KassaId");
+
+                    b.HasIndex("PartnerId");
+
+                    b.HasIndex("TolovUsulId");
+
+                    b.HasIndex("YukTaxlovchId");
 
                     b.HasIndex("YukYiguvchId");
 
                     b.ToTable("Cards");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Cards.Korzinka", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("BarCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("CategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("DiscountPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("OlchovBirligi")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long?>("PartnerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("TolovUsulId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("TransNo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("YukTaxlovchId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("YukYiguvchId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PartnerId");
+
+                    b.HasIndex("TolovUsulId");
+
+                    b.HasIndex("YukTaxlovchId");
+
+                    b.HasIndex("YukYiguvchId");
+
+                    b.ToTable("Korzinkas");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Categories.Category", b =>
@@ -151,9 +240,6 @@ namespace SmartMarket.Data.Migrations
                     b.Property<long>("CategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("CencelerCasherId")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -196,11 +282,11 @@ namespace SmartMarket.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CancelerCasherId");
+
                     b.HasIndex("CasherId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("CencelerCasherId");
 
                     b.ToTable("CancelOrders");
                 });
@@ -246,7 +332,7 @@ namespace SmartMarket.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ContrAgent");
+                    b.ToTable("ContrAgents");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.ContrAgents.Tolov", b =>
@@ -273,7 +359,97 @@ namespace SmartMarket.Data.Migrations
 
                     b.HasIndex("ContrAgentId");
 
-                    b.ToTable("Tolov");
+                    b.ToTable("Tolovs");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Kassas.Kassa", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kassas");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Orders.Order", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Barcode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("CategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("OlchovTuri")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("PartnerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("TransNo")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("YiguvchId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("YukTaxlovchId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PartnerId");
+
+                    b.HasIndex("YiguvchId");
+
+                    b.HasIndex("YukTaxlovchId");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.Partner", b =>
@@ -305,13 +481,15 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("TolovUsuli")
-                        .HasColumnType("integer");
+                    b.Property<long>("TolovUsuliId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TolovUsuliId");
 
                     b.ToTable("Partners");
                 });
@@ -337,6 +515,9 @@ namespace SmartMarket.Data.Migrations
                     b.Property<decimal>("DiscountPrice")
                         .HasColumnType("numeric");
 
+                    b.Property<long>("KassaId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("OlchovBirligi")
                         .HasColumnType("integer");
 
@@ -344,7 +525,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("PartnerId")
+                    b.Property<long?>("PartnerId")
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("Price")
@@ -356,6 +537,13 @@ namespace SmartMarket.Data.Migrations
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("numeric");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<long>("TolovUsuliId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("numeric");
@@ -370,15 +558,56 @@ namespace SmartMarket.Data.Migrations
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("YukTaxlovchId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("YukYiguvchId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("KassaId");
+
                     b.HasIndex("PartnerId");
+
+                    b.HasIndex("TolovUsuliId");
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("YukTaxlovchId");
+
+                    b.HasIndex("YukYiguvchId");
+
                     b.ToTable("PartnerProducts");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.PartnerTolov", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("LastPaid")
+                        .HasColumnType("numeric");
+
+                    b.Property<long>("PartnerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PartnerId");
+
+                    b.ToTable("PartnerTolovs");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Products.Product", b =>
@@ -452,6 +681,47 @@ namespace SmartMarket.Data.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal?>("Karta")
+                        .HasColumnType("numeric");
+
+                    b.Property<long>("KassaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal?>("Naqt")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("Nasiya")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("PulKochirish")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KassaId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TolovUsulis");
+                });
+
             modelBuilder.Entity("SmartMarket.Domin.Entities.Users.User", b =>
                 {
                     b.Property<long>("Id")
@@ -474,12 +744,6 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal?>("OlganPuli")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal?>("Oylik")
-                        .HasColumnType("numeric");
-
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
@@ -487,9 +751,6 @@ namespace SmartMarket.Data.Migrations
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<decimal?>("QolganPuli")
-                        .HasColumnType("numeric");
 
                     b.Property<int>("Role")
                         .HasColumnType("integer");
@@ -506,6 +767,39 @@ namespace SmartMarket.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Users.WorkersPayment", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal?>("OlganPuli")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("Oylik")
+                        .HasColumnType("numeric");
+
+                    b.Property<decimal?>("QolganPuli")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("WorkersPayment");
+                });
+
             modelBuilder.Entity("SmartMarket.Domin.Entities.Cards.Card", b =>
                 {
                     b.HasOne("SmartMarket.Domin.Entities.Users.User", "Casher")
@@ -515,14 +809,32 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
-                        .WithMany()
+                        .WithMany("Cards")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("SmartMarket.Domin.Entities.Categories.Category", null)
+                    b.HasOne("SmartMarket.Domin.Entities.Kassas.Kassa", "Kassa")
                         .WithMany("Cards")
-                        .HasForeignKey("CategoryId1");
+                        .HasForeignKey("KassaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Partners.Partner", "Partner")
+                        .WithMany("Cards")
+                        .HasForeignKey("PartnerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", "TolovUsuli")
+                        .WithMany("Cards")
+                        .HasForeignKey("TolovUsulId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "YukTaxlovchi")
+                        .WithMany("YukTaxlovchisi")
+                        .HasForeignKey("YukTaxlovchId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SmartMarket.Domin.Entities.Users.User", "Yiguvchi")
                         .WithMany("YiguvchiCards")
@@ -533,27 +845,75 @@ namespace SmartMarket.Data.Migrations
 
                     b.Navigation("Category");
 
+                    b.Navigation("Kassa");
+
+                    b.Navigation("Partner");
+
+                    b.Navigation("TolovUsuli");
+
                     b.Navigation("Yiguvchi");
+
+                    b.Navigation("YukTaxlovchi");
                 });
 
-            modelBuilder.Entity("SmartMarket.Domin.Entities.CencelOrders.CencelOrder", b =>
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Cards.Korzinka", b =>
                 {
-                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "Casher")
-                        .WithMany()
-                        .HasForeignKey("CasherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SmartMarket.Domin.Entities.Partners.Partner", "Partner")
+                        .WithMany("Korzinkas")
+                        .HasForeignKey("PartnerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", "TolovUsuli")
+                        .WithMany("Korzinkas")
+                        .HasForeignKey("TolovUsulId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "YukTaxlovchi")
+                        .WithMany("Taxlovchi")
+                        .HasForeignKey("YukTaxlovchId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "Yiguvchi")
+                        .WithMany("Yiguvchi")
+                        .HasForeignKey("YukYiguvchId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Partner");
+
+                    b.Navigation("TolovUsuli");
+
+                    b.Navigation("Yiguvchi");
+
+                    b.Navigation("YukTaxlovchi");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.CencelOrders.CencelOrder", b =>
+                {
                     b.HasOne("SmartMarket.Domin.Entities.Users.User", "CencelerCasher")
                         .WithMany()
-                        .HasForeignKey("CencelerCasherId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CancelerCasherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "Casher")
+                        .WithMany("CencelOrders")
+                        .HasForeignKey("CasherId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
+                        .WithMany("CencelOrders")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Casher");
@@ -568,10 +928,56 @@ namespace SmartMarket.Data.Migrations
                     b.HasOne("SmartMarket.Domin.Entities.ContrAgents.ContrAgent", "ContrAgent")
                         .WithMany("Tolovs")
                         .HasForeignKey("ContrAgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ContrAgent");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Orders.Order", b =>
+                {
+                    b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
+                        .WithMany("Orders")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Partners.Partner", "Partner")
+                        .WithMany("Orders")
+                        .HasForeignKey("PartnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "Yiguvchi")
+                        .WithMany("YukYiguvchi")
+                        .HasForeignKey("YiguvchId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "YukTaxlovchi")
+                        .WithMany("YukTaxlovchi")
+                        .HasForeignKey("YukTaxlovchId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Partner");
+
+                    b.Navigation("Yiguvchi");
+
+                    b.Navigation("YukTaxlovchi");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.Partner", b =>
+                {
+                    b.HasOne("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", "TolovUsuli")
+                        .WithMany("Partners")
+                        .HasForeignKey("TolovUsuliId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TolovUsuli");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.PartnerProduct", b =>
@@ -579,26 +985,66 @@ namespace SmartMarket.Data.Migrations
                     b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
                         .WithMany("PartnersProducts")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Kassas.Kassa", "Kassa")
+                        .WithMany("PartnerProducts")
+                        .HasForeignKey("KassaId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SmartMarket.Domin.Entities.Partners.Partner", "Partner")
                         .WithMany("PartnerProducts")
                         .HasForeignKey("PartnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", "TolovUsuli")
+                        .WithMany("PartnersProduct")
+                        .HasForeignKey("TolovUsuliId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SmartMarket.Domin.Entities.Users.User", "User")
                         .WithMany("PartnerProducts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "YukTaxlovchi")
+                        .WithMany("PartnersYukTaxlovchisi")
+                        .HasForeignKey("YukTaxlovchId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "Yiguvchi")
+                        .WithMany("PartnersYukYiguvchi")
+                        .HasForeignKey("YukYiguvchId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Category");
 
+                    b.Navigation("Kassa");
+
                     b.Navigation("Partner");
 
+                    b.Navigation("TolovUsuli");
+
                     b.Navigation("User");
+
+                    b.Navigation("Yiguvchi");
+
+                    b.Navigation("YukTaxlovchi");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.PartnerTolov", b =>
+                {
+                    b.HasOne("SmartMarket.Domin.Entities.Partners.Partner", "Partner")
+                        .WithMany("PartnerTolovs")
+                        .HasForeignKey("PartnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Partner");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Products.Product", b =>
@@ -606,19 +1052,19 @@ namespace SmartMarket.Data.Migrations
                     b.HasOne("SmartMarket.Domin.Entities.Categories.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SmartMarket.Domin.Entities.ContrAgents.ContrAgent", "ContrAgent")
                         .WithMany("Products")
                         .HasForeignKey("ContrAgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SmartMarket.Domin.Entities.Users.User", "User")
                         .WithMany("Products")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Category");
@@ -628,9 +1074,39 @@ namespace SmartMarket.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", b =>
+                {
+                    b.HasOne("SmartMarket.Domin.Entities.Kassas.Kassa", "Kassa")
+                        .WithMany("Tolovs")
+                        .HasForeignKey("KassaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", null)
+                        .WithMany("TolovUsulis")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Kassa");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Users.WorkersPayment", b =>
+                {
+                    b.HasOne("SmartMarket.Domin.Entities.Users.User", "User")
+                        .WithMany("Payments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SmartMarket.Domin.Entities.Categories.Category", b =>
                 {
                     b.Navigation("Cards");
+
+                    b.Navigation("CencelOrders");
+
+                    b.Navigation("Orders");
 
                     b.Navigation("PartnersProducts");
 
@@ -644,20 +1120,68 @@ namespace SmartMarket.Data.Migrations
                     b.Navigation("Tolovs");
                 });
 
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Kassas.Kassa", b =>
+                {
+                    b.Navigation("Cards");
+
+                    b.Navigation("PartnerProducts");
+
+                    b.Navigation("Tolovs");
+                });
+
             modelBuilder.Entity("SmartMarket.Domin.Entities.Partners.Partner", b =>
                 {
+                    b.Navigation("Cards");
+
+                    b.Navigation("Korzinkas");
+
+                    b.Navigation("Orders");
+
                     b.Navigation("PartnerProducts");
+
+                    b.Navigation("PartnerTolovs");
+                });
+
+            modelBuilder.Entity("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", b =>
+                {
+                    b.Navigation("Cards");
+
+                    b.Navigation("Korzinkas");
+
+                    b.Navigation("Partners");
+
+                    b.Navigation("PartnersProduct");
                 });
 
             modelBuilder.Entity("SmartMarket.Domin.Entities.Users.User", b =>
                 {
                     b.Navigation("CasherCards");
 
+                    b.Navigation("CencelOrders");
+
                     b.Navigation("PartnerProducts");
+
+                    b.Navigation("PartnersYukTaxlovchisi");
+
+                    b.Navigation("PartnersYukYiguvchi");
+
+                    b.Navigation("Payments");
 
                     b.Navigation("Products");
 
+                    b.Navigation("Taxlovchi");
+
+                    b.Navigation("TolovUsulis");
+
+                    b.Navigation("Yiguvchi");
+
                     b.Navigation("YiguvchiCards");
+
+                    b.Navigation("YukTaxlovchi");
+
+                    b.Navigation("YukTaxlovchisi");
+
+                    b.Navigation("YukYiguvchi");
                 });
 #pragma warning restore 612, 618
         }
