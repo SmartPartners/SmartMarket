@@ -1,5 +1,6 @@
-﻿using SmartMarket.Domin.Entities.Cards;
+﻿using SmartMarket.Service.DTOs.CancelOrders;
 using SmartMarket.Service.DTOs.Cards;
+using SmartMarket.Service.DTOs.Orders;
 using SmartMarket.Service.DTOs.PartnerProducts;
 using SmartMarket.Service.DTOs.Products;
 
@@ -15,4 +16,6 @@ public record CategoryForResultDto
     public ICollection<CardForResultDto> Cards { get; set; }
     public ICollection<ProductForResultDto> Products { get; set; }
     public ICollection<PartnerProductForResultDto> PartnersProducts { get; set; }
+    public ICollection<CancelOrderForResultDto> CencelOrders { get; set; }
+    public ICollection<OrderForResultDto> Orders { get; set; }
 }

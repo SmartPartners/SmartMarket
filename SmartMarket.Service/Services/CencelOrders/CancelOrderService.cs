@@ -51,7 +51,7 @@ public class CancelOrderService : ICancelOrderService
             ProductName = card.ProductName,
             BarCode = card.BarCode,
             CategoryId = card.CategoryId,
-            Price = card.SalePrice ?? 0,
+            Price = card.Price,
             OlchovTuri = card.OlchovBirligi,
             DiscountPrice = card.DiscountPrice,
             Quantity = quantity,
@@ -96,7 +96,7 @@ public class CancelOrderService : ICancelOrderService
         return _mapper.Map<CancelOrderForResultDto>(canceledOrder);
     }
 
-    public async Task<CancelOrderForResultDto> CanceledProductsFromPArterAsync(long id, long partnerId, decimal quantity, long canceledBy, string reason, bool action)
+    public async Task<CancelOrderForResultDto> CanceledProductsFromParterAsync(long id, long partnerId, decimal quantity, long canceledBy, string reason, bool action)
     {
         var partnerProduct = await _partnerProductRepository.SelectAll()
             .Where(c => c.Id == id)

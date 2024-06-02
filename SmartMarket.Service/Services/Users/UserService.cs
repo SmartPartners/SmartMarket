@@ -27,18 +27,13 @@ public class UserService : IUserService
             .Where(u => u.PhoneNumber == dto.PhoneNumber)
             .FirstOrDefaultAsync();
         if (user is not null)
-            throw new CustomException(403, "Bunday foydalanuvchi mavjud.");
+            throw new CustomException(403, "Bunday ishchi mavjud.");
 
         var hasherResult = PasswordHelper.Hash(dto.Password);
         var mapped = _mapper.Map<User>(dto);
         mapped.CreatedAt = DateTime.UtcNow;
         mapped.Salt = hasherResult.Salt;
         mapped.Password = hasherResult.Hash;
-        if (dto.OlganPuli is not null)
-        {
-            mapped.QolganPuli = dto.Oylik - dto.OlganPuli;
-        }
-
         var result = await _userRepository.InsertAsync(mapped);
         return _mapper.Map<UserForResultDto>(result);
     }
@@ -51,15 +46,10 @@ public class UserService : IUserService
              .FirstOrDefaultAsync();
 
         if (user is null)
-            throw new CustomException(404, "Foydalanuvchi topilmadi.");
+            throw new CustomException(404, "Ishchi topilmadi.");
 
         var mapped = _mapper.Map(dto, user);
         mapped.UpdatedAt = DateTime.UtcNow;
-
-        if (dto.OlganPuli is not null)
-        {
-            mapped.QolganPuli = dto.Oylik - dto.OlganPuli;
-        }
 
         await _userRepository.UpdateAsync(mapped);
 
@@ -74,7 +64,7 @@ public class UserService : IUserService
               .FirstOrDefaultAsync();
 
         if (user is null)
-            throw new CustomException(404, "Foydalanuvchi topilmadi.");
+            throw new CustomException(404, "Ishchi topilmadi.");
 
         await _userRepository.DeleteAsync(id);
         return true;
@@ -83,9 +73,14 @@ public class UserService : IUserService
     public async Task<IEnumerable<UserForResultDto>> RetrieveAllAsync(PaginationParams @params)
     {
         var users = await _userRepository.SelectAll()
-             .Include(p => p.Products)
-             .Include(uc => uc.CasherCards)
+             .Include(p => p.YukYiguvchi)
+             .Include(y => y.YukTaxlovchi)
+             .Include(t => t.Taxlovchi)
+             .Include(ty => ty.Yiguvchi)
              .Include(y => y.YiguvchiCards)
+             .Include(uc => uc.CasherCards)
+             .Include(yk => yk.YukTaxlovchisi)
+             .Include(p => p.Products)
              .Include(c => c.PartnerProducts)
              .AsNoTracking()
              .ToPagedList(@params)
@@ -98,15 +93,21 @@ public class UserService : IUserService
     {
         var user = await _userRepository.SelectAll()
              .Where(u => u.Id == id)
-             .Include(p => p.Products)
-             .Include(uc => uc.CasherCards)
+             .Include(p => p.Payments)
+             .Include(p => p.YukYiguvchi)
+             .Include(y => y.YukTaxlovchi)
+             .Include(t => t.Taxlovchi)
+             .Include(ty => ty.Yiguvchi)
              .Include(y => y.YiguvchiCards)
+             .Include(uc => uc.CasherCards)
+             .Include(yk => yk.YukTaxlovchisi)
+             .Include(p => p.Products)
              .Include(c => c.PartnerProducts)
              .AsNoTracking()
              .FirstOrDefaultAsync();
 
         if (user is null)
-            throw new CustomException(404, "Foydalanuvchi topilmadi.");
+            throw new CustomException(404, "Ishchi topilmadi.");
 
         return _mapper.Map<UserForResultDto>(user);
     }

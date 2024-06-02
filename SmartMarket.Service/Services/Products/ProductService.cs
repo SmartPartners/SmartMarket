@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using SmartMarket.Data.IRepositories;
 using SmartMarket.Domin.Configurations;
 using SmartMarket.Domin.Entities.ContrAgents;
+using SmartMarket.Domin.Entities.Kassas;
 using SmartMarket.Domin.Entities.Products;
+using SmartMarket.Domin.Entities.Tolovs;
 using SmartMarket.Service.Commons.Exceptions;
 using SmartMarket.Service.Commons.Extensions;
 using SmartMarket.Service.Commons.Helpers;
@@ -19,6 +21,7 @@ public class ProductService : IProductService
     private readonly IMapper _mapper;
     private readonly IUserService _userService;
     private readonly ICategoryService _categoryService;
+    private readonly IRepository<TolovUsuli> _tolovRepository;
     private readonly IRepository<Product> _productRepository;
     private readonly IRepository<ContrAgent> _contrAgentRepository;
 
@@ -27,13 +30,15 @@ public class ProductService : IProductService
         ICategoryService categoryService,
         IRepository<Product> productsRepository,
         IUserService userService,
-        IRepository<ContrAgent> contrAgentRepository)
+        IRepository<ContrAgent> contrAgentRepository,
+        IRepository<TolovUsuli> tolovRepository)
     {
         _productRepository = productsRepository;
         _mapper = mapper;
         _categoryService = categoryService;
         _userService = userService;
         _contrAgentRepository = contrAgentRepository;
+        _tolovRepository = tolovRepository;
     }
 
     public async Task<ProductForResultDto> CreateAsync(ProductForCreationDto productForCreationDto)
@@ -66,6 +71,13 @@ public class ProductService : IProductService
                     agentDept4.Dept += product.TotalPrice;
                     agentDept4.UpdatedAt = DateTime.UtcNow;
                     await _contrAgentRepository.UpdateAsync(agentDept4);
+
+                    /*var tolov = await _tolovRepository.SelectAll()
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync();
+                    tolov.Nasiya += agentDept4.Dept;
+                    await _tolovRepository.InsertAsync(tolov);*/
+
                     throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
                 }
                 else
@@ -86,6 +98,13 @@ public class ProductService : IProductService
                         agentDept1.Dept += product.TotalPrice;
                         agentDept1.UpdatedAt = DateTime.UtcNow;
                         await _contrAgentRepository.UpdateAsync(agentDept1);
+
+                        /*var tolov = await _tolovRepository.SelectAll()
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync();
+                        tolov.Nasiya += agentDept1.Dept;
+                        await _tolovRepository.InsertAsync(tolov);*/
+
                         throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
                     }
                 }
@@ -109,6 +128,13 @@ public class ProductService : IProductService
                     agentDept2.Dept += product.TotalPrice;
                     agentDept2.UpdatedAt = DateTime.UtcNow;
                     await _contrAgentRepository.UpdateAsync(agentDept2);
+
+                    /*var tolov = await _tolovRepository.SelectAll()
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync();
+                    tolov.Nasiya += agentDept2.Dept;
+                    await _tolovRepository.InsertAsync(tolov);*/
+
                     throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
                 }
                 else
@@ -129,6 +155,13 @@ public class ProductService : IProductService
                         agentDept3.Dept += product.TotalPrice;
                         agentDept3.UpdatedAt = DateTime.UtcNow;
                         await _contrAgentRepository.UpdateAsync(agentDept3);
+
+                        /*var tolov = await _tolovRepository.SelectAll()
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync();
+                        tolov.Nasiya += agentDept3.Dept;
+                        await _tolovRepository.InsertAsync(tolov);*/
+
                         throw new CustomException(200, "Bu turdagi mahsulot mavjudligi uchun uning soniga qo'shib qo'yildi.");
                     }
                 }

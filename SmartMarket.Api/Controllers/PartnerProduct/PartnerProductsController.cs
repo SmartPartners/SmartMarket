@@ -2,8 +2,6 @@
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
-using SmartMarket.Domin.Enums;
-using SmartMarket.Service.DTOs.PartnerProducts;
 using SmartMarket.Service.Interfaces.PartnerProducts;
 
 namespace SmartMarket.Api.Controllers.PartnerProduct
@@ -17,35 +15,8 @@ namespace SmartMarket.Api.Controllers.PartnerProduct
             _partnerProductService = partnerProductService;
         }
 
-        [HttpGet("transaction-generator")]
-        public async Task<IActionResult> GenerateTranNo()
-           => Ok(new Response
-           {
-               Code = 200,
-               Message = "Success",
-               Data = await Task.FromResult(_partnerProductService.GenerateTransactionNumber())
-           });
-
-        [HttpPost("hamkor-uchun-yuk")]
-        public async Task<IActionResult> AddAsync(long productId, long partnerId, long userId, decimal quantityToMove, string transNo)
-            => Ok(new Response
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await _partnerProductService.MoveProductToPartnerProductAsync(productId, partnerId, userId, quantityToMove, transNo)
-            });
-
-        [HttpPost("chegirma-berish/{id}/{discountPercentage}")]
-        public async Task<IActionResult> CalculateAsync(long id, short discountPercentage)
-           => Ok(new Response
-           {
-               Code = 200,
-               Message = "Success",
-               Data = await _partnerProductService.CalculeteDiscountPercentageAsync(id, discountPercentage)
-           });
-
         [HttpPut("pay-for-product")]
-        public async Task<IActionResult> UpdatePaidAsync(long partnerId, decimal paid, TolovUsuli tolovUsuli)
+        public async Task<IActionResult> UpdatePaidAsync(long partnerId, decimal paid, long tolovUsuli)
             => Ok(new Response
             {
                 Code = 200,
@@ -88,15 +59,6 @@ namespace SmartMarket.Api.Controllers.PartnerProduct
                 Code = 200,
                 Message = "Success",
                 Data = await _partnerProductService.RetrieveAllWithDateTimeAsync(userId, startDate, endDate)
-            });
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> ModifyAsync(long id, [FromBody] PartnerProductForUpdateDto stockProductForUpdate)
-            => Ok(new Response
-            {
-                Code = 200,
-                Message = "Success",
-                Data = await _partnerProductService.ModifyAsync(id, stockProductForUpdate)
             });
 
         [HttpDelete("{id}")]
