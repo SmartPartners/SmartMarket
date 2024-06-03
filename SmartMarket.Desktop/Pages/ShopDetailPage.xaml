@@ -21,6 +21,8 @@
             </Grid.RowDefinitions>
 
             <Border Grid.Row="0" Background="White" Margin="5" CornerRadius="8">
+                <Viewbox VerticalAlignment="Top">
+                    
                 <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top">
                     <RadioButton 
                                     x:Name="rbExpence"
@@ -50,6 +52,7 @@
                                     Tag="{DynamicResource trash}" Margin="10"/>
 
                 </StackPanel>
+                </Viewbox>
 
             </Border>
 
