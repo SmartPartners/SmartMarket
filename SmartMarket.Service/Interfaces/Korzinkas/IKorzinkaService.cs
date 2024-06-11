@@ -9,8 +9,8 @@ public interface IKorzinkaService
     Task<bool> ReamoveAsync(long id);//
     string GenerateTransactionNumber();//
     Task<KorzinkaForResultDto> RetrieveByIdAsync(long id);//
-    Task<CardForResultDto> GetByBarCodeAsync(string barCode);//
-    Task<IEnumerable<CardForResultDto>> SvetUchgandaAsync(string status);//
+    Task<KorzinkaForResultDto> GetByBarCodeAsync(string barCode);//
+    Task<IEnumerable<KorzinkaForResultDto>> SvetUchgandaAsync(string status);//
     Task<KorzinkaForResultDto> MoveProductsFromOrderToKorzinkaAsync(string transNo);//
     Task<bool> CanceledOrderByKorzinkaAsync(long id, string barCode, decimal quantity);//
     Task<IEnumerable<KorzinkaForResultDto>> RetrieveAllAsync(PaginationParams @params);//

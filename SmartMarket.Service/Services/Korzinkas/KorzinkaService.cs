@@ -210,7 +210,7 @@ public class KorzinkaService : IKorzinkaService
     }
 
 
-    public async Task<CardForResultDto> GetByBarCodeAsync(string barCode)
+    public async Task<KorzinkaForResultDto> GetByBarCodeAsync(string barCode)
     {
         var code = await _korzinkaRepository.SelectAll()
             .Where(c => c.BarCode == barCode)
@@ -218,7 +218,7 @@ public class KorzinkaService : IKorzinkaService
         if (code is null)
             throw new CustomException(404, "Mahsulot topilmadi.");
 
-        return _mapper.Map<CardForResultDto>(code);
+        return _mapper.Map<KorzinkaForResultDto>(code);
     }
 
 
@@ -340,7 +340,7 @@ public class KorzinkaService : IKorzinkaService
         return _mapper.Map<KorzinkaForResultDto>(korzinka);
     }
 
-    public async Task<IEnumerable<CardForResultDto>> SvetUchgandaAsync(string status)
+    public async Task<IEnumerable<KorzinkaForResultDto>> SvetUchgandaAsync(string status)
     {
         var result = await _cardRepository.SelectAll()
             .Where(c => c.Status.ToLower() == status.ToLower())
@@ -349,7 +349,7 @@ public class KorzinkaService : IKorzinkaService
         if (result is null)
             throw new CustomException(404, "Mahsulot topilmadi.");
 
-        return _mapper.Map<IEnumerable<CardForResultDto>>(result);
+        return _mapper.Map<IEnumerable<KorzinkaForResultDto>>(result);
     }
 
     private static int lastTransactionNumberSuffix = 1000;

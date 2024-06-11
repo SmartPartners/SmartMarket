@@ -17,6 +17,7 @@ public record ProductForResultDto
     public decimal? SalePrice { get; set; }
     public decimal? PercentageOfPrice { get; set; }
     public bool Action { get; set; }
+    public long ContrAgentId { get; set; }
     public string ImagePath { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
