@@ -58,7 +58,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Path Grid.Column="0"
-                                      Data="{DynamicResource account}"
+                                      Data="{DynamicResource User}"
                                       Stretch="Uniform"
                                       Fill="{DynamicResource BorderColor}"
                                       Margin="5"/>
@@ -82,7 +82,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Path Grid.Column="0"
-                                      Data="{DynamicResource account}"
+                                      Data="{DynamicResource password}"
                                       Stretch="Uniform"
                                       Fill="{DynamicResource BorderColor}"
                                       Margin="5"/>
