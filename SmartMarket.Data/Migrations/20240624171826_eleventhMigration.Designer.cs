@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SmartMarket.Data.DbContexts;
@@ -11,9 +12,11 @@ using SmartMarket.Data.DbContexts;
 namespace SmartMarket.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240624171826_eleventhMigration")]
+    partial class eleventhMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,7 +327,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long?>("TolovUsuliID")
+                    b.Property<long>("TolovUsuliID")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -1003,9 +1006,10 @@ namespace SmartMarket.Data.Migrations
             modelBuilder.Entity("SmartMarket.Domin.Entities.ContrAgents.ContrAgent", b =>
                 {
                     b.HasOne("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", "TolovUsuli")
-                        .WithMany("ContrAgents")
+                        .WithMany()
                         .HasForeignKey("TolovUsuliID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TolovUsuli");
                 });
@@ -1263,8 +1267,6 @@ namespace SmartMarket.Data.Migrations
             modelBuilder.Entity("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", b =>
                 {
                     b.Navigation("Cards");
-
-                    b.Navigation("ContrAgents");
 
                     b.Navigation("Korzinkas");
 

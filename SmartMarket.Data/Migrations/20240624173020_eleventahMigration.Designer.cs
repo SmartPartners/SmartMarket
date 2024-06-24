@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SmartMarket.Data.DbContexts;
@@ -11,9 +12,11 @@ using SmartMarket.Data.DbContexts;
 namespace SmartMarket.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240624173020_eleventahMigration")]
+    partial class eleventahMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,7 +327,7 @@ namespace SmartMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long?>("TolovUsuliID")
+                    b.Property<long>("TolovUsuliID")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -1005,7 +1008,8 @@ namespace SmartMarket.Data.Migrations
                     b.HasOne("SmartMarket.Domin.Entities.Tolovs.TolovUsuli", "TolovUsuli")
                         .WithMany("ContrAgents")
                         .HasForeignKey("TolovUsuliID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("TolovUsuli");
                 });

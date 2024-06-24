@@ -1,5 +1,6 @@
 ﻿using SmartMarket.Domin.Commons;
 using SmartMarket.Domin.Entities.Cards;
+using SmartMarket.Domin.Entities.ContrAgents;
 using SmartMarket.Domin.Entities.Kassas;
 using SmartMarket.Domin.Entities.Partners;
 
@@ -15,6 +16,7 @@ public class TolovUsuli : Auditable
     public decimal? Nasiya { get; set; }
     public string Status { get; set; }
 
+    public IEnumerable<ContrAgent> ContrAgents { get; set; }
     public IEnumerable<Korzinka> Korzinkas { get; set; }
     public IEnumerable<Partner> Partners { get; set; }
     public IEnumerable<Card> Cards { get; set; }

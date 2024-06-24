@@ -33,6 +33,8 @@ public class User : Auditable
 
     public IEnumerable<CencelOrder> CencelOrders { get; set; }
 
+    public IEnumerable<ProductStory> ProductStory { get; set; }
+
     public IEnumerable<Product> Products { get; set; }
     public IEnumerable<PartnerProduct> PartnerProducts { get; set; }
     public IEnumerable<PartnerProduct> PartnersYukYiguvchi { get; set; }

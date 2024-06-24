@@ -50,6 +50,7 @@ public static class ServiceExtensions
         services.AddScoped<IKorzinkaService, KorzinkaService>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IProductStoryService, ProductStoryService>();
         services.AddScoped<IAccountService, AccountService>();
         services.AddScoped<IPartnerProductService, PartnerProductService>();
         services.AddScoped<IPartnerService, PartnerService>();

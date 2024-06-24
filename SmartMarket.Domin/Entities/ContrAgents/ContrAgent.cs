@@ -13,9 +13,10 @@ public class ContrAgent : Auditable
     public decimal Dept { get; set; }
     public decimal PayForDept { get; set; }
     public decimal LastPaid { get; set; }
-    public long TolovUsuliID { get; set; }
+    public long? TolovUsuliID { get; set; }
     public TolovUsuli TolovUsuli { get; set; }
 
     public IEnumerable<Tolov> Tolovs { get; set; }
     public IEnumerable<Product> Products { get; set; }
+    public IEnumerable<ProductStory> ProductStory { get; set; }
 }

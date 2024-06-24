@@ -47,6 +47,7 @@ public class ContrAgentService : IContrAgentService
             throw new CustomException(403, "Bu agent mavjud.");
 
         var mapped = _mapper.Map<ContrAgent>(dto);
+        mapped.TolovUsuliID = null;
         mapped.CreatedAt = DateTime.UtcNow;
 
         var result = await _agentRepository.InsertAsync(mapped);

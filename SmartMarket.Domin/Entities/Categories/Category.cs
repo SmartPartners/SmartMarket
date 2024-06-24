@@ -16,4 +16,5 @@ public class Category : Auditable
     public IEnumerable<Product> Products { get; set; }
     public IEnumerable<CencelOrder> CencelOrders { get; set; }
     public IEnumerable<PartnerProduct> PartnersProducts { get; set; }
+    public IEnumerable<ProductStory> ProductStory { get; set; }
 }

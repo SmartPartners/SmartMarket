@@ -52,6 +52,7 @@ public class MapperProfile : Profile
         CreateMap<Product, ProductForResultDto>().ReverseMap();
         CreateMap<Product, ProductForUpdateDto>().ReverseMap();
         CreateMap<Product, ProductForCreationDto>().ReverseMap();
+        CreateMap<ProductStory, ProductStoryForResultDto>().ReverseMap();
 
         // Partner
         CreateMap<Partner, PartnerForCreationDto>().ReverseMap();
