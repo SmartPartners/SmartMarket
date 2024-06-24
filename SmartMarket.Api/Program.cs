@@ -8,66 +8,82 @@ using SmartMarket.Api.Extensions;
 using SmartMarket.Service.Commons.Helpers;
 using Serilog;
 
-namespace SmartMarket.Api
+namespace SmartMarket.Api;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        //Set Database Configuration
+        builder.Services.AddDbContext<AppDbContext>(options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+
+        builder.Services.AddCustomServices();
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddAutoMapper(typeof(MapperProfile));
+
+        // CORS
+        builder.Services.ConfigureCors();
+
+        // swagger set up
+        builder.Services.AddSwaggerService();
+
+        // JWT service
+        builder.Services.AddJwtService(builder.Configuration);
+
+        // Logger
+        var logger = new LoggerConfiguration()
+          .ReadFrom.Configuration(builder.Configuration)
+          .Enrich.FromLogContext()
+          .CreateLogger();
+        builder.Logging.ClearProviders();
+        builder.Logging.AddSerilog(logger);
+
+        /// Fix the Cycle
+        builder.Services.AddControllers()
+             .AddNewtonsoftJson(options =>
+             {
+                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+             });
+
+
+
+
+        var app = builder.Build();
+
+        WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
         {
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddCustomServices();
-
-            // CORS
-            builder.Services.ConfigureCors();
-
-            /// Fix the Cycle
-            builder.Services.AddControllers()
-                 .AddNewtonsoftJson(options =>
-                 {
-                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                 });
-
-            //Set Database Configuration
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionString")));
-
-            builder.Services.AddAutoMapper(typeof(MapperProfile));
-
-            // Logger
-            var logger = new LoggerConfiguration()
-              .ReadFrom.Configuration(builder.Configuration)
-              .Enrich.FromLogContext()
-              .CreateLogger();
-            builder.Logging.ClearProviders();
-            builder.Logging.AddSerilog(logger);
-
-            var app = builder.Build();
-            WebHostEnviromentHelper.WebRootPath = Path.GetFullPath("wwwroot");
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseCors("AllowAll");
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
+        app.UseCors("AllowAll");
+
+        app.UseStaticFiles();
+        app.UseHttpsRedirection();
+
+        // Init accessor
+        app.InitAccessor();
+
+        app.UseHttpsRedirection();
+
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+
+        app.MapControllers();
+
+        app.Run();
     }
 }

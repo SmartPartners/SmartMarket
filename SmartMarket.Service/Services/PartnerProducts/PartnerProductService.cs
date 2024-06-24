@@ -63,18 +63,16 @@ public class PartnerProductService : IPartnerProductService
 
                 await _partnerRepository.UpdateAsync(partnerDebt);
 
-
-                if (partnerDebt.Debt == 0)
-                {
-                    partnerDebt.Paid = 0;
-                    partnerDebt.UpdatedAt = new DateTime(0000, 0, 0);
-                }
-
                 var tolovs = await _tolovRepository.SelectAll()
-                        .AsNoTracking()
-                        .FirstOrDefaultAsync();
-                tolovs.Nasiya -= partnerDebt.Paid;
-                await _tolovRepository.UpdateAsync(tolovs);
+                    .Where(t => t.Id == tolovUsuli)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+
+                if (tolovs != null)
+                {
+                    tolovs.Status = partnerDebt.Debt == 0 ? "Tolangan" : "Tolanmagan";
+                    await _tolovRepository.UpdateAsync(tolovs);
+                }
             }
             else
             {

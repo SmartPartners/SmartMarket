@@ -7,11 +7,14 @@ namespace SmartMarket.Service.DTOs.TolovUsullari;
 
 public record TolovUsuliForResultDto
 {
+    public long Id { get; set; }
     public long KassaId { get; set; }
     public decimal? Naqt { get; set; }
     public decimal? Karta { get; set; }
     public decimal? PulKochirish { get; set; }
     public decimal? Nasiya { get; set; }
+    public string Status { get; set; }
+
 
     public ICollection<KorzinkaForResultDto> Korzinkas { get; set; }
     public ICollection<PartnerForResultDto> Partners { get; set; }

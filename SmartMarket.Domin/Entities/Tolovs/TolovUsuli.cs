@@ -13,6 +13,7 @@ public class TolovUsuli : Auditable
     public decimal? Karta { get; set; }
     public decimal? PulKochirish { get; set; }
     public decimal? Nasiya { get; set; }
+    public string Status { get; set; }
 
     public IEnumerable<Korzinka> Korzinkas { get; set; }
     public IEnumerable<Partner> Partners { get; set; }
