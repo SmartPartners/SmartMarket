@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
@@ -6,6 +7,7 @@ using SmartMarket.Service.Interfaces.Cards;
 
 namespace SmartMarket.Api.Controllers.Cards
 {
+    [Authorize]
     public class CardsController : BaseController
     {
         private readonly ICardService _cardService;

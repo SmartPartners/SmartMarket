@@ -13,6 +13,7 @@ public record ContrAgentForResultDto
     public decimal Dept { get; set; }
     public decimal PayForDept { get; set; }
     public decimal LastPaid { get; set; }
+    public long TolovUsuliID { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
@@ -7,6 +8,7 @@ using SmartMarket.Service.Interfaces.Users;
 
 namespace SmartMarket.Api.Controllers.Users
 {
+    [Authorize]
     public class UsersController : BaseController
     {
         private readonly IUserService _userService;

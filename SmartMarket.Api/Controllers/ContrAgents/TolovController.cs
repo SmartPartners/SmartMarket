@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
@@ -6,7 +7,7 @@ using SmartMarket.Service.Interfaces.ContrAgents;
 using SmartMarket.Service.Services.ContrAgents;
 
 namespace SmartMarket.Api.Controllers.ContrAgents;
-
+[Authorize]
 public class TolovController : BaseController
 {
     private readonly ITolovService _tolovService;

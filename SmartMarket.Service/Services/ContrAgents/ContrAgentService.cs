@@ -113,7 +113,7 @@ public class ContrAgentService : IContrAgentService
         return _mapper.Map<ContrAgentForResultDto>(agent);
     }
 
-    public async Task<ContrAgentForResultDto> PayForProductsAsync(long agentId, decimal paid)
+    public async Task<ContrAgentForResultDto> PayForProductsAsync(long agentId, decimal paid, long tolovUsulID)
     {
         var agentProduct = await _productRepository.SelectAll()
             .Where(p => p.ContrAgentId == agentId)
@@ -129,6 +129,7 @@ public class ContrAgentService : IContrAgentService
                 partnerDebt.Dept = nat;
                 partnerDebt.LastPaid = paid;
                 partnerDebt.PayForDept += partnerDebt.LastPaid;
+                partnerDebt.TolovUsuliID = tolovUsulID;
                 partnerDebt.UpdatedAt = DateTime.UtcNow;
 
                 var tolov = new Tolov

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
@@ -7,7 +8,7 @@ using SmartMarket.Service.Interfaces.Products;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartMarket.Api.Controllers.Products;
-
+[Authorize]
 public class ProductsController : BaseController
 {
     private readonly IProductService _productService;

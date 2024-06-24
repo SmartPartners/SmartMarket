@@ -15,7 +15,7 @@ public interface IKorzinkaService
     Task<bool> CanceledOrderByKorzinkaAsync(long id, string barCode, decimal quantity);//
     Task<IEnumerable<KorzinkaForResultDto>> RetrieveAllAsync(PaginationParams @params);//
     Task<KorzinkaForResultDto> CalculeteDiscountPercentageAsync(long id, decimal discountPercentage);//
-    Task<KorzinkaForResultDto> NasiyaSavdoAsync(string transactionNumber, long kassaId, long tolovUsuli, long sotuvchiId);//
+    Task<KorzinkaForResultDto> NasiyaSavdoAsync(string transactionNumber, long partnerId,    long kassaId, long tolovUsuli, long sotuvchiId);//
     Task<KorzinkaForResultDto> UpdateWithTransactionNumberAsync(string transactionNumber, long kassaId, long tolovUsuli, long sotuvchiId);//
     Task<KorzinkaForResultDto> MoveProductToCardAsync(long id, long? yukYiguvchId, long? yukTaxlovchi, long? partnerId, decimal quantityToMove, string transNo);//
     Task<KorzinkaForResultDto> SaleProductWithBarCodeAsync(string barCode, long? yukYiguvchId, long? yukTaxlovchi, long? partnerId, decimal quantityToMove, string transNo);//

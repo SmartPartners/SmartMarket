@@ -151,7 +151,7 @@ public class KorzinkaService : IKorzinkaService
         return _mapper.Map<KorzinkaForResultDto>(korzinkas);
     }
 
-    public async Task<KorzinkaForResultDto> NasiyaSavdoAsync(string transactionNumber, long kassaId, long tolovUsuli, long sotuvchiId)
+    public async Task<KorzinkaForResultDto> NasiyaSavdoAsync(string transactionNumber, long partnerId, long kassaId, long tolovUsuli, long sotuvchiId)
     {
         var korzinkas = await _korzinkaRepository.SelectAll()
             .Where(t => t.TransNo == transactionNumber)
@@ -170,7 +170,7 @@ public class KorzinkaService : IKorzinkaService
 
             partnerProduct = new PartnerProduct
             {
-                PartnerId = korzinka.PartnerId,
+                PartnerId = partnerId,
                 CategoryId = korzinka.CategoryId,
                 UserId = sotuvchiId,
                 YukYiguvchId = korzinka.YukYiguvchId,
@@ -203,7 +203,8 @@ public class KorzinkaService : IKorzinkaService
                         .AsNoTracking()
                         .FirstOrDefaultAsync();
         tolov.KassaId = kassaId;
-        tolov.Nasiya += partnerDebt.Debt;
+        tolov.Nasiya = partnerDebt.Debt;
+        tolov.Status = "Tolanmagan";
         await _tolovRepository.InsertAsync(tolov);
 
         return _mapper.Map<KorzinkaForResultDto>(korzinkas);

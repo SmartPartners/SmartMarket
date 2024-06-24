@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
@@ -8,6 +9,7 @@ using SmartMarket.Service.Interfaces.ContrAgents;
 
 namespace SmartMarket.Api.Controllers.ContrAgents
 {
+    [Authorize]
     public class ContrAgentsController : BaseController
     {
         private readonly IContrAgentService _contrAgentService;
@@ -63,12 +65,12 @@ namespace SmartMarket.Api.Controllers.ContrAgents
             });
 
         [HttpPut("pay-for-agent's-product")]
-        public async Task<IActionResult> UpdatePaidAsync(long partnerId, decimal paid)
+        public async Task<IActionResult> UpdatePaidAsync(long partnerId, decimal paid, long tolovUsulID)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _contrAgentService.PayForProductsAsync(partnerId, paid)
+                Data = await _contrAgentService.PayForProductsAsync(partnerId, paid, tolovUsulID)
             });
     }
 }

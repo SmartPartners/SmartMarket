@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
@@ -7,6 +8,7 @@ using SmartMarket.Service.Interfaces.Korzinkas;
 
 namespace SmartMarket.Api.Controllers.Cards
 {
+    [Authorize]
     public class KorzinkasController : BaseController
     {
         private readonly IKorzinkaService _korzinkaService;
@@ -72,12 +74,12 @@ namespace SmartMarket.Api.Controllers.Cards
             });
 
         [HttpPut("Nasiyaga/{transactionNumber}")]
-        public async Task<IActionResult> UpdateAsync([FromRoute(Name = "transactionNumber")] string transactionNumber, long kassaId, long tolovUsuli, long sotuvchiId)
+        public async Task<IActionResult> UpdateAsync([FromRoute(Name = "transactionNumber")] string transactionNumber, long partnerId, long kassaId, long tolovUsuli, long sotuvchiId)
             => Ok(new Response
             {
                 Code = 200,
                 Message = "Success",
-                Data = await _korzinkaService.NasiyaSavdoAsync(transactionNumber, kassaId, tolovUsuli, sotuvchiId)
+                Data = await _korzinkaService.NasiyaSavdoAsync(transactionNumber, partnerId, kassaId, tolovUsuli, sotuvchiId)
             });
 
         [HttpGet]

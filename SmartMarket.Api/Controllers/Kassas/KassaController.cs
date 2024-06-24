@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
@@ -8,6 +9,7 @@ using SmartMarket.Service.Interfaces.Kassas;
 
 namespace SmartMarket.Api.Controllers.Kassas
 {
+    [Authorize]
     public class KassaController : BaseController
     {
         private readonly IKassaService _kassaService;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SmartMarket.Api.Controllers.Commons;
 using SmartMarket.Api.Models;
 using SmartMarket.Domin.Configurations;
@@ -8,6 +9,7 @@ using SmartMarket.Service.Interfaces.TolovUsuli;
 
 namespace SmartMarket.Api.Controllers.TolovUsuli
 {
+    [Authorize]
     public class TolovUsuliController : BaseController
     {
         private readonly ITolovUsuliService _tolovUsuliService;
@@ -42,6 +44,15 @@ namespace SmartMarket.Api.Controllers.TolovUsuli
                 Code = 200,
                 Message = "Success",
                 Data = await _tolovUsuliService.RetrieveByIdAsync(id)
+            });
+
+        [HttpGet("Hisobot")]
+        public async Task<IActionResult> GetHisobotAsync(long kassaId, DateTime startDate, DateTime endDate)
+            => Ok(new Response
+            {
+                Code = 200,
+                Message = "Success",
+                Data = await _tolovUsuliService.GetNaqtTolovHisoboti(kassaId, startDate, endDate)
             });
     }
 }
