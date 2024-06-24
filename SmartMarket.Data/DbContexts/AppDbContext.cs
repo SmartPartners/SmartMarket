@@ -33,9 +33,15 @@ public class AppDbContext : DbContext
     public DbSet<TolovUsuli> TolovUsulis { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<WorkersPayment> WorkersPayment { get; set; }
+    public DbSet<ProductStory> ProductStory { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ContrAgent>()
+            .HasOne(c => c.TolovUsuli)
+            .WithMany(t => t.ContrAgents)
+            .HasForeignKey(c => c.TolovUsuliID)
+            .OnDelete(DeleteBehavior.Restrict);
         // Configure the relationships for Korzinka entity
         modelBuilder.Entity<Korzinka>()
             .HasOne(k => k.Yiguvchi)
