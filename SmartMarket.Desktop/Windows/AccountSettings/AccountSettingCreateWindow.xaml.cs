@@ -1,4 +1,8 @@
-﻿using System;
+﻿using SmartMarket.Desktop.Service.Interfrace.Users;
+using SmartMarket.Desktop.Service.Service.Users;
+using SmartMarket.Domin.Enums;
+using SmartMarket.Service.DTOs.Users;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -21,59 +25,42 @@ namespace SmartMarket.Desktop.Windows.AccountSettings
     /// </summary>
     public partial class AccountSettingCreateWindow : Window
     {
+        private IUserService _userService;
+
         public AccountSettingCreateWindow()
         {
             InitializeComponent();
+            this._userService = new UserService();
         }
 
         private void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
-            if (!IsRunAsAdministrator())
+            this.Close();            
+        }
+
+        private async void btnCreateAccount_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (txtFirstName.Text != "" && txtLastName.Text != "" && txtPhoneNumber.Text != "" && txtOylik.Text != "" && txtPassword.Text != "" && comboxRole.Text != "")
             {
-                // Restart the application with admin rights
-                var processInfo = new ProcessStartInfo
+                UserForCreationDto userForCreationDto = new UserForCreationDto()
                 {
-                    UseShellExecute = true,
-                    FileName = System.Reflection.Assembly.GetExecutingAssembly().Location,
-                    Verb = "runas"
+                    FirstName = txtFirstName.Text,
+                    LastName = txtLastName.Text,
+                    PhoneNumber = txtPhoneNumber.Text,
+                    Role = (UserRole)comboxRole.SelectedIndex,
+                    IsActive = true,
+                    Oylik = decimal.Parse(txtOylik.Text),
+                    Password = txtPassword.Text
                 };
 
-                try
-                {
-                    Process.Start(processInfo);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("This application must be run as Administrator. " + ex.Message);
-                }
+                var dbResult = await _userService.CreateAsync(userForCreationDto);
 
-                Application.Current.Shutdown();
-            }
-            else
-            {
-                // Your code to start osk.exe
-                StartOnScreenKeyboard();
-            }
-        }
+                if(dbResult != null) this.Close();                
+                else MessageBox.Show("Yaratilda xato!");                
+                
+            } else MessageBox.Show("Hamma polyalarni kiriting!");
 
-        private bool IsRunAsAdministrator()
-        {
-            var wi = WindowsIdentity.GetCurrent();
-            var wp = new WindowsPrincipal(wi);
-            return wp.IsInRole(WindowsBuiltInRole.Administrator);
-        }
 
-        private void StartOnScreenKeyboard()
-        {
-            try
-            {
-                Process.Start("osk.exe");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to start osk.exe: " + ex.Message);
-            }
         }
     }
 }

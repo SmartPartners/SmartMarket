@@ -1,4 +1,5 @@
 ﻿using SmartMarket.Desktop.Windows.AccountSettings;
+using SmartMarket.Domin.Entities.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,23 @@ namespace SmartMarket.Desktop.Components
     /// </summary>
     public partial class AccountCompanent : UserControl
     {
+        private User user;
+
         public AccountCompanent()
         {
             InitializeComponent();
         }
 
+        public void SetaData(User user)
+        {
+            this.user = user;
+            lbName.Text = user.FirstName + " " + user.LastName;
+            lbRole.Text = user.Role.ToString();
+        }
+
         private void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {            
-            AccountSettingUpdateWindow window = new AccountSettingUpdateWindow();
+            AccountSettingUpdateWindow window = new AccountSettingUpdateWindow(user);
             ShowEffectWindow();
             window.ShowDialog();
             Effect = null;

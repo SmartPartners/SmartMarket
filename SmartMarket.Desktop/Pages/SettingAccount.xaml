@@ -65,8 +65,8 @@
                 CornerRadius=" 0 0 5 5"
                 Background="White">
             <ScrollViewer>
-                <UniformGrid x:Name="stPanel"
-                             Columns="2"
+                <UniformGrid x:Name="stPanel" VerticalAlignment="Top"
+                             Columns="3"
                            Margin="10 0 0 0">
                 </UniformGrid>
             </ScrollViewer>

@@ -65,7 +65,8 @@
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5">
-                        <TextBox Margin="3 0"
+                        <TextBox x:Name="txtFirstName"
+                                 Margin="3 0"
                                  FontSize="16"
                                  Foreground="#656161"/>
                     </Border>
@@ -85,7 +86,8 @@
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5">
-                        <TextBox Margin="3 0"
+                        <TextBox x:Name="txtLastName"
+                                 Margin="3 0"
                                  FontSize="16"
                                  Foreground="#656161"/>
                     </Border>
@@ -105,7 +107,8 @@
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5">
-                        <TextBox Margin="3 0"
+                        <TextBox x:Name="txtPhoneNumber"
+                                 Margin="3 0"
                                  FontSize="16"
                                  Foreground="#656161"/>
                     </Border>
@@ -125,13 +128,13 @@
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5">
-                        <ComboBox Margin="3 0"
+                        <ComboBox x:Name="comboxRole"
+                                  Margin="3 0"
                                   FontSize="16"
                                   Foreground="#656161"
                                   VerticalAlignment="Center">
-                            <ComboBoxItem Content="Meneger"/>
-                            <ComboBoxItem Content="Meneger"/>
-                            <ComboBoxItem Content="Meneger"/>
+                            <ComboBoxItem Content="Admin"/>
+                            <ComboBoxItem Content="Sotuvchi"/>
                         </ComboBox>
                     </Border>
                 </Grid>
@@ -150,7 +153,8 @@
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5">
-                        <TextBox Margin="3 0"
+                        <TextBox x:Name="txtPassword"
+                                 Margin="3 0"
                                  FontSize="16"
                                  Foreground="#656161"/>
                     </Border>
@@ -170,16 +174,18 @@
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5">
-                        <TextBox Margin="3 0"
+                        <TextBox x:Name="txtOylik"
+                                 Margin="3 0"
                                  FontSize="16"
                                  Foreground="#656161"/>
                     </Border>
                 </Grid>
-                <Border Background="Green"
+                <Border x:Name="btnCreateAccount" Background="Green"
                         HorizontalAlignment="Right"
                         Margin="4 10"
                         CornerRadius="5"
-                        Cursor="Hand">
+                        Cursor="Hand"
+                        MouseUp="btnCreateAccount_MouseUp">
                     <Label Content="Yaratish"
                            FontWeight="SemiBold"
                            VerticalAlignment="Center"

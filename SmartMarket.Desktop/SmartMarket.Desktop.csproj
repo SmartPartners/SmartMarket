@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SmartMarket.Desktop.Service\SmartMarket.Desktop.Service.csproj" />
+    <ProjectReference Include="..\SmartMarket.Service\SmartMarket.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\barcode.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

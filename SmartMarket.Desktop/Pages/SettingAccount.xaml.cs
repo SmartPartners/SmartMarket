@@ -1,5 +1,8 @@
 ﻿using SmartMarket.Desktop.Components;
+using SmartMarket.Desktop.Service.Interfrace.Users;
+using SmartMarket.Desktop.Service.Service.Users;
 using SmartMarket.Desktop.Windows.AccountSettings;
+using SmartMarket.Domin.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +26,12 @@ namespace SmartMarket.Desktop.Pages
     /// </summary>
     public partial class SettingAccount : Page
     {
+        private IUserService _userService;
+
         public SettingAccount()
         {
             InitializeComponent();
+            this._userService = new UserService();
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -36,10 +42,17 @@ namespace SmartMarket.Desktop.Pages
         public async Task RefreshAsync()
         {
             stPanel.Children.Clear();
-            for (int i = 0; i < 10; i++)
+
+            var users = await _userService.GetAllAsync();
+            
+            if(users != null)
             {
-                AccountCompanent accountCompanent = new AccountCompanent();
-                stPanel.Children.Add(accountCompanent);
+                foreach ( var user in users)
+                {
+                    AccountCompanent accountCompanent = new AccountCompanent();
+                    accountCompanent.SetaData(user);
+                    stPanel.Children.Add(accountCompanent);
+                }
             }
         }
 

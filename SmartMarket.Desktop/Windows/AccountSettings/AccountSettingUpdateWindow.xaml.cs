@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartMarket.Domin.Entities.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,15 @@ namespace SmartMarket.Desktop.Windows.AccountSettings
     /// </summary>
     public partial class AccountSettingUpdateWindow : Window
     {
-        public AccountSettingUpdateWindow()
+        public AccountSettingUpdateWindow(User user)
         {
             InitializeComponent();
+
+            txtFirstName.Text = user.FirstName;
+            txtLastName.Text = user.LastName;   
+            txtPhoneNumber.Text = user.PhoneNumber;
+            txtRole.Text = user.Role.ToString();
+            txtOylik.Text = user.Oylik.ToString();
         }
 
         private void Border_MouseUp(object sender, MouseButtonEventArgs e)

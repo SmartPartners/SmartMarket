@@ -44,7 +44,8 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0"
+                <TextBlock x:Name="lbName"
+                           Grid.Row="0"
                            Text="Sobirov Sherzod"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
@@ -55,7 +56,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0"
+                    <TextBlock x:Name="lbRole"
+                               Grid.Row="0"
                                Text="Sotuvchi"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Top"
