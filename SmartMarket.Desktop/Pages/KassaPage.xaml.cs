@@ -10,21 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SmartMarket.Desktop.Windows.ContrAgents
+namespace SmartMarket.Desktop.Pages
 {
     /// <summary>
-    /// Interaction logic for ContrAgentsCreateWindow.xaml
+    /// Interaction logic for KassaPage.xaml
     /// </summary>
-    public partial class ContrAgentsCreateWindow : Window
+    public partial class KassaPage : Page
     {
-        public ContrAgentsCreateWindow()
+        public KassaPage()
         {
             InitializeComponent();
         }
 
-        private void Border_MouseUp(object sender, MouseButtonEventArgs e)
+        private void rbExpence_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void rbReturnProds_Click(object sender, RoutedEventArgs e)
         {
 
         }

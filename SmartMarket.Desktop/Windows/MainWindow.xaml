@@ -89,7 +89,19 @@
                                 Style="{DynamicResource MenuButton2}" 
                                 Tag="{DynamicResource store}"/>
 
+                            <RadioButton 
+                                        x:Name="rbStoreKassa"
+                                        Content="Kassa hisoboti"
+                                        Click="rbStoreKassa_Click"
+                                        Style="{DynamicResource MenuButton2}" 
+                                        Tag="{DynamicResource Kassa}"/>
 
+                            <RadioButton 
+                                        x:Name="rbSettings"
+                                        Content="Sozlamalar"
+                                        Click="rbSettings_Click"
+                                        Style="{DynamicResource MenuButton2}" 
+                                        Tag="{DynamicResource Setting}"/>
                         </StackPanel>
 
                         <Button Style="{StaticResource MenuButton}" x:Name="BtnClose" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Padding="0" Click="BtnClose_Click">

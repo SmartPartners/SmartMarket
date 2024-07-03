@@ -92,5 +92,15 @@ namespace SmartMarket.Desktop
         {
             Application.Current.Shutdown();
         }
+
+        private void rbStoreKassa_Click(object sender, RoutedEventArgs e)
+        {
+            PageNavigator.Content = new KassaPage();
+        }
+
+        private void rbSettings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

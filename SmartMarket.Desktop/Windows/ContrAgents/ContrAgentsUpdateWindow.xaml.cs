@@ -23,5 +23,10 @@ namespace SmartMarket.Desktop.Windows.ContrAgents
         {
             InitializeComponent();
         }
+
+        private void Border_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
