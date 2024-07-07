@@ -7,7 +7,8 @@
       xmlns:local="clr-namespace:SmartMarket.Desktop.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="640" d:DesignWidth="1024"
-      Title="MainPage">
+      Title="MainPage"
+      Loaded="Page_Loaded">
     <Grid Background="#D9D9D9">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -33,7 +34,7 @@
                             </Button>
                         </Grid>
                     </Border>
-                    <StackPanel x:Name="panel_goods">
+                    <StackPanel x:Name="stCategory">
 
                     </StackPanel>
                 </StackPanel>
