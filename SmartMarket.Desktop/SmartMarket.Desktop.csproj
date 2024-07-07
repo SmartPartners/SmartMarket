@@ -29,4 +29,8 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Windows\Products\" />
+  </ItemGroup>
+
 </Project>

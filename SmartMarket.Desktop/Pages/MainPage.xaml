@@ -27,16 +27,22 @@
 
                             <TextBlock Text="IO" VerticalAlignment="Center" FontSize="15" Padding="25 0 0 0" Foreground="White" DockPanel.Dock="Left"/>
 
-                            <Button Grid.Column="1" Width="50" Height="25" Style="{StaticResource MenuButton}" >
+                            <Button Grid.Column="1" 
+                                    x:Name="btnCategoryCreate"
+                                    Width="50" Height="25" 
+                                    Style="{StaticResource MenuButton}" 
+                                    Click="btnCategoryCreate_Click">
                                 <Button.Content>
                                     <fa:IconImage Grid.Column="0" Icon="Plus" Width="20" Height="20" Foreground="Black"/>
                                 </Button.Content>
                             </Button>
                         </Grid>
                     </Border>
-                    <StackPanel x:Name="stCategory">
+                    <ScrollViewer >
+                        <StackPanel x:Name="stCategory">
 
-                    </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
                 </StackPanel>
             </Border>
         </Grid>
@@ -56,18 +62,22 @@
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Mahsulotlar" VerticalAlignment="Center" FontSize="18" Padding="25 0 0 0" Foreground="Black" DockPanel.Dock="Left"/>
+                        <TextBlock Text="Mahsulotlar" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="18" Padding="25 0 0 0" Foreground="Black" DockPanel.Dock="Left"/>
 
                         <Button Grid.Column="2" Width="90" Height="25" Style="{StaticResource MenuButton}" Background="#0AB1F9" BorderBrush="#0AB1F9">
                             <Button.Content>
-                                <TextBlock Text="Qo'shish" FontSize="14" Foreground="Black"/>
+                                <TextBlock Text="Qo'shish"
+                                           FontSize="14" 
+                                           HorizontalAlignment="Center"
+                                           Foreground="Black"/>
                             </Button.Content>
                         </Button>
                     </Grid>
                 </Border>
 
-                <DataGrid
-        Background="White">
+                <DataGrid x:Name="grProducts" Background="White">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="№" />
@@ -81,7 +91,6 @@
                         <DataGridTextColumn Header="Jami summasi" />
                         <DataGridTextColumn Header="O'lchov" />
                         <DataGridTextColumn Header="Sotuv Narxi" />
-
 
                         <DataGridTemplateColumn Width="65">
                             <DataGridTemplateColumn.CellTemplate>
@@ -120,25 +129,28 @@
 
                         <Button Grid.Column="2" Width="90" Height="25" Style="{StaticResource MenuButton}" Background="#0AB1F9" BorderBrush="#0AB1F9">
                             <Button.Content>
-                                <TextBlock Text="Qo'shish" FontSize="14" Foreground="Black"/>
+                                <TextBlock Text="Qo'shish" 
+                                           HorizontalAlignment="Center"                                           
+                                           FontSize="14" Foreground="Black"/>
                             </Button.Content>
                         </Button>
                     </Grid>
                 </Border>
 
-                <DataGrid Background="White">
+                <DataGrid x:Name="grContrAgent"
+                          Background="White">
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="№" />
-                        <DataGridTextColumn Header="Firma" />
-                        <DataGridTextColumn Header="Ism" Width="30"/>
-                        <DataGridTextColumn Header="Familiya" Width="60"/>
-                        <DataGridTextColumn Header="Telefon Nomer" />
-                        <DataGridTextColumn Header="Olingan yuk narxi" />
-                        <DataGridTextColumn Header="Qilingan to'lov" />
-                        <DataGridTextColumn Header="Oxirgi to'lov" />
-                        <DataGridTextColumn Header="Oxirgi to'lov sanasi" />
-                        <DataGridTextColumn Header="Qarz miqdori" />
+                        <DataGridTextColumn Header="№" Width="50" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Header="Firma" Binding="{Binding Firma}"/>
+                        <DataGridTextColumn Header="Ism" Width="55" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Familiya" Width="80" Binding="{Binding LastName}"/>
+                        <DataGridTextColumn Header="Telefon Nomer" Binding="{Binding PhoneNumber}"/>
+                        <DataGridTextColumn Header="Olingan yuk narxi" Binding="{Binding id}"/>
+                        <DataGridTextColumn Header="Qilingan to'lov" Binding="{Binding id}"/>
+                        <DataGridTextColumn Header="Oxirgi to'lov" Binding="{Binding id}"/>
+                        <DataGridTextColumn Header="Oxirgi to'lov sanasi" Binding="{Binding id}"/>
+                        <DataGridTextColumn Header="Qarz miqdori" Binding="{Binding id}"/>
 
                         <DataGridTemplateColumn Width="25">
                             <DataGridTemplateColumn.CellTemplate>

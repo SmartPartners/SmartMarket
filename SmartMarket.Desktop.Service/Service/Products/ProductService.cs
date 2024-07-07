@@ -20,8 +20,8 @@ namespace SmartMarket.Desktop.Service.Service.Products
                 client.BaseAddress = new Uri($"{StaticModel.BASE_URL}" + $"/api/Products");
                 HttpResponseMessage message = await client.GetAsync(client.BaseAddress);
                 string response = await message.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<IList<Product>>(response);
-                return result!;
+                var result = JsonConvert.DeserializeObject<BaseModelList<Product>>(response);
+                return result.Data!;
             }
             catch
             {

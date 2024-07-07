@@ -45,8 +45,8 @@ namespace SmartMarket.Desktop.Service.Service.ContrAgents
                 client.BaseAddress = new Uri($"{StaticModel.BASE_URL}" + $"/api/ContrAgents");
                 HttpResponseMessage message = await client.GetAsync(client.BaseAddress);
                 string response = await message.Content.ReadAsStringAsync();
-                var result = JsonConvert.DeserializeObject<IList<ContrAgent>>(response);
-                return result!;
+                var result = JsonConvert.DeserializeObject<BaseModelList<ContrAgent>>(response);
+                return result.Data!;
             }
             catch
             {

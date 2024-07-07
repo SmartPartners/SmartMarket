@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="SmartMarket.Desktop.Components.Categories.CategoryUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartMarket.Desktop.Components.Categories"
+             mc:Ignorable="d" 
+             Height="35" d:DesignWidth="200">
+    <Border BorderThickness="1"
+            BorderBrush="{DynamicResource BorderColor}"
+            CornerRadius="5"
+            Background="{DynamicResource FirstColor}"
+            Margin="0 3 0 0">
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                       x:Name="lbNumber"
+                       Text="1"
+                       FontSize="16"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+            <TextBlock Grid.Column="1"
+                       x:Name="lbName"
+                       Text="choy"
+                       FontSize="16"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="5 0 0 0"/>
+
+            <Border Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="3"
+                    x:Name="btnUpdate"
+                    MouseDown="btnUpdate_MouseDown"
+                    Cursor="Hand">
+                <Path Data="{DynamicResource pencil}"
+                      Fill="{DynamicResource BorderColor}"
+                      Stretch="Uniform"/>
+            </Border>
+            
+            <Border Grid.Column="3"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <Border x:Name="btnDelete"
+                        MouseDown="btnDelete_MouseDown"
+                        Cursor="Hand">
+                    <Path Data="{DynamicResource trash}"
+                          Fill="{DynamicResource BorderColor}"
+                          />
+                </Border>
+            </Border>
+
+        </Grid>
+    </Border>
+</UserControl>
