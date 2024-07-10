@@ -77,7 +77,11 @@
                     </Grid>
                 </Border>
 
-                <DataGrid x:Name="grProducts" Background="White">
+                <DataGrid x:Name="grProducts"
+                          Background="White"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          >
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="№" />
@@ -125,9 +129,19 @@
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Kontr Agentlar" VerticalAlignment="Center" FontSize="18" Padding="25 0 0 0" Foreground="Black" DockPanel.Dock="Left"/>
+                        <TextBlock Text="Kontr Agentlar"
+                                   VerticalAlignment="Center"
+                                   FontSize="18" 
+                                   Padding="25 0 0 0" 
+                                   Foreground="Black"
+                                   DockPanel.Dock="Left"/>
 
-                        <Button Grid.Column="2" Width="90" Height="25" Style="{StaticResource MenuButton}" Background="#0AB1F9" BorderBrush="#0AB1F9">
+                        <Button Grid.Column="2" 
+                                Width="90" Height="25"
+                                Style="{StaticResource MenuButton}"
+                                Background="#0AB1F9"
+                                BorderBrush="#0AB1F9"
+                                Click="Button_Click">
                             <Button.Content>
                                 <TextBlock Text="Qo'shish" 
                                            HorizontalAlignment="Center"                                           
@@ -138,19 +152,25 @@
                 </Border>
 
                 <DataGrid x:Name="grContrAgent"
-                          Background="White">
+                          Background="White"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGrid.RowStyle>
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="№" Width="50" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Firma" Binding="{Binding Firma}"/>
-                        <DataGridTextColumn Header="Ism" Width="55" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Ism" Width="80" Binding="{Binding FirstName}"/>
                         <DataGridTextColumn Header="Familiya" Width="80" Binding="{Binding LastName}"/>
                         <DataGridTextColumn Header="Telefon Nomer" Binding="{Binding PhoneNumber}"/>
-                        <DataGridTextColumn Header="Olingan yuk narxi" Binding="{Binding id}"/>
-                        <DataGridTextColumn Header="Qilingan to'lov" Binding="{Binding id}"/>
-                        <DataGridTextColumn Header="Oxirgi to'lov" Binding="{Binding id}"/>
+                        <DataGridTextColumn Header="Qarz miqdori" Binding="{Binding Dept}"/>
+                        <DataGridTextColumn Header="Qilingan to'lov" Binding="{Binding PayForDept}"/>
+                        <DataGridTextColumn Header="Oxirgi to'lov" Binding="{Binding LastPaid}"/>
                         <DataGridTextColumn Header="Oxirgi to'lov sanasi" Binding="{Binding id}"/>
-                        <DataGridTextColumn Header="Qarz miqdori" Binding="{Binding id}"/>
 
                         <DataGridTemplateColumn Width="25">
                             <DataGridTemplateColumn.CellTemplate>

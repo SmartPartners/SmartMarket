@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SmartMarket.Desktop.Service.Interfrace.ContrAgents;
+using SmartMarket.Desktop.Service.Service.ContrAgents;
+using SmartMarket.Service.DTOs.ContrAgents;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +22,51 @@ namespace SmartMarket.Desktop.Windows.ContrAgents
     /// </summary>
     public partial class ContrAgentsCreateWindow : Window
     {
+        private IContrAgentService _service;
+
         public ContrAgentsCreateWindow()
         {
             InitializeComponent();
+            this._service = new ContrAgentService();
         }
 
-        private void Border_MouseUp(object sender, MouseButtonEventArgs e)
+        private async void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if(txtName.Text == "")
+            {
+                MessageBox.Show("Firma nomini kiriting !");
+                return;
+            }
+            if (txtFirstName.Text == "")
+            {
+                MessageBox.Show("Ism kiriting !");
+                return;
+            }
+            if (txtLastName.Text == "")
+            {
+                MessageBox.Show("Familiya kiriting !");
+                return;
+            }
+            if (txtPhoneNumber.Text == "")
+            {
+                MessageBox.Show("Ism kiriting !");
+                return;
+            }
+
+            ContrAgentForCreationDto creationDto = new ContrAgentForCreationDto()
+            {
+                Firma = txtName.Text,
+                FirstName = txtFirstName.Text,
+                LastName = txtLastName.Text,    
+                PhoneNumber = txtPhoneNumber.Text,
+            };
+
+            var dbCreate = await _service.CreateAsync(creationDto);
+
+            if (dbCreate != null)
+            {
+
+            }
 
         }
     }
