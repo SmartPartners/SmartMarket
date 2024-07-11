@@ -164,24 +164,25 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="№" Width="50" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Firma" Binding="{Binding Firma}"/>
-                        <DataGridTextColumn Header="Ism" Width="80" Binding="{Binding FirstName}"/>
-                        <DataGridTextColumn Header="Familiya" Width="80" Binding="{Binding LastName}"/>
-                        <DataGridTextColumn Header="Telefon Nomer" Binding="{Binding PhoneNumber}"/>
-                        <DataGridTextColumn Header="Qarz miqdori" Binding="{Binding Dept}"/>
-                        <DataGridTextColumn Header="Qilingan to'lov" Binding="{Binding PayForDept}"/>
-                        <DataGridTextColumn Header="Oxirgi to'lov" Binding="{Binding LastPaid}"/>
-                        <DataGridTextColumn Header="Oxirgi to'lov sanasi" Binding="{Binding id}"/>
+                        <DataGridTextColumn Header="Ism" Width="*" Binding="{Binding FirstName}"/>
+                        <DataGridTextColumn Header="Familiya" Width="*" Binding="{Binding LastName}"/>
+                        <DataGridTextColumn Header="Telefon Nomer" Width="*" Binding="{Binding PhoneNumber}"/>
+                        <DataGridTextColumn Header="Qarz miqdori" Width="0.8*" Binding="{Binding Dept}"/>
+                        <DataGridTextColumn Header="Qilingan to'lov" Width="0.8*" Binding="{Binding PayForDept}"/>
+                        <DataGridTextColumn Header="Oxirgi to'lov" Width="0.8*" Binding="{Binding LastPaid}"/>
+                        <DataGridTextColumn Header="Oxirgi to'lov sanasi" Width="0.8*" Binding="{Binding id}"/>
 
-                        <DataGridTemplateColumn Width="25">
+                        <DataGridTemplateColumn Width="0.3*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource MenuButton}">
+                                    <Button Style="{StaticResource MenuButton}"
+                                            Background="Black">
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Width="25">
+                        <DataGridTemplateColumn Width="0.3*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Style="{StaticResource MenuButton}">

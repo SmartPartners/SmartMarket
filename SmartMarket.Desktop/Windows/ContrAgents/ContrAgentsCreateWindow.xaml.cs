@@ -32,7 +32,12 @@ namespace SmartMarket.Desktop.Windows.ContrAgents
 
         private async void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if(txtName.Text == "")
+            this.Close();
+        }
+
+        private async void btnCreate_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (txtName.Text == "")
             {
                 MessageBox.Show("Firma nomini kiriting !");
                 return;
@@ -57,17 +62,20 @@ namespace SmartMarket.Desktop.Windows.ContrAgents
             {
                 Firma = txtName.Text,
                 FirstName = txtFirstName.Text,
-                LastName = txtLastName.Text,    
+                LastName = txtLastName.Text,
                 PhoneNumber = txtPhoneNumber.Text,
             };
 
             var dbCreate = await _service.CreateAsync(creationDto);
 
-            if (dbCreate != null)
+            if (dbCreate == null)
             {
-
+                MessageBox.Show("Yaratishda xatolik!");
             }
-
+            else
+            {
+                this.Close();
+            }
         }
     }
 }

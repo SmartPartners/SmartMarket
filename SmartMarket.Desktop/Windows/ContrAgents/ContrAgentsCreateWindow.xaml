@@ -136,7 +136,9 @@
                                  Foreground="#656161"/>
                     </Border>
                 </Grid>
-                <Border Background="#1EB7E8"
+                <Border x:Name="btnCreate"
+                        MouseDown="btnCreate_MouseDown"
+                        Background="#1EB7E8"
                         Margin="4 20"
                         Width="350"
                         CornerRadius="5"
