@@ -7,6 +7,7 @@ using SmartMarket.Desktop.Service.Service.ContrAgents;
 using SmartMarket.Desktop.Service.Service.Products;
 using SmartMarket.Desktop.Windows.Categories;
 using SmartMarket.Desktop.Windows.ContrAgents;
+using SmartMarket.Desktop.Windows.Products;
 using SmartMarket.Domin.Entities.Categories;
 using System.Windows;
 using System.Windows.Controls;
@@ -87,6 +88,12 @@ namespace SmartMarket.Desktop.Pages
             ContrAgentsCreateWindow createWindow = new ContrAgentsCreateWindow();
             createWindow.ShowDialog();
             await RefreshKontrAgents();
+        }
+
+        private void btnProductCreate_Click(object sender, RoutedEventArgs e)
+        {
+            ProductCreateWindow productCreateWindow = new ProductCreateWindow();
+            productCreateWindow.ShowDialog();
         }
     }
 }
