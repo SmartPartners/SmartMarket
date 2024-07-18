@@ -3,45 +3,39 @@ using SmartMarket.Domin.Commons;
 using SmartMarket.Domin.Configurations;
 using SmartMarket.Service.Commons.Exceptions;
 using SmartMarket.Service.Commons.Helpers;
+using SmartMarket.Service.Helpers;
+using System.Net.Http.Headers;
 
 namespace SmartMarket.Service.Commons.Extensions;
 
 public static class CollectionExtensions
 {
-    public static IQueryable<TEntity> ToPagedList<TEntity>(this IQueryable<TEntity> entities, PaginationParams @params)
-           where TEntity : Auditable
+    private static readonly HttpClient _httpClient;
+
+    static CollectionExtensions()
     {
-
-        var metaData = new PaginationMetaData(entities.Count(), @params);
-
-        var json = JsonConvert.SerializeObject(metaData);
-        if (HttpContextHelper.ResponseHeaders != null)
+        _httpClient = new HttpClient
         {
-            if (HttpContextHelper.ResponseHeaders.ContainsKey("X-Pagination"))
-                HttpContextHelper.ResponseHeaders.Remove("X-Pagination");
-
-            HttpContextHelper.ResponseHeaders.Add("X-Pagination", json);
-        }
-
-        return @params.PageIndex > 0 && @params.PageSize > 0 ?
-            entities
-            .OrderBy(e => e.Id)
-            .Skip((@params.PageIndex - 1) * @params.PageSize).Take(@params.PageSize)
-            : throw new CustomException(400, "Please, enter valid numbers");
+            BaseAddress = new Uri("https://localhost:7208/api/")
+        };
+        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
-    public static IEnumerable<TEntity> ToPagedList<TEntity>(this IEnumerable<TEntity> source, PaginationParams @params)
+    public static void AddAuthorizationHeader()
     {
-        if (@params.PageIndex < 1)
+        if (_httpClient.DefaultRequestHeaders.Contains("Authorization"))
         {
-            throw new ArgumentOutOfRangeException(nameof(@params.PageIndex), "The page index must be greater than or equal to 1.");
+            _httpClient.DefaultRequestHeaders.Remove("Authorization");
         }
 
-        if (@params.PageSize < 1)
+        if (!string.IsNullOrEmpty(TokenHelper.apiToken))
         {
-            throw new ArgumentOutOfRangeException(nameof(@params.PageSize), "The page size must be greater than or equal to 1.");
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", TokenHelper.apiToken);
         }
+    }
 
-        return source.Take((@params.PageSize * (@params.PageIndex - 1))..(@params.PageSize * (@params.PageIndex - 1) + @params.PageSize));
+    public static HttpClient GetHttpClient()
+    {
+        return _httpClient;
     }
 }
