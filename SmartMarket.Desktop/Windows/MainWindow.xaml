@@ -10,7 +10,6 @@
         Title="MainWindow" 
         Height="730" Width="1024"
         WindowStyle="None"
-        ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen" AllowsTransparency="True"> 
     <Grid Background="{DynamicResource FirstColor}">
         <Grid.RowDefinitions>

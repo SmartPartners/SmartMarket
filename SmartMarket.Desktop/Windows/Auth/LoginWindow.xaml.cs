@@ -74,7 +74,7 @@ namespace SmartMarket.Desktop.Windows.Auth
 
 
                 MainWindow mainWindow = new MainWindow();
-                mainWindow.ShowDialog();
+                mainWindow.Show();
                 this.Close();
             }
             else

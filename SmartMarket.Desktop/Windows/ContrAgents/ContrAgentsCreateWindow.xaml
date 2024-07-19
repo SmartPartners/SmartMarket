@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartMarket.Desktop.Windows.ContrAgents"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="ContrAgentsCreateWindow"
         Height="350" Width="450"
@@ -130,10 +131,12 @@
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5">
-                        <TextBox x:Name="txtPhoneNumber"
+                        <xctk:MaskedTextBox  x:Name="txtPhoneNumber" Focusable="True" IsReadOnly="False"   Padding="10 0 0 5" FontSize="20"  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Mask="+\9\98 00 000-00-00" Foreground="#656161"  Grid.Column="1"  Margin="-5 -14 0 0"   BorderThickness="0"/>
+                        
+                        <!--<TextBox x:Name="txtPhoneNumber"
                                  Margin="3 0"
                                  FontSize="20"
-                                 Foreground="#656161"/>
+                                 Foreground="#656161"/>-->
                     </Border>
                 </Grid>
                 <Border x:Name="btnCreate"
