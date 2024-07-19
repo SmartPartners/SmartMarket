@@ -22,13 +22,15 @@ namespace SmartMarket.Desktop.Pages
         private ICategoriesService _categoryService;
         private IProductService _productService;
         private IContrAgentService _contrAgentService;
+        public MainWindow MainWindowParent;
 
-        public MainPage()
+        public MainPage(MainWindow mainWindow)
         {
             InitializeComponent();
             this._categoryService = new CategoriesService();
             this._productService = new ProductService();
             this._contrAgentService = new ContrAgentService();
+            this.MainWindowParent = mainWindow;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -60,6 +62,8 @@ namespace SmartMarket.Desktop.Pages
 
         public async Task RefreshCategories()
         {
+            stCategory.Children.Clear();
+
             var dbCategories = await _categoryService.GetcategoriesAsync();
 
             if (dbCategories != null)
@@ -68,7 +72,7 @@ namespace SmartMarket.Desktop.Pages
                 foreach (var category in dbCategories)
                 {
                     i++;
-                    CategoryUserControl userControl = new CategoryUserControl();
+                    CategoryUserControl userControl = new CategoryUserControl(this);
                     userControl.SetaData(i, category);
                     userControl.Refresh = RefreshCategories;
                     stCategory.Children.Add(userControl);
@@ -78,22 +82,28 @@ namespace SmartMarket.Desktop.Pages
 
         private async void btnCategoryCreate_Click(object sender, RoutedEventArgs e)
         {
+            MainWindowParent.lab_fon.Visibility = Visibility.Visible;
             CategoryCreateWindow categoryWindow = new CategoryCreateWindow();
             categoryWindow.ShowDialog();
+            MainWindowParent.lab_fon.Visibility = Visibility.Collapsed;
             await RefreshCategories();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            MainWindowParent.lab_fon.Visibility = Visibility.Visible;
             ContrAgentsCreateWindow createWindow = new ContrAgentsCreateWindow();
             createWindow.ShowDialog();
+            MainWindowParent.lab_fon.Visibility = Visibility.Collapsed;
             await RefreshKontrAgents();
         }
 
         private void btnProductCreate_Click(object sender, RoutedEventArgs e)
         {
+            MainWindowParent.lab_fon.Visibility = Visibility.Visible;
             ProductCreateWindow productCreateWindow = new ProductCreateWindow();
             productCreateWindow.ShowDialog();
+            MainWindowParent.lab_fon.Visibility = Visibility.Collapsed;
         }
     }
 }

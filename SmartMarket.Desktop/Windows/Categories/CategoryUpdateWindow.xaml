@@ -33,15 +33,16 @@
                        FontWeight="SemiBold">
                 </Label>
                 <Border Grid.Column="1">
-                    <Border HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Margin="10"
+                    <Button HorizontalAlignment="Right"
+                            VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Padding="0"
+                            Margin="2 2 10 2"
                             Cursor="Hand"
-                            MouseUp="Border_MouseUp">
+                            Height="25" Width="25"
+                             Click="Button_Click">
                         <Path Data="{DynamicResource x}"
                               Fill="White"
                               Stretch="Uniform"/>
-                    </Border>
+                    </Button>
                 </Border>
             </Grid>
         </Border>
@@ -77,7 +78,7 @@
                         Width="310"
                         CornerRadius="5"
                         Cursor="Hand"
-                        HorizontalAlignment="Center">
+                        HorizontalAlignment="Center" MouseUp="EditBtn_MouseUp">
                     <Label Content="Tahrirlash"
                            FontWeight="SemiBold"
                            VerticalAlignment="Center"

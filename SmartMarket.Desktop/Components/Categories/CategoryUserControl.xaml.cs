@@ -1,6 +1,8 @@
-﻿using SmartMarket.Desktop.Service.Interfrace.Categories;
+﻿using SmartMarket.Desktop.Pages;
+using SmartMarket.Desktop.Service.Interfrace.Categories;
 using SmartMarket.Desktop.Service.Service.Categories;
 using SmartMarket.Desktop.Windows.Categories;
+using SmartMarket.Desktop.Windows.CustomWindows;
 using SmartMarket.Domin.Entities.Categories;
 using SmartMarket.Service.DTOs.Categories;
 using System.Windows;
@@ -18,11 +20,13 @@ namespace SmartMarket.Desktop.Components.Categories
         private ICategoriesService _categoryService;
         private Category category;
         public Func<Task> Refresh;
+        MainPage MainPage;
 
-        public CategoryUserControl()
+        public CategoryUserControl(MainPage mainPage)
         {
             InitializeComponent();
             this._categoryService = new CategoriesService();
+            this.MainPage = mainPage;
         }
 
         public void SetaData(int i, Category category)
@@ -32,25 +36,38 @@ namespace SmartMarket.Desktop.Components.Categories
             lbName.Text = category.Name;
         }
 
-        private async void btnDelete_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private async void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Rostdan ham bu Kategoriyani o'chirmoqchimisiz ?", "O'chirish", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            MainPage.MainWindowParent.lab_fon.Visibility = Visibility.Visible;
+            CategoryUpdateWindow updateWindow = new CategoryUpdateWindow();
+            updateWindow.SetaData(category);
+            updateWindow.ShowDialog();
+            MainPage.MainWindowParent.lab_fon.Visibility = Visibility.Collapsed;
+            await Refresh();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.MainWindowParent.lab_fon.Visibility = Visibility.Visible;
+            var result = MyMessage.Show("Rostdan ham bu Kategoriyani o'chirmoqchimisiz ?", "O'chirish", MainPage.MainWindowParent);
+            MainPage.MainWindowParent.lab_fon.Visibility = Visibility.Collapsed;
+
+            if (result == MessageBoxResult.Yes)
             {
                 var dbResult = await _categoryService.DeleteAsync(category.Id);
                 if (dbResult == true)
                 {
-                    await Refresh();                    
+                    await Refresh();
                 }
-                else MessageBox.Show("O'chirishda xato !");
-            }
-        }
+                else
+                {
+                    MainPage.MainWindowParent.lab_fon.Visibility = Visibility.Visible;
+                    MyMessage.Show("O'chirishda xato !", MainPage.MainWindowParent);
+                    MainPage.MainWindowParent.lab_fon.Visibility = Visibility.Collapsed;
 
-        private async void btnUpdate_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            CategoryUpdateWindow updateWindow = new CategoryUpdateWindow();
-            updateWindow.SetaData(category);
-            updateWindow.ShowDialog();
-            await Refresh();
+                }
+            }
         }
     }
 }

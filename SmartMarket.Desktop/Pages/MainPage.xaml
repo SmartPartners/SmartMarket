@@ -40,7 +40,7 @@
                     </Border>
                     <ScrollViewer >
                         <StackPanel x:Name="stCategory">
-
+  
                         </StackPanel>
                     </ScrollViewer>
                 </StackPanel>

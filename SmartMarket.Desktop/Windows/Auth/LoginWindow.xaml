@@ -13,7 +13,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent" Loaded="Window_Loaded">
     <Grid >
 
         <Grid.RowDefinitions>
@@ -151,6 +151,13 @@
                 </StackPanel>
             </Border>
         </Border>
-        
+
+        <Rectangle x:Name="lab_fon" Grid.RowSpan="4" Grid.ColumnSpan="2"
+                   Fill="Black"
+                   Opacity="0.5"
+                   Visibility="Collapsed"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"/>
+
     </Grid>
 </Window>

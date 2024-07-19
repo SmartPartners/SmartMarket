@@ -1,4 +1,5 @@
-﻿using SmartMarket.Service.DTOs.Auth;
+﻿using SmartMarket.Desktop.Windows.CustomWindows;
+using SmartMarket.Service.DTOs.Auth;
 using SmartMarket.Service.Helpers;
 using SmartMarket.Service.Interfrace.Auth;
 using SmartMarket.Service.Service.Auth;
@@ -42,13 +43,17 @@ namespace SmartMarket.Desktop.Windows.Auth
 
             if (string.IsNullOrEmpty(phone)) 
             {
+                this.lab_fon.Visibility = Visibility.Visible;
                 MessageBox.Show("Telefon raqam kiritilmadi");
+                this.lab_fon.Visibility = Visibility.Collapsed;
                 return;
             }
 
             if (string.IsNullOrEmpty(password)) 
             {
+                this.lab_fon.Visibility = Visibility.Visible;
                 MessageBox.Show("Parol kiritilmadi");
+                this.lab_fon.Visibility = Visibility.Collapsed;
                 return;
             }
 
@@ -74,7 +79,11 @@ namespace SmartMarket.Desktop.Windows.Auth
             }
             else
             {
-                MessageBox.Show("Foydalanuvchi topilmadi");
+
+                this.lab_fon.Visibility = Visibility.Visible;
+                MyMessage.Show("Foydalanuvchi topilmadi", this);
+                this.lab_fon.Visibility = Visibility.Collapsed;
+
                 return;
             }
         }
@@ -132,6 +141,12 @@ namespace SmartMarket.Desktop.Windows.Auth
             {
                 return "";
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.txtPhone.Text = Properties.Settings.Default.Phone;
+            this.txtPassword.Text = Properties.Settings.Default.Password;
         }
     }
 }

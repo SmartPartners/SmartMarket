@@ -34,15 +34,16 @@
                        FontWeight="SemiBold">
                 </Label>
                 <Border Grid.Column="1">
-                    <Border HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Margin="10"
-                            Cursor="Hand"
-                            MouseUp="Border_MouseUp">
+                    <Button HorizontalAlignment="Right"
+            VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Padding="0"
+            Margin="2 2 10 2"
+            Cursor="Hand"
+            Height="25" Width="25"
+             Click="Button_Click">
                         <Path Data="{DynamicResource x}"
-                              Fill="White"
-                              Stretch="Uniform"/>
-                    </Border>
+              Fill="White"
+              Stretch="Uniform"/>
+                    </Button>
                 </Border>
             </Grid>
         </Border>

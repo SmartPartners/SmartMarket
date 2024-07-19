@@ -44,10 +44,6 @@ namespace SmartMarket.Desktop.Windows.Categories
             Marshal.FreeHGlobal(accentPtr);
         }
 
-        private async void Border_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-           this.Close();
-        }
 
         private async void btnCategoryCreate_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -74,6 +70,11 @@ namespace SmartMarket.Desktop.Windows.Categories
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //EnableBlur();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

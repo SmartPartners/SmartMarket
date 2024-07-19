@@ -29,8 +29,7 @@ namespace SmartMarket.Desktop
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+            this.DragMove();
         }
 
         private void butt_shop_details_Click(object sender, RoutedEventArgs e)
@@ -40,7 +39,7 @@ namespace SmartMarket.Desktop
 
         private void rbMain_Click(object sender, RoutedEventArgs e)
         {
-            this.PageNavigator.Content = new MainPage();
+            this.PageNavigator.Content = new MainPage(this);
         }
 
         private void rbKassa_Click(object sender, RoutedEventArgs e)
@@ -101,6 +100,11 @@ namespace SmartMarket.Desktop
         private void rbSettings_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Grid_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

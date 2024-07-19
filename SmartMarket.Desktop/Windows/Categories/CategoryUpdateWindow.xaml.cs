@@ -28,7 +28,8 @@ namespace SmartMarket.Desktop.Windows.Categories
             txtName.Text = category.Name;
 
         }
-        private async void Border_MouseUp(object sender, MouseButtonEventArgs e)
+
+        private void EditBtn_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (txtName.Text.Length == 0)
             {
@@ -47,6 +48,11 @@ namespace SmartMarket.Desktop.Windows.Categories
             //    this.Close();
             //}
             //else MessageBox.Show("Tahrirlashda xato!");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

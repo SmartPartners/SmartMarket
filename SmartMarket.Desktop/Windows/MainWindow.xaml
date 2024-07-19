@@ -11,23 +11,20 @@
         Height="730" Width="1024"
         WindowStyle="None"
         ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" AllowsTransparency="True"> 
     <Grid Background="{DynamicResource FirstColor}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" MouseDown="Grid_MouseDown">
-            <Border>
+        <Grid Grid.Row="0" MouseDown="Grid_MouseDown_1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
-                    <Button x:Name="btnMinimized" Style="{DynamicResource MinimizedButton}" Click="btnMinimized_Click" ></Button>
-                    <Button x:Name="btnMaximized" Style="{DynamicResource MaximizedButton}" Click="btnMaximized_Click"></Button>
-                    <Button x:Name="btnExit" Style="{DynamicResource CloseButtun}" Click="btnExit_Click" ></Button>
+                    <Button Cursor="Hand" x:Name="btnMinimized" Style="{DynamicResource MinimizedButton}" Click="btnMinimized_Click" ></Button>
+                    <Button Cursor="Hand" x:Name="btnMaximized" Style="{DynamicResource MaximizedButton}" Click="btnMaximized_Click"></Button>
+                    <Button Cursor="Hand" x:Name="btnExit" Style="{DynamicResource CloseButtun}" Click="btnExit_Click" ></Button>
                 </StackPanel>
-            </Border>
-            <Border Grid.Column="1" ></Border>
         </Grid>
         
         <Grid Grid.Row="1" >
@@ -117,6 +114,13 @@
             <Frame Name="PageNavigator"
                    NavigationUIVisibility="Hidden" Content=""/>
         </Grid>
-        
+
+        <Rectangle x:Name="lab_fon" Grid.RowSpan="4"
+                   Fill="Black"
+                   Opacity="0.5"
+                   Visibility="Collapsed"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"/>
+
     </Grid>
 </Window>
