@@ -61,11 +61,11 @@
                     </Grid>
                 </Border>
 
-                <WrapPanel Grid.Row="1" >
+                <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                     <item:TopSaleComponent/>
                     <item:TopSaleComponent/>
                     <item:TopSaleComponent/>
-                </WrapPanel>
+                </StackPanel>
                 
             </Grid>
         </Border>

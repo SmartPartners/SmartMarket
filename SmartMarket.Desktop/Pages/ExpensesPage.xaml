@@ -25,7 +25,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Sotuv Tarixi" Height="25" FontWeight="SemiBold" FontSize="18" VerticalAlignment="Center" Padding="10 0 0 0"/>
+                        <TextBlock Text="Sotuv Tarixi" Height="25" FontWeight="SemiBold" FontSize="16" VerticalAlignment="Center" Padding="10 0 0 0"/>
 
                         <StackPanel Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center">
 

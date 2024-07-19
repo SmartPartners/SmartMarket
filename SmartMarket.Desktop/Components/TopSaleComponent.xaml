@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartMarket.Desktop.Components" 
-             mc:Ignorable="d" FontSize="25" MinWidth="900">
+             mc:Ignorable="d" FontSize="25" d:DesignWidth="1200" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Border
     Name="brand_Border"
     Margin="10 3 10 3"
     CornerRadius="10"
     BorderBrush="Transparent"
     BorderThickness="1"
-    Background="#A59C9C">
+    Background="#A59C9C" HorizontalAlignment="Stretch">
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -24,31 +24,31 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
 
-                <TextBlock Text="Mahsulot Nomi: " Foreground="Black" Margin="5"/>
-                <TextBlock Text="Kasha Nestle 9" Foreground="White" Margin="5"/>
+                <TextBlock Text="Mahsulot Nomi: " FontSize="18" Foreground="Black" Margin="5"/>
+                <TextBlock Text="Kasha Nestle 9" FontSize="18"  Foreground="White" Margin="5"/>
 
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
 
-                <TextBlock Text="Sotilgan Soni: " Foreground="Black" Margin="5"/>
-                <TextBlock Text="1,000 Dona" Foreground="White" Margin="5"/>
+                <TextBlock Text="Sotilgan Soni: " FontSize="18"  Foreground="Black" Margin="5"/>
+                <TextBlock Text="1,000 Dona" FontSize="18"  Foreground="White" Margin="5"/>
 
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
 
-                <TextBlock Text="Jami sotuv summasi: " Foreground="Black" Margin="5"/>
-                <TextBlock Text="25,000,000" Foreground="White" Margin="5"/>
+                <TextBlock Text="Jami sotuv summasi: " FontSize="18"  Foreground="Black" Margin="5"/>
+                <TextBlock Text="25,000,000" FontSize="18"  Foreground="White" Margin="5"/>
 
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
 
-                <TextBlock Text="Foyda: " Foreground="Red" Margin="5"/>
-                <TextBlock Text="5,000,000" Foreground="White" Margin="5"/>
+                <TextBlock Text="Foyda: " FontSize="18"  Foreground="Red" Margin="5"/>
+                <TextBlock Text="5,000,000" FontSize="18"  Foreground="White" Margin="5"/>
 
             </StackPanel>
 

@@ -26,7 +26,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Text="Qaytarilgan yuklar" FontSize="20" Foreground="Black" VerticalAlignment="Center" Padding="10 0 0 0"/>
+                        <TextBlock Text="Qaytarilgan yuklar" FontSize="16" FontWeight="Bold" Foreground="Black" VerticalAlignment="Center" Padding="10 0 0 0"/>
 
                         <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
 

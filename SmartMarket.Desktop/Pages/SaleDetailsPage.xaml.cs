@@ -23,11 +23,14 @@ namespace SmartMarket.Desktop.Pages
         public SaleDetails()
         {
             InitializeComponent();
+
+            rbSaleHistory.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         }
 
         private void rbSaleHistory_Click(object sender, RoutedEventArgs e)
         {
-            this.leftGrid.RowDefinitions[1].Height = GridLength.Auto;
+            this.leftGrid.RowDefinitions[0].Height = new GridLength(1, GridUnitType.Auto);
+            this.leftGrid.RowDefinitions[1].Height = new GridLength(1.7, GridUnitType.Auto);
             this.left_bottom_panel_sale_history.Visibility = Visibility.Visible;
             this.left_bottom_panel_return.Visibility = Visibility.Collapsed;
             this.left_bottom_panel_invalid.Visibility = Visibility.Collapsed;
@@ -43,7 +46,8 @@ namespace SmartMarket.Desktop.Pages
 
         private void rbReturnProds_Click(object sender, RoutedEventArgs e)
         {
-            this.leftGrid.RowDefinitions[1].Height = GridLength.Auto;
+            this.leftGrid.RowDefinitions[1].Height = new GridLength(1.7, GridUnitType.Auto);
+            this.leftGrid.RowDefinitions[0].Height = new GridLength(1, GridUnitType.Auto);
             this.left_bottom_panel_sale_history.Visibility = Visibility.Collapsed;
             this.left_bottom_panel_return.Visibility = Visibility.Visible;
             this.left_bottom_panel_invalid.Visibility = Visibility.Collapsed;
@@ -53,7 +57,8 @@ namespace SmartMarket.Desktop.Pages
 
         private void rbInvalidProds_Click(object sender, RoutedEventArgs e)
         {
-            this.leftGrid.RowDefinitions[1].Height = GridLength.Auto;
+            this.leftGrid.RowDefinitions[1].Height = new GridLength(1.7, GridUnitType.Auto);
+            this.leftGrid.RowDefinitions[0].Height = new GridLength(1, GridUnitType.Auto);
             this.left_bottom_panel_sale_history.Visibility = Visibility.Collapsed;
             this.left_bottom_panel_return.Visibility = Visibility.Collapsed;
             this.left_bottom_panel_invalid.Visibility = Visibility.Visible;
