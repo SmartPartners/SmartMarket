@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartMarket.Desktop.Windows.Auth"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="LoginWindow" 
@@ -13,15 +15,26 @@
         AllowsTransparency="True"
         Background="Transparent">
     <Grid >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-                
-        <Border Grid.Column="0"
-                CornerRadius="55 0 0 55"
+
+
+        <Border Grid.Row="0" Grid.ColumnSpan="2" MouseDown="Grid_MouseDown" CornerRadius="55 55 0 0" Background="White">
+            
+        </Border>
+        
+        <Border Grid.Column="0" Grid.Row="1" Margin="0 0 0 0"
+                CornerRadius="0 0 0 55"
                 Background="White">
-            <StackPanel>
+            <StackPanel Margin="0 -20 0 0">
                 <TextBlock Text="Smart Post"
                            FontSize="30"
                            FontWeight="Bold"
@@ -32,13 +45,25 @@
                 <TextBlock Text="version 1.0"
                            FontSize="16"
                            Margin="20 0 0 0"/>
+
+
+                <Image Source="pack://application:,,,/Assets/login_background.png">
+
+                </Image>
+
+                <Button x:Name="btnClose" Height="80" Width="80" Margin="-200 00 0 0" Background="Transparent" BorderBrush="Transparent" Padding="0" Click="btnClose_Click">
+                    <Image Source="pack://application:,,,/Assets/login_close.png" >
+
+                    </Image>
+                </Button>
+
             </StackPanel>
         </Border>
-        <Border Grid.Column="1"
+        <Border Grid.Column="1" Grid.Row="1" Margin="0 0 0 0"
                 Background="White"
-                CornerRadius=" 0 55 55 0">
-            <Border CornerRadius="55"
-                    Margin="20 30"
+                CornerRadius=" 0 0 55 0">
+            <Border CornerRadius="55" 
+                    Margin="20 0 20 30"
                     BorderThickness="2"
                     BorderBrush="#8F8F8F"
                     >
@@ -57,18 +82,13 @@
                                 <ColumnDefinition Width="45"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Path Grid.Column="0"
-                                      Data="{DynamicResource User}"
-                                      Stretch="Uniform"
-                                      Fill="{DynamicResource BorderColor}"
-                                      Margin="5"/>
-                            <TextBox x:Name="txtPhone" Grid.Column="1"
-                                         Margin="4"
-                                         VerticalAlignment="Center"
-                                         Foreground="Black"
-                                         FontSize="18"
-                                         BorderThickness="0"
-                                         />
+
+                            <materialDesign:PackIcon Padding="0" Grid.Column="0" Width="30" Height="30" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Kind="Phone" Margin="5" Foreground="{DynamicResource BorderColor}">
+                                
+                            </materialDesign:PackIcon>                            
+
+                            <xctk:MaskedTextBox  x:Name="txtPhone" Focusable="True" IsReadOnly="False"   Padding="0 0 0 0" FontSize="18" Width="159"   Style="{StaticResource MaterialDesignFloatingHintTextBox}"  Mask="+\9\98 00 000-00-00"  Grid.Column="1" BorderThickness="0"  Margin="-5 -9 0 0"  Foreground="Black" />
+
                         </Grid>
                     </Border>
                     <Border Height="40" Width="200"

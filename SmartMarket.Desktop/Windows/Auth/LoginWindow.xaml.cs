@@ -55,7 +55,7 @@ namespace SmartMarket.Desktop.Windows.Auth
             var loginDTO = new LoginDTO()
             {
                 Password = password,
-                PhoneNumber = phone
+                PhoneNumber = RemoveSpacePhone(phone)
             };
 
             var result = await authService.LoginAsync(loginDTO);
@@ -63,6 +63,11 @@ namespace SmartMarket.Desktop.Windows.Auth
             {
                 TokenHelper.apiToken = result.Data;
                 
+                Properties.Settings.Default.Phone = UnMaskedPhone(txtPhone.Text);
+                Properties.Settings.Default.Password = txtPassword.Text;
+                Properties.Settings.Default.Save();
+
+
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.ShowDialog();
                 this.Close();
@@ -71,6 +76,61 @@ namespace SmartMarket.Desktop.Windows.Auth
             {
                 MessageBox.Show("Foydalanuvchi topilmadi");
                 return;
+            }
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        public string UnMaskedPhone(string phone)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(phone))
+                {
+                    phone = phone.Replace(" ", "");
+                    phone = phone.Replace("-", "");
+                    phone = phone.Remove(0, 4);
+                    return phone;
+                }
+                else
+                {
+                    return phone;
+                }
+
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        public string RemoveSpacePhone(string phone) 
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(phone))
+                {
+                    phone = phone.Replace(" ", "");
+                    phone = phone.Replace("-", "");
+                    return phone;
+                }
+                else
+                {
+                    return phone;
+                }
+
+            }
+            catch (Exception)
+            {
+                return "";
             }
         }
     }

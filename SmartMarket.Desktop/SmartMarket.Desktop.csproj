@@ -10,12 +10,15 @@
 
   <ItemGroup>
     <None Remove="Assets\barcode.png" />
+    <None Remove="Assets\login_background.png" />
+    <None Remove="Assets\login_close.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.6.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.5.0.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.1.1" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +29,8 @@
     <Resource Include="Assets\barcode.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\login_background.png" />
+    <Resource Include="Assets\login_close.png" />
   </ItemGroup>
 
   <ItemGroup>
