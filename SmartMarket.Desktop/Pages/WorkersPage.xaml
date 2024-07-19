@@ -4,17 +4,46 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:local="clr-namespace:SmartMarket.Desktop.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WorkersPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type Calendar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Calendar">
+                        <Grid  >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <CalendarItem x:Name="PART_CalendarItem" Grid.Row="1"  />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+
+
     <Grid Background="#D9D9D9">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2.8*"/>
+            <ColumnDefinition Width="3.3*"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="180"/>
+            </Grid.RowDefinitions>
+            
+            
             <Border Background="White" Margin="5" CornerRadius="8">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Border Height="40" Background="Red" CornerRadius="8 8 0 0">
@@ -24,7 +53,7 @@
                                 <ColumnDefinition Width="60"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="IO" VerticalAlignment="Center" FontSize="15" Padding="25 0 0 0" Foreground="White" DockPanel.Dock="Left"/>
+                            <TextBlock Text="Ishchilarim" VerticalAlignment="Center" FontSize="15" Padding="25 0 0 0" Foreground="White" DockPanel.Dock="Left"/>
 
                             <Button Grid.Column="1" Width="50" Height="25" Style="{StaticResource MenuButton}" >
                                 <Button.Content>
@@ -37,6 +66,11 @@
 
                     </StackPanel>
                 </StackPanel>
+            </Border>
+
+            <Border Grid.Row="1" Background="White" Margin="5" CornerRadius="8">
+                <Calendar HorizontalAlignment="Center"  Name="calendar1" VerticalAlignment="Center" >
+                </Calendar>
             </Border>
         </Grid>
 
