@@ -17,5 +17,6 @@ public record ProductForCreationDto
     public decimal? SalePrice { get; set; }
     public decimal? PercentageOfPrice { get; set; }
     public bool Action {  get; set; }
-    public IFormFile ImagePath { get; set; }
+    public string ImagePath { get; set; }
+    public long ContrAgentId { get; set; }
 }

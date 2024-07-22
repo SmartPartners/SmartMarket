@@ -11,7 +11,8 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"        
-        Background="Transparent">
+        Background="Transparent"
+        Loaded="Window_Loaded">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -75,7 +76,7 @@
                     </Border>
 
                     <Label Grid.Column="0"
-                           Content="Barcode:"
+                           Content="PCode:"
                            VerticalAlignment="Center"
                            Margin="10 0 0 0"
                            FontSize="18"/>
@@ -124,18 +125,23 @@
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5">
                         <ComboBox x:Name="comboCategory"
+                                  SelectedValue="Id"
+                                  DisplayMemberPath="Name"
                                  Margin="3 0"
                                  FontSize="18"
                                  Foreground="#656161"/>
                     </Border>
 
-                    <Border Grid.Column="1"
+                    <Border x:Name="btnCreateCategory"
+                            Grid.Column="1"
+                            MouseDown="btnCreateCategory_MouseDown"
                             Margin="10 3 3 3"
                             Width="48"
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5"
-                            Background="#1EB7E8">
+                            Background="#1EB7E8"
+                            Cursor="Hand">
                         <fa:IconImage Icon="Plus"
                                       Margin="7"
                                       Foreground="White"
@@ -232,7 +238,11 @@
                         <ComboBox x:Name="comboMeasurement"
                                  Margin="3 0"
                                  FontSize="20"
-                                 Foreground="#656161"/>
+                                 Foreground="#656161">
+                            <ComboBoxItem Content="kg"/>
+                            <ComboBoxItem Content="litr"/>
+                            <ComboBoxItem Content="dona"/>
+                        </ComboBox>
                     </Border>
                 </StackPanel>
                 <StackPanel Margin="0 5 0 0"
@@ -260,7 +270,8 @@
                             BorderThickness="1"
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5"
-                            Background="#1EB7E8">
+                            Background="#1EB7E8"
+                            Cursor="Hand">
                         <fa:IconImage Icon="Plus"
                                       Margin="7"
                                       Foreground="White"
@@ -308,7 +319,7 @@
                             <Label x:Name="lbImage"
                                    Grid.Column="0"
                                    VerticalAlignment="Center"
-                                   Margin="0 0 0 0"
+                                   Margin="10 0 0 0"
                                    FontSize="18"/>
                             <Path Grid.Column="1"
                                   Data="{DynamicResource dots}"
@@ -346,7 +357,8 @@
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5"
                             HorizontalAlignment="Right"
-                            Background="#A1B90C">
+                            Background="#A1B90C"
+                            Cursor="Hand">
                         <Label Content="Tozalash"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -365,7 +377,8 @@
                             BorderBrush="{DynamicResource BorderColor}"
                             CornerRadius="5"
                             HorizontalAlignment="Right"
-                            Background="#1EB7E8">
+                            Background="#1EB7E8"
+                            Cursor="Hand">
                         <Label Content="Qo'shish"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -377,5 +390,13 @@
 
             </StackPanel>
         </Border>
+
+        <Rectangle x:Name="lab_fon2"
+                   Grid.Row="1"
+                   Fill="Black"
+                   Opacity="0.5"
+                   Visibility="Collapsed"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Stretch"/>
     </Grid>
 </Window>

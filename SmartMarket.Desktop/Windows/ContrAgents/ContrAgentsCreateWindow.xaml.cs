@@ -52,9 +52,9 @@ namespace SmartMarket.Desktop.Windows.ContrAgents
                 MessageBox.Show("Familiya kiriting !");
                 return;
             }
-            if (txtPhoneNumber.Text == "")
+            if (txtPhoneNumber.Text == "" || txtPhoneNumber.Text.Contains("_") == true)
             {
-                MessageBox.Show("Ism kiriting !");
+                MessageBox.Show("Telefon raqamni to'g'ri kiriting !");
                 return;
             }
 
