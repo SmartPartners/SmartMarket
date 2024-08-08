@@ -62,9 +62,9 @@
                 </Border>
 
                 <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                   <!-- <item:TopSaleComponent/>
                     <item:TopSaleComponent/>
-                    <item:TopSaleComponent/>
-                    <item:TopSaleComponent/>
+                    <item:TopSaleComponent/> -->
                 </StackPanel>
                 
             </Grid>
