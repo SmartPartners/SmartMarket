@@ -13,6 +13,11 @@ namespace SmartMarket.Desktop.Service.Service.Products
 {
     public class ProductService : IProductService
     {
+        public Task<IList<Product>> CreateAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IList<Product>> GetProductsAsync()
         {
             try
