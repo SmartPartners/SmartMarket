@@ -1,0 +1,26 @@
+﻿<Window x:Class="SmartMarket.Desktop.Windows.PaymentType.PaymentCash"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartMarket.Desktop.Windows.PaymentType"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        Title="PaymentCash" Height="200" Width="300">
+    <Grid>
+        <StackPanel>
+            <DockPanel Height="30" Background="#05C21A">
+                <TextBlock FontSize="17"  Text="To'lov Naqd" Foreground="White"></TextBlock>
+                <Button x:Name="close_btn" Padding="10 0 0 0" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right">
+                    <md:PackIcon Kind="Close" VerticalAlignment="Center" Width="30" Height="30" ></md:PackIcon>
+                </Button>
+            </DockPanel>
+            <TextBlock Text="To'lov miqdori" FontWeight="DemiBold" FontSize="15" Margin="60 20 0 0"></TextBlock>
+            <TextBox x:Name="CashAmount_sum" Width="200" Height='30' FontWeight="DemiBold" Text="56000.00" TextAlignment="Center" Margin="20 10 0 0" BorderThickness="1" ></TextBox>
+            <Button x:Name="pay_btn" Content="To'lov" Width="200" Height="30" Background="#05C21A" Margin="20 10 0 0"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

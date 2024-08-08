@@ -1,0 +1,30 @@
+﻿<Window x:Class="SmartMarket.Desktop.Windows.PaymentType.PaymentTypeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartMarket.Desktop.Windows.PaymentType"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        Title="PaymentTypeWindow" Height="300" Width="250">
+    <Grid>
+        <StackPanel>
+            <DockPanel Height="30" Background="#05C21A">
+                <TextBlock FontSize="20"  Text="To'lov" Foreground="White"></TextBlock>
+                <Button x:Name="close_btn" Padding="10 0 0 0" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right">
+                    <md:PackIcon Kind="Close" VerticalAlignment="Center" Width="30" Height="30" ></md:PackIcon>
+                </Button>
+            </DockPanel>
+
+            <TextBlock Margin="50 10 0 0" Text="To'lov turlari" FontSize="15"></TextBlock>
+            <Button x:Name="naqd_btn" Content="Naqd" Foreground="Black" Background="#D9D9D9" Width="150" Margin="0 10 0 0"></Button>
+            <Button x:Name="karta_btn" Content="Karta"  Background="#FFD028" Width="150" Margin="0 10 0 0"></Button>
+            <Button x:Name="pulKochirish_btn" Content="Pul ko'chirish"  Background="#949091" Width="150" Margin="0 10 0 0"></Button>
+            <Button x:Name="clik_btn" Content="Clik" Background="#0F6BD8" Width="150" Margin="0 10 0 0"></Button>
+            <Button x:Name="clik_naqd_btn" Content="Clik va Naqd" Foreground="Black" Background="#FFFFFF" Width="150" Margin="0 10 0 0"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
